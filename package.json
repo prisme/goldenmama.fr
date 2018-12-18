@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "npm start & npm run watch",
+    "watch": "watchify -p browserify public/js/index.js -o public/js/bundle.js",
+    "build:js": "browserify public/js/index.js | uglifyjs -m -c warnings=false > public/js/bundle.min.js",
+    "build:css": "postcss --use autoprefixer -b 'last 2 versions' < public/css/style.css | cssmin > public/css/style.min.css"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
@@ -13,8 +17,17 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.0"
   },
+  "devDependencies": {
+    "autoprefixer": "^6.7.6",
+    "browserify": "^14.1.0",
+    "cssmin": "^0.4.3",
+    "dom-ready": "^1.0.6",
+    "postcss": "^5.2.15",
+    "uglify-js": "^3.4.9",
+    "watchify": "^3.9.0"
+  },
   "main": "app.js",
-  "author": "",
+  "author": "prisme",
   "license": "ISC",
-  "description": ""
+  "description": "goldenmama.fr"
 }
