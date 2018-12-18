@@ -52,13 +52,27 @@ body, html {
 }
 
 body {
-  /*font-family: Arial;*/
   font-family: 'Open Sans', sans-serif;
-
   font-size: 16px;
   line-height: 1
 }
 
 body.noscroll {
   overflow: hidden;
+}
+
+.root{
+  display: flex;
+  height: 100vh;
+}
+.golden-mama,
+.guru{
+  flex-grow: 1;
+}
+
+.golden-mama {
+  background: #2d2e83;
+}
+.guru {
+  background: #e5e5e5;
 }
