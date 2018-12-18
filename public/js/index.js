@@ -1,1 +1,5 @@
-console.log('Hello Golden Mama')
+const domLoaded = require('dom-loaded');
+
+domLoaded.then(() => {
+  console.log('DOM is loaded');
+});

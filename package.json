@@ -12,6 +12,7 @@
   "dependencies": {
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
+    "dom-loaded": "^1.0.1",
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
@@ -21,7 +22,6 @@
     "autoprefixer": "^6.7.6",
     "browserify": "^14.1.0",
     "cssmin": "^0.4.3",
-    "dom-ready": "^1.0.6",
     "postcss": "^5.2.15",
     "uglify-js": "^3.4.9",
     "watchify": "^3.9.0"
