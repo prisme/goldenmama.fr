@@ -29,7 +29,7 @@ domLoaded.then(() => {
 
 const onCanPlay = (event) => {
   event.target.removeEventListener(canplayEvent, onCanPlay, false);
-  event.target.classList.add('loaded');
+  event.target.parentNode.classList.add('loaded');
 }
 
 },{"dom-loaded":1}]},{},[2]);
