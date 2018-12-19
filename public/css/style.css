@@ -141,8 +141,14 @@
     z-index: 0;
     transform: translateX(-50%) translateY(-50%);
     pointer-events: none;
-    opacity: 0;
+
     transition: opacity 0.2s ease-out;
+    opacity: 0;
+    display: none;
+  }
+  .guru video.loaded,
+  .golden-mama video.loaded{
+    display: block;
   }
   .guru:hover video,
   .golden-mama:hover video{

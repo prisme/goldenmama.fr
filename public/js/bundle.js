@@ -17,9 +17,19 @@ module.exports = new Promise(resolve => {
 
 },{}],2:[function(require,module,exports){
 const domLoaded = require('dom-loaded');
+const canplayEvent = 'canplaythrough';
 
 domLoaded.then(() => {
-  console.log('DOM is loaded');
-});
+  const videos = document.querySelectorAll('video');
+
+  for (var i = 0; i < videos.length; i++) {
+    videos[i].addEventListener(canplayEvent, onCanPlay, false);
+  }
+})
+
+const onCanPlay = (event) => {
+  event.target.removeEventListener(canplayEvent, onCanPlay, false);
+  event.target.classList.add('loaded');
+}
 
 },{"dom-loaded":1}]},{},[2]);
