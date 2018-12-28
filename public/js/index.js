@@ -1,7 +1,14 @@
 const domLoaded = require('dom-loaded');
 const canplayEvent = 'canplaythrough';
 
+require('gsap');
+let tl = new TimelineLite()
+GSDevTools.create({paused: true})
+
+
+
 domLoaded.then(() => {
+
   const videos = document.querySelectorAll('video');
 
   for (var i = 0; i < videos.length; i++) {
