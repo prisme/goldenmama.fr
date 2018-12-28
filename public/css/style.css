@@ -71,7 +71,6 @@
     position: relative;
     flex-grow: 1;
     overflow: hidden;
-    /* display: flex; */
   }
 
   @media only screen and ( max-width: 42em) and ( max-aspect-ratio: 13/9 ) {
@@ -88,7 +87,7 @@
   .root .g{
     position: absolute;
     z-index: 1;
-    width: 50%;
+    width: 50%; height: auto;
     left: 50%; top: 50%;
     transform: translateX(-50%) translateY(-50%);
   }
@@ -107,9 +106,6 @@
   .golden-mama:hover .g svg * {
     fill: #2d2e83;
   }
-  .golden-mama.loaded:hover .g svg * {
-    opacity: 0;
-  }
 
   .guru {
     background: #e5e5e5;
@@ -125,6 +121,17 @@
   .guru:hover .g svg *{
     fill: #e5e5e5;
   }
+
+  .golden-mama,
+  .guru{
+    cursor: progress;
+  }
+  .golden-mama.loaded,
+  .guru.loaded{
+    cursor: auto;
+  }
+
+  .golden-mama.loaded:hover .g svg *,
   .guru.loaded:hover .g svg *{
     opacity: 0;
   }
