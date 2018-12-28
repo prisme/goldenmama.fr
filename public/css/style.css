@@ -96,12 +96,12 @@
   .golden-mama {
     background: #2d2e83;
   }
+  .golden-mama:hover {
+    background: #fd386d;
+  }
   .golden-mama .g svg *,
   .golden-mama .claim svg * {
     fill: #fd386d;
-  }
-  .golden-mama:hover {
-    background: #fd386d;
   }
   .golden-mama:hover .g svg * {
     fill: #2d2e83;
@@ -110,13 +110,13 @@
   .guru {
     background: #e5e5e5;
   }
+  .guru:hover {
+    background: #343434;
+  }
   .guru .g svg *,
   .guru .claim svg *
   {
     fill: #343434;
-  }
-  .guru:hover {
-    background: #343434;
   }
   .guru:hover .g svg *{
     fill: #e5e5e5;

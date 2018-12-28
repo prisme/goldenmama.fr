@@ -5,8 +5,6 @@ require('gsap');
 let tl = new TimelineLite()
 GSDevTools.create({paused: true})
 
-
-
 domLoaded.then(() => {
 
   const videos = document.querySelectorAll('video');
