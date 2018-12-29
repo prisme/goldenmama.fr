@@ -106,6 +106,7 @@
     background: #2d2e83;
   }
   .golden-mama:hover {
+  /*.golden-mama.loaded {*/
     background: #fd386d;
   }
   .golden-mama .g svg *,
@@ -120,6 +121,7 @@
     background: #e5e5e5;
   }
   .guru:hover {
+  /*.guru.loaded {*/
     background: #343434;
   }
   .guru .g svg *,
@@ -140,8 +142,8 @@
     cursor: auto;
   }
 
-  .golden-mama.loaded:hover .g svg *,
-  .guru.loaded:hover .g svg *{
+  .loaded:hover .g svg *{
+  /*.loaded .g svg *{*/
     opacity: 0;
   }
 
@@ -160,18 +162,43 @@
     transform: translateX(-50%) translateY(-50%);
     transition: opacity 0.3s ease-out;
     opacity: 0;
+    display: none;
+    font-weight: bold;
+    font-size: 2em;
+    text-align: center;
+    width: 70%;
   }
-  .loaded:hover .claim{
+
+  .claim p{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 100%;
+  }
+
+  /*.loaded:hover .claim{*/
+  .loaded .claim{
     opacity: 1;
   }
   .loaded .claim{
     display: block;
   }
 
+  .guru .claim{
+     color: #e5e5e5;
+  }
+  .golden-mama .claim{
+     color: #2d2e83;
+  }
+
+
+  /*
   .claim svg{
     width: 100%;
     height: auto;
   }
+  */
 
 /* video */
   .guru video,
@@ -189,16 +216,16 @@
     pointer-events: none;
 
     transition: opacity 0.3s ease-out;
-    opacity: 0;
+    /*opacity: 0;*/
     display: none;
   }
   .guru.loaded video,
   .golden-mama.loaded video{
-    display: block;
+    /*display: block;*/
   }
-  .guru:hover video,
+  /*.guru:hover video,
   .golden-mama:hover video{
     opacity: 1
-  }
+  }*/
 
 

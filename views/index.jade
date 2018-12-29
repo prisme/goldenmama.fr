@@ -2,43 +2,41 @@ extends layout
 
 block content
   .root
-    .golden-mama
+    .golden-mama.loaded
       .g
         include ../public/img/golden-mama-logo.svg
       video.loop.muted(autoplay='', muted='', loop='', preload='auto', playsinline='')
         source(src='https://storage.cloud.google.com/goldenmama/GOLDENMAMA.mp4', type='video/mp4')
 
-      .claim.gm
-
-
+      .claim
         p
-          | DATE YOUR TARGET
-
+          | Date your target
         p
           | We create strategic conversations
-          | to produce sensitive relationships
-          | building trust before gaining growth.
-
+        p
+          | To produce sensitive relationships
+        p
+          | Building trust before gaining growth.
         p
           | You’ll thank us later.
 
-    .guru
+    .guru.loaded
       .g
         include ../public/img/guru-logo.svg
 
       video.loop.muted(autoplay='', muted='', loop='', preload='auto', playsinline='')
         source(src='https://storage.cloud.google.com/goldenmama/GURU.mp4', type='video/mp4')
 
-      .claim.gu
+      .claim
 
         p
-          | CREATIVES AT THEIR FINEST
-
+          | Creatives at their finest
         p
           | We are thrill producers based in Paris,
-          | transforming each moment into a daring experience
-          | all around the world.
-
+        p
+          | Transforming each moment into a daring experience
+        p
+          | All around the world.
         p
           | Savoir-faire is french, so are we.
 
