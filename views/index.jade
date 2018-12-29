@@ -2,11 +2,11 @@ extends layout
 
 block content
   .root
-    .golden-mama.loaded
+    .golden-mama
       .g
         include ../public/img/golden-mama-logo.svg
       video.loop.muted(autoplay='', muted='', loop='', preload='auto', playsinline='')
-        source(src='https://storage.cloud.google.com/goldenmama/GOLDENMAMA.mp4', type='video/mp4')
+        source(src='https://storage.cloud.google.com/goldenmama/GURU.mp4', type='video/mp4')
 
       .claim
         p
@@ -20,12 +20,12 @@ block content
         p
           | You’ll thank us later.
 
-    .guru.loaded
+    .guru
       .g
         include ../public/img/guru-logo.svg
 
       video.loop.muted(autoplay='', muted='', loop='', preload='auto', playsinline='')
-        source(src='https://storage.cloud.google.com/goldenmama/GURU.mp4', type='video/mp4')
+        source(src='https://storage.cloud.google.com/goldenmama/GOLDENMAMA.mp4', type='video/mp4')
 
       .claim
 

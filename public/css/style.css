@@ -105,33 +105,31 @@
   .golden-mama {
     background: #2d2e83;
   }
-  .golden-mama:hover {
-  /*.golden-mama.loaded {*/
+/*  .golden-mama:hover {
     background: #fd386d;
-  }
+  }*/
   .golden-mama .g svg *,
   .golden-mama .claim svg * {
     fill: #fd386d;
   }
-  .golden-mama:hover .g svg * {
+/*  .golden-mama:hover .g svg * {
     fill: #2d2e83;
-  }
+  }*/
 
   .guru {
     background: #e5e5e5;
   }
-  .guru:hover {
-  /*.guru.loaded {*/
+/*  .guru:hover {
     background: #343434;
-  }
+  }*/
   .guru .g svg *,
   .guru .claim svg *
   {
     fill: #343434;
   }
-  .guru:hover .g svg *{
+/*  .guru:hover .g svg *{
     fill: #e5e5e5;
-  }
+  }*/
 
   .golden-mama,
   .guru{
@@ -142,10 +140,9 @@
     cursor: auto;
   }
 
-  .loaded:hover .g svg *{
-  /*.loaded .g svg *{*/
+/*  .loaded:hover .g svg *{
     opacity: 0;
-  }
+  }*/
 
 .guru,
 .golden-mama,
@@ -214,14 +211,11 @@
     transform: translateX(-50%) translateY(-50%);
     z-index: 0;
     pointer-events: none;
-
-    transition: opacity 0.3s ease-out;
-    /*opacity: 0;*/
     display: none;
   }
-  .guru.loaded video,
-  .golden-mama.loaded video{
-    /*display: block;*/
+  .loaded video{
+    display: block;
+    opacity: 0;
   }
   /*.guru:hover video,
   .golden-mama:hover video{
