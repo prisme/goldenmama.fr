@@ -65,12 +65,22 @@
   .root{
     display: flex;
     height: 100vh;
+    position: relative;
+    overflow: hidden;
   }
 
   .golden-mama, .guru {
     position: relative;
     flex-grow: 1;
     overflow: hidden;
+    /* position: absolute; */
+    /* top: 0; */
+    /* bottom: 0; */
+    /* left: 0; */
+    /* right: 0; */
+    /* display: flex; */
+    /* align-items: center; */
+    z-index: 1;
   }
 
   @media only screen and ( max-width: 42em) and ( max-aspect-ratio: 13/9 ) {
@@ -84,21 +94,31 @@
     }
   }
 
-  .root .g{
+  .root .logo {
     position: absolute;
     z-index: 1;
-    width: 50%; height: auto;
-    left: 50%; top: 50%;
+    width: 50%;
+    height: auto;
+    left: 50%;
+    top: 50%;
     transform: translateX(-50%) translateY(-50%);
+    /* flex-grow: 1; */
+    /* flex-shrink: 0; */
+    /* float: left; */
+    /* height: 100vh; */
   }
 
-  .root .guru .g{
+  .root .guru .logo {
     width: 34%;
     margin-top: 1.5%;
   }
 
-  .root .g svg{
+  .root .logo svg{
     width: 100%;
+    /* transform: translateX(-50%) translateY(-50%); */
+    /* left: 50%; */
+    /* top: 50%; */
+    /* position: absolute; */
   }
 
 /* colors */
@@ -108,11 +128,11 @@
 /*  .golden-mama:hover {
     background: #fd386d;
   }*/
-  .golden-mama .g svg *,
+  .golden-mama .logo svg *,
   .golden-mama .claim svg * {
     fill: #fd386d;
   }
-/*  .golden-mama:hover .g svg * {
+/*  .golden-mama:hover .logo svg * {
     fill: #2d2e83;
   }*/
 
@@ -122,12 +142,12 @@
 /*  .guru:hover {
     background: #343434;
   }*/
-  .guru .g svg *,
+  .guru .logo svg *,
   .guru .claim svg *
   {
     fill: #343434;
   }
-/*  .guru:hover .g svg *{
+/*  .guru:hover .logo svg *{
     fill: #e5e5e5;
   }*/
 
@@ -140,16 +160,18 @@
     cursor: auto;
   }
 
-/*  .loaded:hover .g svg *{
+/*  .loaded:hover .logo svg *{
     opacity: 0;
   }*/
 
+/*
 .guru,
 .golden-mama,
-.guru .g svg *,
-.golden-mama .g svg * {
+.guru .logo svg *,
+.golden-mama .logo svg * {
   transition: 0.3s ease-in;
 }
+*/
 
 /* text */
   .claim{
@@ -157,29 +179,32 @@
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    transition: opacity 0.3s ease-out;
+    /*transition: opacity 0.3s ease-out;*/
     opacity: 0;
     display: none;
     font-weight: bold;
     font-size: 2em;
     text-align: center;
     width: 70%;
+    z-index: 1;
+    /* flex-grow: 1; */
+    /* height: 100vh; */
   }
 
   .claim p{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    width: 100%;
+    /* position: absolute; */
+    /* top: 50%; */
+    /* left: 50%; */
+    /* transform: translateX(-50%) translateY(-50%); */
+    /* width: 100%; */
   }
 
   /*.loaded:hover .claim{*/
   .loaded .claim{
-    opacity: 1;
+    /* opacity: 1; */
   }
   .loaded .claim{
-    display: block;
+    /* display: block; */
   }
 
   .guru .claim{
@@ -198,8 +223,7 @@
   */
 
 /* video */
-  .guru video,
-  .golden-mama video
+  .root video
   {
     position: absolute;
     top: 50%;
@@ -211,15 +235,23 @@
     transform: translateX(-50%) translateY(-50%);
     z-index: 0;
     pointer-events: none;
-    display: none;
+    /* display: none; */
   }
   .loaded video{
-    display: block;
+    /*display: block;*/
+    /*opacity: 0;*/
+  }
+
+  .root video{
     opacity: 0;
   }
+
   /*.guru:hover video,
   .golden-mama:hover video{
     opacity: 1
   }*/
 
 
+.gs-dev-tools{
+  z-index: 1;
+}
