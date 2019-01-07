@@ -1,12 +1,13 @@
 {
   "name": "goldenmama",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
     "dev": "npm start & npm run watch",
-    "watch": "watchify -p browserify public/js/index.js -o public/js/bundle.js",
-    "build:js": "browserify public/js/index.js | uglifyjs -m -c warnings=false > public/js/bundle.min.js",
+    "watch": "watchify -p browserify src/js/index.js -o public/js/bundle.js -p esmify",
+    "build": "npm run build:js & npm run build:css",
+    "build:js": "browserify -p esmify -p tinyify src/js/index.js -o public/js/bundle.min.js",
     "build:css": "postcss --use autoprefixer -b 'last 2 versions' < public/css/style.css | cssmin > public/css/style.min.css"
   },
   "dependencies": {
@@ -23,8 +24,9 @@
     "autoprefixer": "^6.7.6",
     "browserify": "^14.1.0",
     "cssmin": "^0.4.3",
+    "esmify": "^2.0.0",
     "postcss": "^5.2.15",
-    "uglify-js": "^3.4.9",
+    "tinyify": "^2.5.0",
     "watchify": "^3.9.0"
   },
   "main": "app.js",
