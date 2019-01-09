@@ -244,6 +244,43 @@
     opacity: 1
   }*/
 
+  .controls{
+    display: flex;
+    position: absolute;
+    z-index: 2;
+    margin: 1vh;
+    opacity: 0;
+  }
+
+  .controls > * {
+    cursor: pointer;
+    margin: 1vh;
+    width: 3vh;
+    height: auto;
+  }
+
+  .controls svg{
+    width: 100%;
+    height: auto;
+  }
+
+  .controls svg *{
+    fill: #e5e5e5;
+  }
+
+  .controls .mute{
+    position: relative;
+	left: -5vh;
+	opacity: 0;
+  }
+
+  .controls .close{
+    transform: scale(0.85);
+  }
+  .controls .close path{
+    stroke: transparent;
+  }
+
 
 .gs-dev-tools{
   z-index: 1;
