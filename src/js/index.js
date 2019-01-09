@@ -9,25 +9,20 @@ domLoaded.then(() => {
 
   var clickEvent = isTouchDevice() ? 'touchstart' : 'click'
   // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
-  /*
-    TweenLite.set('.logo', { x: '50%', y: '-50%', z: 0, right: '50%', top: '50%', force3D: true})
-    window.addEventListener('resize', () => {
-      TweenLite.set('.logo', { x: '50%', y: '-50%', z: 0, right: '50%', top: '50%', force3D: true})
-    })
-  */
+
+  // ANIMATION
+  const gutuTl = new TimelineLite({id: "guru"})
 
   // elements
   const root = document.querySelector('.root')
   const guru = root.querySelector('.guru')
   const mama = root.querySelector('.golden-mama')
 
-  // anim
-  const gutuTl = new TimelineLite({id: "guru"})
-  // const guruSplitText
 
   // hide logos : opacity
   const guruLogo = guru.querySelector('.logo')
   const mamaLogo = mama.querySelector('.logo')
+
   gutuTl
     .to(guruLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut }, 0)
     .to(mamaLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut }, 0)
@@ -41,6 +36,7 @@ domLoaded.then(() => {
 
   // video
   const guruVideo = document.querySelector('video#guru')
+
   gutuTl.to(guruVideo, 1, { autoAlpha: 1, onComplete: () => {
     guruVideo.currentTime = 0
     guruVideo.play()
@@ -49,6 +45,7 @@ domLoaded.then(() => {
   // top logo
   const guruLogoTop = root.appendChild(guruLogo.cloneNode(true))
   guruLogoTop.removeChild(guruLogoTop.querySelector('.baseline'))
+
   TweenLite.set(guruLogoTop.querySelectorAll('g *'), { fill: '#e5e5e5' })
   TweenLite.set(guruLogoTop, {
     width: guruLogo.offsetWidth * 0.6 +'px',
@@ -57,14 +54,17 @@ domLoaded.then(() => {
     right: 0,
     xPercent: 100
   })
+
   gutuTl
     .to(guruLogoTop, .5, {xPercent: 0, right: '1vh', ease: Power4.easeOut}, 'hideBackgrounds+=0.3')
 
-  // controls (close, mute)
+  // controls
+  // const controls =
 
 
 
   // subtitles
+  // const guruSplitText
   gutuTl.staggerTo('.guru .claim p', 1, {
     opacity : 1,
     repeat: 1,
@@ -72,9 +72,7 @@ domLoaded.then(() => {
   }, 3, 2)
 
 
-  // MAMA
-  //
-  // const tlMama = new TimelineLite({paused: true, id: "mama"})
+  // const tlMama = new TimelineLite()
 
   // listeners
   guru.addEventListener('mouseenter', (event) => {
@@ -97,12 +95,15 @@ domLoaded.then(() => {
     // console.log('mama leave')
   }, false)
 
+  window.addEventListener('resize', () => {
+    console.log('resize')
+  })
 
   const videos = document.querySelectorAll('video');
   for (let i = 0; i < videos.length; i++) {
     videos[i].addEventListener(canplayEvent, onCanPlay, false);
     // end loader
-    // attach listeners
+    // attach pointer listeners
   }
 
 })

@@ -11296,23 +11296,15 @@ const canplayEvent = 'canplaythrough';
 
 _domLoaded.default.then(() => {
   var clickEvent = isTouchDevice() ? 'touchstart' : 'click'; // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
-
-  /*
-    TweenLite.set('.logo', { x: '50%', y: '-50%', z: 0, right: '50%', top: '50%', force3D: true})
-    window.addEventListener('resize', () => {
-      TweenLite.set('.logo', { x: '50%', y: '-50%', z: 0, right: '50%', top: '50%', force3D: true})
-    })
-  */
-  // elements
-
-  const root = document.querySelector('.root');
-  const guru = root.querySelector('.guru');
-  const mama = root.querySelector('.golden-mama'); // anim
+  // ANIMATION
 
   const gutuTl = new _TweenMax.TimelineLite({
     id: "guru"
-  }); // const guruSplitText
-  // hide logos : opacity
+  }); // elements
+
+  const root = document.querySelector('.root');
+  const guru = root.querySelector('.guru');
+  const mama = root.querySelector('.golden-mama'); // hide logos : opacity
 
   const guruLogo = guru.querySelector('.logo');
   const mamaLogo = mama.querySelector('.logo');
@@ -11361,16 +11353,16 @@ _domLoaded.default.then(() => {
     xPercent: 0,
     right: '1vh',
     ease: Power4.easeOut
-  }, 'hideBackgrounds+=0.3'); // controls (close, mute)
+  }, 'hideBackgrounds+=0.3'); // controls
+  // const controls =
   // subtitles
+  // const guruSplitText
 
   gutuTl.staggerTo('.guru .claim p', 1, {
     opacity: 1,
     repeat: 1,
     yoyo: true
-  }, 3, 2); // MAMA
-  //
-  // const tlMama = new TimelineLite({paused: true, id: "mama"})
+  }, 3, 2); // const tlMama = new TimelineLite()
   // listeners
 
   guru.addEventListener('mouseenter', event => {// gutuTl.play()
@@ -11387,11 +11379,14 @@ _domLoaded.default.then(() => {
     // tlMama.seek(0)
     // console.log('mama leave')
   }, false);
+  window.addEventListener('resize', () => {
+    console.log('resize');
+  });
   const videos = document.querySelectorAll('video');
 
   for (let i = 0; i < videos.length; i++) {
     videos[i].addEventListener(canplayEvent, onCanPlay, false); // end loader
-    // attach listeners
+    // attach pointer listeners
   }
 });
 
