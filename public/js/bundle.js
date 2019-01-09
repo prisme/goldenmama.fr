@@ -11326,10 +11326,10 @@ _domLoaded.default.then(() => {
   gutuTl.to(guruLogo, 0.8, {
     autoAlpha: 0,
     ease: Power2.easeOut
-  }).to(mamaLogo, 0.8, {
+  }, 0).to(mamaLogo, 0.8, {
     autoAlpha: 0,
     ease: Power2.easeOut
-  }).addLabel('hideLogos', '-=0.6'); // backgrounds
+  }, 0).addLabel('hideLogos', '-=0.6'); // backgrounds
 
   gutuTl.to(mama, 0.8, {
     opacity: 0,

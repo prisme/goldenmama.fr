@@ -36,8 +36,8 @@ domLoaded.then(() => {
   const guruLogo = guru.querySelector('.logo')
   const mamaLogo = mama.querySelector('.logo')
   gutuTl
-    .to(guruLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut })
-    .to(mamaLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut })
+    .to(guruLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut }, 0)
+    .to(mamaLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut }, 0)
     .addLabel('hideLogos', '-=0.6')
 
   // backgrounds
