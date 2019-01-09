@@ -38,6 +38,18 @@
   }
 
 /* global */
+  @font-face {
+    font-family: 'AvantGarde-ExtraLight';
+    src: url('../fonts/AvantGarde-ExtraLight.eot');
+    src: url('../fonts/AvantGarde-ExtraLight.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/AvantGarde-ExtraLight.woff2') format('woff2'),
+         url('../fonts/AvantGarde-ExtraLight.woff') format('woff'),
+         url('../fonts/AvantGarde-ExtraLight.ttf') format('truetype'),
+         url('../fonts/AvantGarde-ExtraLight.svg#AvantGarde-ExtraLight') format('svg');
+    font-weight: 200;
+    font-style: normal;
+  }
+
   body, html {
     margin: 0;
     padding: 0;
