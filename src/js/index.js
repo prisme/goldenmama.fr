@@ -9,53 +9,88 @@ domLoaded.then(() => {
 
   var clickEvent = isTouchDevice() ? 'touchstart' : 'click'
   // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
-
+  /*
     TweenLite.set('.logo', { x: '50%', y: '-50%', z: 0, right: '50%', top: '50%', force3D: true})
-  window.addEventListener('resize', () => {
-    TweenLite.set('.logo', { x: '50%', y: '-50%', z: 0, right: '50%', top: '50%', force3D: true})
-  })
+    window.addEventListener('resize', () => {
+      TweenLite.set('.logo', { x: '50%', y: '-50%', z: 0, right: '50%', top: '50%', force3D: true})
+    })
+  */
 
+  // elements
+  const root = document.querySelector('.root')
+  const guru = root.querySelector('.guru')
+  const mama = root.querySelector('.golden-mama')
 
-  // const tl = new TimelineLite({id: "master"});
-  const guru = document.querySelector('.root > .guru')
-  const mama = document.querySelector('.root > .golden-mama')
+  // anim
+  const gutuTl = new TimelineLite({id: "guru"})
+  // const guruSplitText
 
-  // GURU
-  const tlGuru = new TimelineLite({id: "guru"})
-  //const splitGuru =
-  // hide other half
-  tlGuru.to([mama, mama.querySelector('.logo')], 1, { opacity: 0 }, 0);
-  // background
-  tlGuru.to(guru, 1, { backgroundColor: 'rgba(229, 229, 229, 0)'}, 0)
-  // logo
-  tlGuru.to(guru.querySelectorAll('.logo path'), 1, { fill: '#e5e5e5' }, 0);
-  tlGuru.to(guru.querySelectorAll('.logo'), 1, {
-    top: '5vh',
-    right: '5vh',
-    x: 0,
-    y: 0,
-    z: 0, force3D: true
-   }, 0);
+  // hide logos : color
+    // const guruLogo = guru.querySelectorAll('.logo g *')
+    // const mamaLogo = mama.querySelectorAll('.logo g *')
+    // gutuTl
+    //   .to(guruLogo, 0.6, { fill: '#e5e5e5', ease: Power2.easeOut }, 0)
+    //   .to(mamaLogo, 0.6, { fill: '#2d2e83', ease: Power2.easeOut }, 0)
+    //   .addLabel('hideLogos')
+  // hide logos : opacity
+  const guruLogo = guru.querySelector('.logo')
+  const mamaLogo = mama.querySelector('.logo')
+  gutuTl
+    .to(guruLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut })
+    .to(mamaLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut })
+    .addLabel('hideLogos', '-=0.6')
+
+  // backgrounds
+  gutuTl
+    .to(mama, 0.8, { opacity: 0, xPercent:-100, force3D: true, ease: Power3.easeIn }, 'hideLogos')
+    .to(guru, 0.8, { opacity: 0, xPercent: 100, force3D: true, ease: Power3.easeIn }, 'hideLogos')
+    .addLabel('hideBackgrounds')
+
   // video
-  tlGuru.to('video#guru', 1, { autoAlpha: 1}, 0)
+  const guruVideo = document.querySelector('video#guru')
+  gutuTl.to(guruVideo, 1, { autoAlpha: 1, onComplete: () => {
+    guruVideo.currentTime = 0
+    guruVideo.play()
+  }}, 'hideLogos')
 
-  tlGuru.staggerTo('.guru .claim p', 1, {
+  // top logo
+  const guruLogoTop = root.appendChild(guruLogo.cloneNode(true))
+  guruLogoTop.removeChild(guruLogoTop.querySelector('.baseline'))
+  TweenLite.set(guruLogoTop.querySelectorAll('g *'), { fill: '#e5e5e5' })
+  TweenLite.set(guruLogoTop, {
+    width: guruLogo.offsetWidth * 0.6 +'px',
+    height: guruLogo.offsetHeight * 0.6 +'px',
+    top: '1vh',
+    right: 0,
+    xPercent: 100
+  })
+  gutuTl
+    .to(guruLogoTop, .5, {xPercent: 0, right: '1vh', ease: Power4.easeOut}, 'hideBackgrounds+=0.3')
+
+  // controls (close, mute)
+
+
+
+  // subtitles
+  gutuTl.staggerTo('.guru .claim p', 1, {
     opacity : 1,
     repeat: 1,
     yoyo: true
-  }, 2, 0)
+  }, 3, 2)
 
 
   // MAMA
-  const tlMama = new TimelineLite({paused: true, id: "mama"})
+  //
+  // const tlMama = new TimelineLite({paused: true, id: "mama"})
 
+  // listeners
   guru.addEventListener('mouseenter', (event) => {
-    // tlGuru.play()
+    // gutuTl.play()
     // console.log('guru enter')
   }, false)
   guru.addEventListener('mouseleave', (event) => {
-    // tlGuru.stop()
-    // tlGuru.seek(0)
+    // gutuTl.stop()
+    // gutuTl.seek(0)
     // console.log('guru leave')
   }, false)
 
@@ -73,6 +108,8 @@ domLoaded.then(() => {
   const videos = document.querySelectorAll('video');
   for (let i = 0; i < videos.length; i++) {
     videos[i].addEventListener(canplayEvent, onCanPlay, false);
+    // end loader
+    // attach listeners
   }
 
 })

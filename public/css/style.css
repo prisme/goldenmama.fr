@@ -108,29 +108,49 @@
     }
   }
 
-  .root .logo {
+  .logo{
     position: absolute;
     z-index: 1;
+  }
+
+  .guru .logo, .golden-mama .logo {
     width: 50%;
     height: auto;
     right: 50%;
     top: 50%;
-    /* transform: translateX(50%) translateY(-50%); */
+    transform: translateX(50%) translateY(-50%);
   }
 
-  .root .guru .logo {
+  .guru .logo {
     width: 34%;
     margin-top: 1.5%;
   }
 
-  .root .logo svg{
+  .logo svg{
     width: 100%;
-    /* transform: translateX(-50%) translateY(-50%); */
-    /* left: 50%; */
-    /* top: 50%; */
-    /* position: absolute; */
     height: auto;
   }
+
+  .logo .baseline{
+    font-family: 'AvantGarde-ExtraLight';
+    text-align: center;
+    font-style: italic;
+    position: absolute;
+    width: 100%;
+    bottom: -3em;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    font-weight: lighter;
+  }
+
+  .guru .baseline{
+    color: #343434;
+  }
+
+  .golden-mama .baseline{
+    color: #fd386d;
+  }
+
 
 /* colors */
   .golden-mama {
@@ -161,7 +181,7 @@
 /*  .guru:hover .logo svg *{
     fill: #e5e5e5;
   }*/
-
+/*
   .golden-mama,
   .guru{
     cursor: progress;
@@ -170,6 +190,7 @@
   .guru.loaded{
     cursor: auto;
   }
+*/
 
 /* text */
   .claim{
