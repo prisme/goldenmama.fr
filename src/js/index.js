@@ -18,8 +18,7 @@ domLoaded.then(() => {
   const guru = root.querySelector('.guru')
   const mama = root.querySelector('.golden-mama')
 
-
-  // hide logos : opacity
+  // logos
   const guruLogo = guru.querySelector('.logo')
   const mamaLogo = mama.querySelector('.logo')
 
@@ -60,8 +59,6 @@ domLoaded.then(() => {
 
   // controls
   // const controls =
-
-
 
   // subtitles
   // const guruSplitText

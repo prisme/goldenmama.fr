@@ -11304,7 +11304,7 @@ _domLoaded.default.then(() => {
 
   const root = document.querySelector('.root');
   const guru = root.querySelector('.guru');
-  const mama = root.querySelector('.golden-mama'); // hide logos : opacity
+  const mama = root.querySelector('.golden-mama'); // logos
 
   const guruLogo = guru.querySelector('.logo');
   const mamaLogo = mama.querySelector('.logo');
