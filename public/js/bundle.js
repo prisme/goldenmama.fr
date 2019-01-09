@@ -11312,13 +11312,6 @@ _domLoaded.default.then(() => {
   const gutuTl = new _TweenMax.TimelineLite({
     id: "guru"
   }); // const guruSplitText
-  // hide logos : color
-  // const guruLogo = guru.querySelectorAll('.logo g *')
-  // const mamaLogo = mama.querySelectorAll('.logo g *')
-  // gutuTl
-  //   .to(guruLogo, 0.6, { fill: '#e5e5e5', ease: Power2.easeOut }, 0)
-  //   .to(mamaLogo, 0.6, { fill: '#2d2e83', ease: Power2.easeOut }, 0)
-  //   .addLabel('hideLogos')
   // hide logos : opacity
 
   const guruLogo = guru.querySelector('.logo');
