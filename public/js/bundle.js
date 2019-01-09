@@ -11317,21 +11317,26 @@ _domLoaded.default.then(() => {
   }, 0).addLabel('hideLogos', '-=0.6'); // backgrounds
 
   gutuTl.to(mama, 0.8, {
-    opacity: 0,
+    backgroundColor: 'rgba(45, 46, 131, 0)',
     xPercent: -100,
     force3D: true,
     ease: Power3.easeIn
   }, 'hideLogos').to(guru, 0.8, {
-    opacity: 0,
+    backgroundColor: 'rgba(229, 229, 229, 0)',
     xPercent: 100,
     force3D: true,
-    ease: Power3.easeIn
+    ease: Power3.easeIn,
+    onComplete: () => {
+      TweenLite.set(guru, {
+        xPercent: 0
+      });
+    }
   }, 'hideLogos').addLabel('hideBackgrounds'); // video
 
   const guruVideo = document.querySelector('video#guru');
   gutuTl.to(guruVideo, 1, {
     autoAlpha: 1,
-    onComplete: () => {
+    onStart: () => {
       guruVideo.currentTime = 0;
       guruVideo.play();
     }
@@ -11349,22 +11354,33 @@ _domLoaded.default.then(() => {
     right: 0,
     xPercent: 100
   });
-  gutuTl.to(guruLogoTop, .5, {
+  gutuTl.to(guruLogoTop, 0.5, {
     xPercent: 0,
     right: '1vh',
     ease: Power4.easeOut
   }, 'hideBackgrounds+=0.3'); // controls
-  // const controls =
-  // subtitles
+
+  const controls = document.querySelector('.controls');
+  TweenLite.set(controls, {
+    xPercent: -100,
+    opacity: 1
+  });
+  gutuTl.to(controls, 0.5, {
+    xPercent: 0,
+    ease: Power4.easeOut
+  }, 'hideBackgrounds+=0.3'); // subtitles
   // const guruSplitText
 
-  gutuTl.staggerTo('.guru .claim p', 1, {
+  gutuTl.staggerTo('.guru .claim p', 1.5, {
     opacity: 1,
     repeat: 1,
     yoyo: true
-  }, 3, 2); // const tlMama = new TimelineLite()
+  }, 5, 'hideBackgrounds+=1'); // const tlMama = new TimelineLite()
   // listeners
 
+  controls.querySelector('.mute').addEventListener(clickEvent, event => {});
+  controls.querySelector('.unmute').addEventListener(clickEvent, event => {});
+  controls.querySelector('.close').addEventListener(clickEvent, event => {});
   guru.addEventListener('mouseenter', event => {// gutuTl.play()
     // console.log('guru enter')
   }, false);
