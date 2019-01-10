@@ -11302,8 +11302,8 @@ _domLoaded.default.then(() => {
   const ctrlUnmute = controls.querySelector('.unmute');
   const ctrlMute = controls.querySelector('.mute');
   const ctrlClose = controls.querySelector('.close'); // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
+  //-- Animation
   // const tlMama = new TimelineLite({id: "mama"})
-  // ANIMATION
 
   const gutuTl = new _TweenMax.TimelineLite({
     id: "guru"
@@ -11385,14 +11385,13 @@ _domLoaded.default.then(() => {
     opacity: 1,
     repeat: 1,
     yoyo: true
-  }, 5, 'hideBackgrounds+=1'); // listeners
+  }, 5, 'hideBackgrounds+=1'); //-- Listeners
 
   const handleClose = () => {};
 
-  ctrlClose.addEventListener(clickEvent, handleClose); //
+  ctrlClose.addEventListener(clickEvent, handleClose); // Mute State
 
   const handleUnmute = () => {
-    // console.log('unmute')
     isMute = false;
     currentVideo.muted = false;
     TweenLite.to(ctrlMute, 0.3, {
@@ -11404,7 +11403,6 @@ _domLoaded.default.then(() => {
   };
 
   const handleMute = () => {
-    // console.log('mute')
     isMute = true;
     currentVideo.muted = true;
     TweenLite.to(ctrlUnmute, 0.3, {
@@ -11420,7 +11418,6 @@ _domLoaded.default.then(() => {
   let hidden, visibilityChange;
 
   if (typeof document.hidden !== "undefined") {
-    // Opera 12.10 and Firefox 18 and later support
     hidden = "hidden";
     visibilityChange = "visibilitychange";
   } else if (typeof document.msHidden !== "undefined") {
