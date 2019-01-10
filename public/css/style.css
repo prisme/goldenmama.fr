@@ -296,8 +296,9 @@
 
   .controls .mute{
     position: relative;
-	left: -5vh;
-	opacity: 0;
+    left: -5vh;
+    opacity: 0;
+    visibility: hidden;
   }
 
   .controls .close{

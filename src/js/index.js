@@ -7,11 +7,23 @@ const canplayEvent = 'canplaythrough';
 
 domLoaded.then(() => {
 
-  var clickEvent = isTouchDevice() ? 'touchstart' : 'click'
+  const clickEvent = isTouchDevice() ? 'touchstart' : 'click'
+  let isMute = true
+  let currentVideo
+
+  const controls = document.querySelector('.controls')
+  const ctrlUnmute = controls.querySelector('.unmute')
+  const ctrlMute = controls.querySelector('.mute')
+  const ctrlClose = controls.querySelector('.close')
+
   // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
 
+  // const tlMama = new TimelineLite({id: "mama"})
   // ANIMATION
   const gutuTl = new TimelineLite({id: "guru"})
+  gutuTl.eventCallback('onStart', () => {
+    currentVideo = guruVideo
+  })
 
   // elements
   const root = document.querySelector('.root')
@@ -36,6 +48,7 @@ domLoaded.then(() => {
     .addLabel('hideBackgrounds')
 
   // video
+  const mamaVideo = document.querySelector('video#mama')
   const guruVideo = document.querySelector('video#guru')
 
   gutuTl
@@ -66,7 +79,6 @@ domLoaded.then(() => {
     }, 'hideBackgrounds+=0.3')
 
   // controls
-  const controls = document.querySelector('.controls')
   TweenLite.set(controls, {
     xPercent: -100,
     opacity: 1
@@ -86,12 +98,27 @@ domLoaded.then(() => {
   }, 5, 'hideBackgrounds+=1')
 
 
-  // const tlMama = new TimelineLite()
+
 
   // listeners
-  controls.querySelector('.mute').addEventListener(clickEvent, (event) => {})
-  controls.querySelector('.unmute').addEventListener(clickEvent, (event) => {})
-  controls.querySelector('.close').addEventListener(clickEvent, (event) => {})
+  ctrlClose.addEventListener(clickEvent, (event) => {})
+
+  ctrlUnmute.addEventListener(clickEvent, (event) => {
+    // console.log('unmute')
+    isMute = false
+    currentVideo.muted = false
+    TweenLite.to(ctrlMute, 0.3, {autoAlpha: 1})
+    TweenLite.to(ctrlUnmute, 0.1, {autoAlpha: 0})
+  })
+
+  ctrlMute.addEventListener(clickEvent, (event) => {
+    // console.log('mute')
+    isMute = true
+    currentVideo.muted = true
+    TweenLite.to(ctrlUnmute, 0.3, {autoAlpha: 1})
+    TweenLite.to(ctrlMute, 0.1, {autoAlpha: 0})
+  })
+
 
   guru.addEventListener('mouseenter', (event) => {
     // gutuTl.play()
