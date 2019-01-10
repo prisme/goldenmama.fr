@@ -103,22 +103,44 @@ domLoaded.then(() => {
   // listeners
   ctrlClose.addEventListener(clickEvent, (event) => {})
 
-  ctrlUnmute.addEventListener(clickEvent, (event) => {
+  //
+  const handleUnmute = () => {
     // console.log('unmute')
     isMute = false
     currentVideo.muted = false
     TweenLite.to(ctrlMute, 0.3, {autoAlpha: 1})
     TweenLite.to(ctrlUnmute, 0.1, {autoAlpha: 0})
-  })
-
-  ctrlMute.addEventListener(clickEvent, (event) => {
+  }
+  const handleMute = () => {
     // console.log('mute')
     isMute = true
     currentVideo.muted = true
     TweenLite.to(ctrlUnmute, 0.3, {autoAlpha: 1})
     TweenLite.to(ctrlMute, 0.1, {autoAlpha: 0})
-  })
+  }
 
+  ctrlUnmute.addEventListener(clickEvent, handleUnmute);
+  ctrlMute.addEventListener(clickEvent, handleMute);
+
+  let hidden, visibilityChange
+  if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
+    hidden = "hidden";
+    visibilityChange = "visibilitychange";
+  } else if (typeof document.msHidden !== "undefined") {
+    hidden = "msHidden";
+    visibilityChange = "msvisibilitychange";
+  } else if (typeof document.webkitHidden !== "undefined") {
+    hidden = "webkitHidden";
+    visibilityChange = "webkitvisibilitychange";
+  }
+  document.addEventListener(visibilityChange, () => {
+    // todo? pause/resume video & animation?
+    if (isMute) return;
+    switch (document.visibilityState) {
+      case 'hidden': currentVideo.muted = true; break;
+      case 'visible': currentVideo.muted = false; break;
+    }
+  })
 
   guru.addEventListener('mouseenter', (event) => {
     // gutuTl.play()
