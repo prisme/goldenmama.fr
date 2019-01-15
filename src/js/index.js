@@ -7,15 +7,17 @@ const canplayEvent = 'canplaythrough';
 
 domLoaded.then(() => {
 
-  const clickEvent = isTouchDevice() ? 'touchstart' : 'click'
-  let isMute = true
   let currentVideo
+  const clickEvent = isTouchDevice() ? 'touchstart' : 'click'
+  let isMute = false
+  // let isMute = true
 
   const controls = document.querySelector('.controls')
   const ctrlUnmute = controls.querySelector('.unmute')
   const ctrlMute = controls.querySelector('.mute')
   const ctrlClose = controls.querySelector('.close')
-
+  let defaultOffMuteElt = isMute ? ctrlMute : ctrlUnmute
+  TweenLite.set(defaultOffMuteElt, {autoAlpha: 0})
   // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
 
   //-- Animation
@@ -56,6 +58,7 @@ domLoaded.then(() => {
       autoAlpha: 1,
       onStart: () => {
         guruVideo.currentTime = 0
+        guruVideo.muted = isMute
         guruVideo.play()
       }
     }, 'hideLogos')
