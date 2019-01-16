@@ -1,41 +1,46 @@
 import domLoaded from 'dom-loaded';
 import { TweenMax, Eases, CSSPlugin, ScrollToPlugin, TimelineLite } from 'gsap/TweenMax';
-import SplitText from "./gsap-bonus/SplitText";
-const isTouchDevice = require('is-touch-device');
 
+const isTouchDevice = require('is-touch-device');
+const clickEvent = isTouchDevice() ? 'touchstart' : 'click'
 const canplayEvent = 'canplaythrough';
+let isMute = false
+// let isMute = true
 
 domLoaded.then(() => {
-
-  let currentVideo
-  const clickEvent = isTouchDevice() ? 'touchstart' : 'click'
-  let isMute = false
-  // let isMute = true
+// Elements
+  const root = document.querySelector('.root')
+  const guru = root.querySelector('.guru')
+  const mama = root.querySelector('.golden-mama')
 
   const controls = document.querySelector('.controls')
   const ctrlUnmute = controls.querySelector('.unmute')
   const ctrlMute = controls.querySelector('.mute')
   const ctrlClose = controls.querySelector('.close')
+
+  const guruLogo = guru.querySelector('.logo')
+  const mamaLogo = mama.querySelector('.logo')
+
+  const mamaVideo = document.querySelector('video#mama')
+  const guruVideo = document.querySelector('video#guru')
+  let currentVideo
+
   let defaultOffMuteElt = isMute ? ctrlMute : ctrlUnmute
   TweenLite.set(defaultOffMuteElt, {autoAlpha: 0})
   // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
 
-  //-- Animation
-  // const tlMama = new TimelineLite({id: "mama"})
+// Animation
+  const mamaTl = new TimelineLite({id: "mama"})
+  mamaTl.eventCallback('onStart', () => {
+    currentVideo = mamaVideo
+  })
+
   const gutuTl = new TimelineLite({id: "guru"})
   gutuTl.eventCallback('onStart', () => {
     currentVideo = guruVideo
   })
 
-  // elements
-  const root = document.querySelector('.root')
-  const guru = root.querySelector('.guru')
-  const mama = root.querySelector('.golden-mama')
-
   // logos
-  const guruLogo = guru.querySelector('.logo')
-  const mamaLogo = mama.querySelector('.logo')
-
   gutuTl
     .to(guruLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut }, 0)
     .to(mamaLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut }, 0)
@@ -50,16 +55,13 @@ domLoaded.then(() => {
     .addLabel('hideBackgrounds')
 
   // video
-  const mamaVideo = document.querySelector('video#mama')
-  const guruVideo = document.querySelector('video#guru')
-
   gutuTl
     .to(guruVideo, 1, {
       autoAlpha: 1,
       onStart: () => {
-        guruVideo.currentTime = 0
-        guruVideo.muted = isMute
-        guruVideo.play()
+        currentVideo.currentTime = 0
+        currentVideo.muted = isMute
+        currentVideo.play()
       }
     }, 'hideLogos')
 
