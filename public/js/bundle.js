@@ -10591,12 +10591,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const isTouchDevice = require('is-touch-device');
 
 const clickEvent = isTouchDevice() ? 'touchstart' : 'click';
-const canplayEvent = 'canplaythrough';
-let isMute = false; // let isMute = true
+const canplayEvent = 'canplaythrough'; // let isMute = false
 
-let _tlMain = new _TweenMax.TimelineLite({
-  paused: true
-});
+let isMute = true;
+let currentVideo;
+let currentTl;
 
 _domLoaded.default.then(() => {
   // Elements
@@ -10613,91 +10612,94 @@ _domLoaded.default.then(() => {
   const videos = document.querySelectorAll('video');
   const mamaVideo = document.querySelector('video.mama');
   const guruVideo = document.querySelector('video.guru');
-  let currentVideo;
   TweenLite.set(isMute ? ctrlMute : ctrlUnmute, {
     autoAlpha: 0
   }); // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
-
-  /*
   // Animation Guru
-    const gutuTl = new TimelineLite({
-      id: "guru",
-      // paused: true
-    })
-    gutuTl.eventCallback('onStart', () => {
-      currentVideo = guruVideo
-    })
-  
-    // logos
-    gutuTl
-      .to(guruLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut }, 0)
-      .to(mamaLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut }, 0)
-      .addLabel('hideLogos', '-=0.6')
-  
-    // backgrounds
-    gutuTl
-      .to(mama, 0.8, { backgroundColor: 'rgba(45, 46, 131, 0)', xPercent:-100, force3D: true, ease: Power3.easeIn }, 'hideLogos')
-      .to(guru, 0.8, { backgroundColor: 'rgba(229, 229, 229, 0)', xPercent: 100, force3D: true, ease: Power3.easeIn,
-        onComplete: () => { TweenLite.set(guru, { xPercent: 0 }) }
-      }, 'hideLogos')
-      .addLabel('hideBackgrounds')
-  
-    // video
-    gutuTl
-      .to(guruVideo, 1, {
-        autoAlpha: 1,
-        onStart: () => {
-          currentVideo.currentTime = 0
-          currentVideo.muted = isMute
-          currentVideo.play()
-        }
-      }, 'hideLogos')
-  
-    // top logo
-    const guruLogoTop = root.appendChild(guruLogo.cloneNode(true))
-    guruLogoTop.removeChild(guruLogoTop.querySelector('.baseline'))
-  
-    TweenLite.set(guruLogoTop.querySelectorAll('g *'), { fill: '#e5e5e5' })
-    TweenLite.set(guruLogoTop, {
-      width: guruLogo.offsetWidth * 0.6 +'px',
-      height: guruLogo.offsetHeight * 0.6 +'px',
-      top: '1vh',
-      right: 0,
-      xPercent: 100
-    })
-  
-    gutuTl
-      .to(guruLogoTop, 0.5, {
-        xPercent: 0, right: '1vh', ease: Power4.easeOut
-      }, 'hideBackgrounds+=0.3')
-  
-    // controls
-    TweenLite.set(ctrlGuru, {
-      xPercent: -100
-    })
-  
-    gutuTl
-      .to(ctrlGuru, 0.5, {
-        xPercent: 0,
-        autoAlpha: 1,
-        ease: Power4.easeOut
-      }, 'hideBackgrounds+=0.3')
-  
-    // subtitles
-    gutuTl.staggerTo('.guru .claim p', 1.5, {
-      opacity : 1,
-      repeat: 1,
-      yoyo: true
-    }, 5, 'hideBackgrounds+=1')
-  */
-  // Animation Mama
+
+  const guruTl = new _TweenMax.TimelineLite({
+    id: "guru",
+    paused: true
+  });
+  guruTl.eventCallback('onStart', () => {
+    currentVideo = guruVideo;
+    currentTl = guruTl;
+  }); // logos
+
+  guruTl.to(guruLogo, 0.8, {
+    autoAlpha: 0,
+    ease: Power2.easeOut
+  }, 0).to(mamaLogo, 0.8, {
+    autoAlpha: 0,
+    ease: Power2.easeOut
+  }, 0).addLabel('guru_hideLogos', '-=0.6'); // backgrounds
+
+  guruTl.to(mama, 0.8, {
+    backgroundColor: 'rgba(45, 46, 131, 0)',
+    xPercent: -100,
+    force3D: true,
+    ease: Power3.easeIn
+  }, 'guru_hideLogos').to(guru, 0.8, {
+    backgroundColor: 'rgba(229, 229, 229, 0)',
+    xPercent: 100,
+    force3D: true,
+    ease: Power3.easeIn,
+    onComplete: () => {
+      TweenLite.set(guru, {
+        xPercent: 0
+      });
+    }
+  }, 'guru_hideLogos').addLabel('guru_hideBackgrounds'); // video
+
+  guruTl.to(guruVideo, 1, {
+    autoAlpha: 1,
+    onStart: () => {
+      currentVideo.currentTime = 0;
+      currentVideo.muted = isMute;
+      currentVideo.play();
+    }
+  }, 'guru_hideLogos'); // top logo
+
+  const guruLogoTop = root.appendChild(guruLogo.cloneNode(true));
+  guruLogoTop.removeChild(guruLogoTop.querySelector('.baseline'));
+  TweenLite.set(guruLogoTop.querySelectorAll('g *'), {
+    fill: '#e5e5e5'
+  });
+  TweenLite.set(guruLogoTop, {
+    width: guruLogo.offsetWidth * 0.6 + 'px',
+    height: guruLogo.offsetHeight * 0.6 + 'px',
+    top: '1vh',
+    right: 0,
+    xPercent: 100
+  });
+  guruTl.to(guruLogoTop, 0.5, {
+    xPercent: 0,
+    right: '1vh',
+    ease: Power4.easeOut
+  }, 'guru_hideBackgrounds+=0.3'); // controls
+
+  TweenLite.set(ctrlGuru, {
+    xPercent: -100
+  });
+  guruTl.to(ctrlGuru, 0.5, {
+    xPercent: 0,
+    autoAlpha: 1,
+    ease: Power4.easeOut
+  }, 'guru_hideBackgrounds+=0.3'); // subtitles
+
+  guruTl.staggerTo('.guru .claim p', 1.5, {
+    opacity: 1,
+    repeat: 1,
+    yoyo: true
+  }, 5, 'guru_hideBackgrounds+=1'); // Animation Mama
 
   const mamaTl = new _TweenMax.TimelineLite({
-    id: "mama" // paused: true
-
+    id: "mama",
+    paused: true
   });
   mamaTl.eventCallback('onStart', () => {
     currentVideo = mamaVideo;
+    currentTl = mamaTl;
   }); // logos
 
   mamaTl.to(mamaLogo, 0.8, {
@@ -10766,14 +10768,7 @@ _domLoaded.default.then(() => {
     repeat: 1,
     yoyo: true
   }, 5, 'hideBackgrounds+=1'); // Listeners
-  // close
-
-  const handleClose = () => {};
-
-  for (var i = 0; i < ctrlClose.length; i++) {
-    ctrlClose[i].addEventListener(clickEvent, handleClose);
-  } // Mute State
-
+  // Mute State
 
   const handleUnmute = () => {
     isMute = false;
@@ -10831,16 +10826,23 @@ _domLoaded.default.then(() => {
         currentVideo.muted = false;
         break;
     }
+  }); // start / close
+
+  for (var i = 0; i < ctrlClose.length; i++) {
+    ctrlClose[i].addEventListener(clickEvent, () => {
+      currentTl.reverse('hideBackgrounds');
+    });
+  }
+
+  guru.addEventListener(clickEvent, event => {
+    guruTl.play();
   });
-  guru.addEventListener('click', event => {// gutuTl.play()
-    // console.log('guru enter')
-  }, false);
-  mama.addEventListener('click', event => {// tlMama.play()
-    // console.log('mama enter')
-  }, false);
+  mama.addEventListener(clickEvent, event => {
+    mamaTl.play();
+  });
   window.addEventListener('resize', () => {
     console.log('resize');
-  });
+  }); // videos
 
   const onCanPlay = event => {
     console.log('video canPlay');
@@ -10851,12 +10853,6 @@ _domLoaded.default.then(() => {
     videos[i].addEventListener(canplayEvent, onCanPlay, false); // end loader
     // attach pointer listeners
   }
-});
-
-GSDevTools.create({
-  animation: 'mama',
-  paused: true,
-  persist: false
 });
 
 },{"dom-loaded":1,"gsap/TweenMax":11,"is-touch-device":13}]},{},[14]);

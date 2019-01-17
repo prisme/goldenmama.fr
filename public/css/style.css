@@ -167,21 +167,21 @@
 
 /* text */
   .claim{
-    position: absolute;
-    bottom: 1vh;
-    font-size: 2em;
-    width: 90%;
     z-index: 2;
+    position: absolute;
+    bottom: 2vh;
+    width: 90%;
+    height: 50vh;
+    font-size: 2em;
     color: white;
     text-shadow: 0 0px 1px rgba(0, 0, 0, 0.2);
-    height: 50vh;
   }
 
   .mama .claim{
-    left: 3vh;
+    left: 2vh;
   }
   .guru .claim{
-    right: 3vh;
+    right: 2vh;
   }
   .guru .claim,
   .guru .claim p {
@@ -190,7 +190,7 @@
 
   .claim p{
     position: absolute;
-    bottom: 10vh;
+    bottom: 1vh;
     width: 100%;
     opacity: 0;
   }
