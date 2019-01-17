@@ -10591,9 +10591,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const isTouchDevice = require('is-touch-device');
 
 const clickEvent = isTouchDevice() ? 'touchstart' : 'click';
-const canplayEvent = 'canplaythrough'; // let isMute = false
+const canplayEvent = 'canplaythrough';
+let isMute = false; // let isMute = true
 
-let isMute = true;
 let currentVideo;
 let currentTl;
 

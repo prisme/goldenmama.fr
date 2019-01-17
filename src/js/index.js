@@ -4,8 +4,8 @@ import { TweenMax, Eases, CSSPlugin, ScrollToPlugin, TimelineLite } from 'gsap/T
 const isTouchDevice = require('is-touch-device')
 const clickEvent = isTouchDevice() ? 'touchstart' : 'click'
 const canplayEvent = 'canplaythrough'
-// let isMute = false
-let isMute = true
+let isMute = false
+// let isMute = true
 let currentVideo
 let currentTl
 
