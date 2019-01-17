@@ -45,15 +45,15 @@ domLoaded.then(() => {
   guruTl
     .to(guruLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut }, 0)
     .to(mamaLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut }, 0)
-    .addLabel('guru_hideLogos', '-=0.6')
+    .addLabel('hideLogos', '-=0.6')
 
   // backgrounds
   guruTl
-    .to(mama, 0.8, { backgroundColor: 'rgba(45, 46, 131, 0)', xPercent:-100, force3D: true, ease: Power3.easeIn }, 'guru_hideLogos')
+    .to(mama, 0.8, { backgroundColor: 'rgba(45, 46, 131, 0)', xPercent:-100, force3D: true, ease: Power3.easeIn }, 'hideLogos')
     .to(guru, 0.8, { backgroundColor: 'rgba(229, 229, 229, 0)', xPercent: 100, force3D: true, ease: Power3.easeIn,
       onComplete: () => { TweenLite.set(guru, { xPercent: 0 }) }
-    }, 'guru_hideLogos')
-    .addLabel('guru_hideBackgrounds')
+    }, 'hideLogos')
+    .addLabel('hideBackgrounds')
 
   // video
   guruTl
@@ -64,7 +64,7 @@ domLoaded.then(() => {
         currentVideo.muted = isMute
         currentVideo.play()
       }
-    }, 'guru_hideLogos')
+    }, 'hideLogos')
 
   // top logo
   const guruLogoTop = root.appendChild(guruLogo.cloneNode(true))
@@ -82,7 +82,7 @@ domLoaded.then(() => {
   guruTl
     .to(guruLogoTop, 0.5, {
       xPercent: 0, right: '1vh', ease: Power4.easeOut
-    }, 'guru_hideBackgrounds+=0.3')
+    }, 'hideBackgrounds+=0.3')
 
   // controls
   TweenLite.set(ctrlGuru, {
@@ -94,14 +94,14 @@ domLoaded.then(() => {
       xPercent: 0,
       autoAlpha: 1,
       ease: Power4.easeOut
-    }, 'guru_hideBackgrounds+=0.3')
+    }, 'hideBackgrounds+=0.3')
 
   // subtitles
   guruTl.staggerTo('.guru .claim p', 1.5, {
     opacity : 1,
     repeat: 1,
     yoyo: true
-  }, 5, 'guru_hideBackgrounds+=1')
+  }, 5, 'hideBackgrounds+=1')
 
 // Animation Mama
   const mamaTl = new TimelineLite({

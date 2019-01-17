@@ -10632,14 +10632,14 @@ _domLoaded.default.then(() => {
   }, 0).to(mamaLogo, 0.8, {
     autoAlpha: 0,
     ease: Power2.easeOut
-  }, 0).addLabel('guru_hideLogos', '-=0.6'); // backgrounds
+  }, 0).addLabel('hideLogos', '-=0.6'); // backgrounds
 
   guruTl.to(mama, 0.8, {
     backgroundColor: 'rgba(45, 46, 131, 0)',
     xPercent: -100,
     force3D: true,
     ease: Power3.easeIn
-  }, 'guru_hideLogos').to(guru, 0.8, {
+  }, 'hideLogos').to(guru, 0.8, {
     backgroundColor: 'rgba(229, 229, 229, 0)',
     xPercent: 100,
     force3D: true,
@@ -10649,7 +10649,7 @@ _domLoaded.default.then(() => {
         xPercent: 0
       });
     }
-  }, 'guru_hideLogos').addLabel('guru_hideBackgrounds'); // video
+  }, 'hideLogos').addLabel('hideBackgrounds'); // video
 
   guruTl.to(guruVideo, 1, {
     autoAlpha: 1,
@@ -10658,7 +10658,7 @@ _domLoaded.default.then(() => {
       currentVideo.muted = isMute;
       currentVideo.play();
     }
-  }, 'guru_hideLogos'); // top logo
+  }, 'hideLogos'); // top logo
 
   const guruLogoTop = root.appendChild(guruLogo.cloneNode(true));
   guruLogoTop.removeChild(guruLogoTop.querySelector('.baseline'));
@@ -10676,7 +10676,7 @@ _domLoaded.default.then(() => {
     xPercent: 0,
     right: '1vh',
     ease: Power4.easeOut
-  }, 'guru_hideBackgrounds+=0.3'); // controls
+  }, 'hideBackgrounds+=0.3'); // controls
 
   TweenLite.set(ctrlGuru, {
     xPercent: -100
@@ -10685,13 +10685,13 @@ _domLoaded.default.then(() => {
     xPercent: 0,
     autoAlpha: 1,
     ease: Power4.easeOut
-  }, 'guru_hideBackgrounds+=0.3'); // subtitles
+  }, 'hideBackgrounds+=0.3'); // subtitles
 
   guruTl.staggerTo('.guru .claim p', 1.5, {
     opacity: 1,
     repeat: 1,
     yoyo: true
-  }, 5, 'guru_hideBackgrounds+=1'); // Animation Mama
+  }, 5, 'hideBackgrounds+=1'); // Animation Mama
 
   const mamaTl = new _TweenMax.TimelineLite({
     id: "mama",
