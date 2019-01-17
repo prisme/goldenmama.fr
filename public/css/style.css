@@ -66,9 +66,9 @@
 
   body {
     font-family: 'itc-avant-garde-gothic-pro', sans-serif;
+    /*font-weight: 300;*/
     font-weight: 700;
     font-size: 16px;
-    /*font-weight: 300;*/
     line-height: 1
   }
 
@@ -83,17 +83,10 @@
     overflow: hidden;
   }
 
-  .golden-mama, .guru {
+  article.mama,
+  article.guru {
     position: relative;
     flex-grow: 1;
-    /* overflow: hidden; */
-    /* position: absolute; */
-    /* top: 0; */
-    /* bottom: 0; */
-    /* left: 0; */
-    /* right: 0; */
-    /* display: flex; */
-    /* align-items: center; */
     z-index: 1;
   }
 
@@ -113,7 +106,8 @@
     z-index: 1;
   }
 
-  .guru .logo, .golden-mama .logo {
+  .guru .logo,
+  .mama .logo {
     width: 50%;
     height: auto;
     right: 50%;
@@ -147,72 +141,48 @@
     color: #343434;
   }
 
-  .golden-mama .baseline{
+  .mama .baseline{
     color: #fd386d;
   }
 
 
 /* colors */
-  .golden-mama {
-    background: rgb(45, 46, 131);
+  article.mama {
+    background: #2d2e83;
   }
-/*  .golden-mama:hover {
-    background: #fd386d;
-  }*/
-  .golden-mama .logo svg *,
-  .golden-mama .claim svg * {
+  article.guru {
+    background: #e5e5e5;
+  }
+
+  .mama .logo svg *,
+  .mama .claim svg * {
     fill: #fd386d;
   }
-/*  .golden-mama:hover .logo svg * {
-    fill: #2d2e83;
-  }*/
 
-  .guru {
-    background: rgb(229, 229, 229);
-  }
-/*  .guru:hover {
-    background: #343434;
-  }*/
   .guru .logo svg *,
   .guru .claim svg *
   {
     fill: #343434;
   }
-/*  .guru:hover .logo svg *{
-    fill: #e5e5e5;
-  }*/
-/*
-  .golden-mama,
-  .guru{
-    cursor: progress;
-  }
-  .golden-mama.loaded,
-  .guru.loaded{
-    cursor: auto;
-  }
-*/
 
 /* text */
   .claim{
     position: absolute;
     bottom: 1vh;
-    /* left: 50%; */
-    /* transform: translateX(-50%) translateY(-50%); */
-    /* opacity: 0; */
-    /* display: none; */
     font-size: 2em;
     width: 90%;
-    z-index: 1;
-    color: rgb(85, 85, 85);
+    z-index: 2;
     color: white;
     text-shadow: 0 0px 1px rgba(0, 0, 0, 0.2);
     height: 50vh;
   }
 
+  .mama .claim{
+    left: 3vh;
+  }
   .guru .claim{
     right: 3vh;
   }
-
   .guru .claim,
   .guru .claim p {
     text-align: right;
@@ -221,25 +191,9 @@
   .claim p{
     position: absolute;
     bottom: 10vh;
-    /* left: 50%; */
-    /* transform: translateX(-50%) translateY(-50%); */
     width: 100%;
     opacity: 0;
   }
-
-  /*.loaded:hover .claim{*/
-  .loaded .claim{
-    /* opacity: 1; */
-    /* display: block; */
-    /* color: white; */
-  }
-
-  /*
-  .claim svg{
-    width: 100%;
-    height: auto;
-  }
-  */
 
 /* video */
   .root video
@@ -254,21 +208,20 @@
     transform: translateX(-50%) translateY(-50%);
     z-index: 0;
     pointer-events: none;
-    /* display: none; */
-  }
-  .loaded video{
-    /*display: block;*/
-    /*opacity: 0;*/
   }
 
   .root video{
     opacity: 0;
   }
 
-  /*.guru:hover video,
-  .golden-mama:hover video{
-    opacity: 1
-  }*/
+  .controls.guru{
+    left: 0;
+    right: auto;
+  }
+  .controls.mama{
+    right: 0;
+    left: auto;
+  }
 
   .controls{
     display: flex;
@@ -276,6 +229,7 @@
     z-index: 2;
     margin: 1vh;
     opacity: 0;
+    visibility: hidden;
   }
 
   .controls > * {
@@ -296,7 +250,12 @@
 
   .controls .mute{
     position: relative;
+  }
+  .controls.guru .mute{
     left: -5vh;
+  }
+  .controls.mama .mute{
+    left: 5vh;
   }
 
   .controls .close{

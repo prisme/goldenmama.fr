@@ -7,35 +7,36 @@ const canplayEvent = 'canplaythrough';
 let isMute = false
 // let isMute = true
 
+let _tlMain = new TimelineLite({paused: true});
+
 domLoaded.then(() => {
 // Elements
   const root = document.querySelector('.root')
-  const guru = root.querySelector('.guru')
-  const mama = root.querySelector('.golden-mama')
+  const guru = root.querySelector('article.guru')
+  const mama = root.querySelector('article.mama')
 
-  const controls = document.querySelector('.controls')
-  const ctrlUnmute = controls.querySelector('.unmute')
-  const ctrlMute = controls.querySelector('.mute')
-  const ctrlClose = controls.querySelector('.close')
+  const ctrlGuru = document.querySelector('.controls.guru')
+  const ctrlMama = document.querySelector('.controls.mama')
+  const ctrlUnmute = document.querySelectorAll('.unmute')
+  const ctrlMute = document.querySelectorAll('.mute')
+  const ctrlClose = document.querySelectorAll('.close')
 
   const guruLogo = guru.querySelector('.logo')
   const mamaLogo = mama.querySelector('.logo')
 
-  const mamaVideo = document.querySelector('video#mama')
-  const guruVideo = document.querySelector('video#guru')
+  const videos = document.querySelectorAll('video')
+  const mamaVideo = document.querySelector('video.mama')
+  const guruVideo = document.querySelector('video.guru')
   let currentVideo
 
-  let defaultOffMuteElt = isMute ? ctrlMute : ctrlUnmute
-  TweenLite.set(defaultOffMuteElt, {autoAlpha: 0})
+  TweenLite.set(isMute ? ctrlMute : ctrlUnmute, {autoAlpha: 0})
   // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
-
-// Animation
-  const mamaTl = new TimelineLite({id: "mama"})
-  mamaTl.eventCallback('onStart', () => {
-    currentVideo = mamaVideo
+/*
+// Animation Guru
+  const gutuTl = new TimelineLite({
+    id: "guru",
+    // paused: true
   })
-
-  const gutuTl = new TimelineLite({id: "guru"})
   gutuTl.eventCallback('onStart', () => {
     currentVideo = guruVideo
   })
@@ -49,9 +50,9 @@ domLoaded.then(() => {
   // backgrounds
   gutuTl
     .to(mama, 0.8, { backgroundColor: 'rgba(45, 46, 131, 0)', xPercent:-100, force3D: true, ease: Power3.easeIn }, 'hideLogos')
-    .to(guru, 0.8, { backgroundColor: 'rgba(229, 229, 229, 0)', xPercent: 100, force3D: true, ease: Power3.easeIn, onComplete: () => {
-      TweenLite.set(guru, { xPercent: 0 })
-    }}, 'hideLogos')
+    .to(guru, 0.8, { backgroundColor: 'rgba(229, 229, 229, 0)', xPercent: 100, force3D: true, ease: Power3.easeIn,
+      onComplete: () => { TweenLite.set(guru, { xPercent: 0 }) }
+    }, 'hideLogos')
     .addLabel('hideBackgrounds')
 
   // video
@@ -84,28 +85,106 @@ domLoaded.then(() => {
     }, 'hideBackgrounds+=0.3')
 
   // controls
-  TweenLite.set(controls, {
-    xPercent: -100,
-    opacity: 1
+  TweenLite.set(ctrlGuru, {
+    xPercent: -100
   })
 
   gutuTl
-    .to(controls, 0.5, {
-      xPercent: 0, ease: Power4.easeOut
+    .to(ctrlGuru, 0.5, {
+      xPercent: 0,
+      autoAlpha: 1,
+      ease: Power4.easeOut
     }, 'hideBackgrounds+=0.3')
 
   // subtitles
-  // const guruSplitText
   gutuTl.staggerTo('.guru .claim p', 1.5, {
+    opacity : 1,
+    repeat: 1,
+    yoyo: true
+  }, 5, 'hideBackgrounds+=1')
+*/
+
+// Animation Mama
+  const mamaTl = new TimelineLite({
+    id: "mama",
+    // paused: true
+  })
+  mamaTl.eventCallback('onStart', () => {
+    currentVideo = mamaVideo
+  })
+
+  // logos
+  mamaTl
+    .to(mamaLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut }, 0)
+    .to(guruLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut }, 0)
+    .addLabel('hideLogos', '-=0.6')
+
+  // backgrounds
+  mamaTl
+    .to(mama, 0.8, { backgroundColor: 'rgba(45, 46, 131, 0)', xPercent:-100, force3D: true, ease: Power3.easeIn }, 'hideLogos')
+    .to(guru, 0.8, { backgroundColor: 'rgba(229, 229, 229, 0)', xPercent: 100, force3D: true, ease: Power3.easeIn,
+      onComplete: () => { TweenLite.set(mama, { xPercent: 0 }) }
+    }, 'hideLogos')
+    .addLabel('hideBackgrounds')
+
+  // video
+  mamaTl
+    .to(mamaVideo, 1, {
+      autoAlpha: 1,
+      onStart: () => {
+        currentVideo.currentTime = 0
+        currentVideo.muted = isMute
+        currentVideo.play()
+      }
+    }, 'hideLogos')
+
+  // top logo
+  const mamaLogoTop = root.appendChild(mamaLogo.cloneNode(true))
+  mamaLogoTop.removeChild(mamaLogoTop.querySelector('.baseline'))
+
+  TweenLite.set(mamaLogoTop.querySelectorAll('g *'), { fill: '#fd386d' })
+  TweenLite.set(mamaLogoTop, {
+    width: mamaLogo.offsetWidth * 0.6 +'px',
+    height: mamaLogo.offsetHeight * 0.6 +'px',
+    top: '1vh',
+    left: 0,
+    xPercent: -100
+  })
+
+  mamaTl
+    .to(mamaLogoTop, 0.5, {
+      xPercent: 0, left: '1vh', ease: Power4.easeOut
+    }, 'hideBackgrounds+=0.3')
+
+  // controls
+  TweenLite.set(ctrlMama, {
+    xPercent: 100
+  })
+
+  mamaTl
+    .to(ctrlMama, 0.5, {
+      xPercent: 0,
+      autoAlpha: 1,
+      ease: Power4.easeOut
+    }, 'hideBackgrounds+=0.3')
+
+  // subtitles
+  mamaTl.staggerTo('.mama .claim p', 1.5, {
     opacity : 1,
     repeat: 1,
     yoyo: true
   }, 5, 'hideBackgrounds+=1')
 
 
-  //-- Listeners
-  const handleClose = () => {}
-  ctrlClose.addEventListener(clickEvent, handleClose)
+// Listeners
+  // close
+  const handleClose = () => {
+
+  }
+
+  for (var i = 0; i < ctrlClose.length; i++) {
+    ctrlClose[i].addEventListener(clickEvent, handleClose)
+  }
 
   // Mute State
     const handleUnmute = () => {
@@ -121,8 +200,12 @@ domLoaded.then(() => {
       TweenLite.to(ctrlMute, 0.1, {autoAlpha: 0})
     }
 
-    ctrlUnmute.addEventListener(clickEvent, handleUnmute);
-    ctrlMute.addEventListener(clickEvent, handleMute);
+    for (var i = 0; i < ctrlUnmute.length; i++) {
+      ctrlUnmute[i].addEventListener(clickEvent, handleUnmute);
+    }
+    for (var i = 0; i < ctrlMute.length; i++) {
+      ctrlMute[i].addEventListener(clickEvent, handleMute);
+    }
 
     let hidden, visibilityChange
     if (typeof document.hidden !== "undefined") {
@@ -144,31 +227,26 @@ domLoaded.then(() => {
       }
     })
 
-  guru.addEventListener('mouseenter', (event) => {
+  guru.addEventListener('click', (event) => {
     // gutuTl.play()
     // console.log('guru enter')
   }, false)
-  guru.addEventListener('mouseleave', (event) => {
-    // gutuTl.stop()
-    // gutuTl.seek(0)
-    // console.log('guru leave')
-  }, false)
 
-  mama.addEventListener('mouseenter', (event) => {
+  mama.addEventListener('click', (event) => {
     // tlMama.play()
     // console.log('mama enter')
-  }, false)
-  mama.addEventListener('mouseleave', (event) => {
-    // tlMama.stop()
-    // tlMama.seek(0)
-    // console.log('mama leave')
   }, false)
 
   window.addEventListener('resize', () => {
     console.log('resize')
   })
 
-  const videos = document.querySelectorAll('video');
+  const onCanPlay = (event) => {
+    console.log('video canPlay')
+    event.target.removeEventListener(canplayEvent, onCanPlay, false);
+    // event.target.parentNode.classList.add('loaded'); //TODO
+  }
+
   for (let i = 0; i < videos.length; i++) {
     videos[i].addEventListener(canplayEvent, onCanPlay, false);
     // end loader
@@ -177,15 +255,9 @@ domLoaded.then(() => {
 
 })
 
-const onCanPlay = (event) => {
-  console.log('video canPlay')
-  event.target.removeEventListener(canplayEvent, onCanPlay, false);
-  // event.target.parentNode.classList.add('loaded'); //TODO
-}
 
 GSDevTools.create({
-  animation: 'guru',
+  animation: 'mama',
   paused: true,
-  persist: false,
-  inTime: 0
+  persist: false
 });

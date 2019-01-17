@@ -2,7 +2,7 @@ extends layout
 
 block content
   .root
-    .controls
+    .controls.guru
       .close
         include ../public/img/close2.svg
       .unmute
@@ -10,7 +10,15 @@ block content
       .mute
         include ../public/img/unmuted.svg
 
-    .golden-mama
+    .controls.mama
+      .mute
+        include ../public/img/unmuted.svg
+      .unmute
+        include ../public/img/muted.svg
+      .close
+        include ../public/img/close2.svg
+
+    article.mama
       .logo
         include ../public/img/golden-mama-logo.svg
         .baseline
@@ -28,8 +36,7 @@ block content
         p
           | You’ll thank us later.
 
-
-    .guru
+    article.guru
       .logo
         include ../public/img/guru-logo.svg
         .baseline
@@ -47,17 +54,16 @@ block content
         p
           | Savoir-faire is french, so are we.
 
-    video#mama.loop.muted(autoplay='', muted='', loop='', preload='auto', playsinline='')
-      //- source(src='video/MAMA.mp4', type='video/mp4')
-      //- source(src='video/MAMA.webm', type='video/webm')
-      source(src='https://storage.googleapis.com/goldenmama/MAMA.webm', type='video/webm')
-      source(src='https://storage.googleapis.com/goldenmama/MAMA.mp4', type='video/mp4')
+    video.mama.loop.muted(muted='', loop='', preload='auto', playsinline='')
+      source(src='video/MAMA.webm', type='video/webm')
+      source(src='video/MAMA.mp4', type='video/mp4')
+      //- source(src='https://storage.googleapis.com/goldenmama/MAMA.webm', type='video/webm')
+      //- source(src='https://storage.googleapis.com/goldenmama/MAMA.mp4', type='video/mp4')
 
-
-    video#guru.loop.muted(autoplay='', muted='', loop='', preload='auto', playsinline='')
-      //- source(src='video/GURU.mp4', type='video/mp4')
-      //- source(src='video/GURU.webm', type='video/webm')
-      source(src='https://storage.googleapis.com/goldenmama/GURU.webm', type='video/webm')
-      source(src='https://storage.googleapis.com/goldenmama/GURU.mp4', type='video/mp4')
+    video.guru.loop.muted(muted='', loop='', preload='auto', playsinline='')
+      source(src='video/GURU.webm', type='video/webm')
+      source(src='video/GURU.mp4', type='video/mp4')
+      //- source(src='https://storage.googleapis.com/goldenmama/GURU.webm', type='video/webm')
+      //- source(src='https://storage.googleapis.com/goldenmama/GURU.mp4', type='video/mp4')
 
 
