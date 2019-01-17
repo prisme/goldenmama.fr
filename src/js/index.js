@@ -223,7 +223,8 @@ domLoaded.then(() => {
     for (var i = 0; i < ctrlClose.length; i++) {
       ctrlClose[i].addEventListener(clickEvent, () => {
         currentTl.reverse('hideBackgrounds')
-        currentVideo.muted = true
+        isMute = true
+        currentVideo.muted = isMute
       })
     }
 
