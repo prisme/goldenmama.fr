@@ -36,10 +36,6 @@ domLoaded.then(() => {
     id: "guru",
     paused: true
   })
-  guruTl.eventCallback('onStart', () => {
-    currentVideo = guruVideo
-    currentTl = guruTl
-  })
 
   // logos
   guruTl
@@ -59,11 +55,7 @@ domLoaded.then(() => {
   guruTl
     .to(guruVideo, 1, {
       autoAlpha: 1,
-      onStart: () => {
-        currentVideo.currentTime = 0
-        currentVideo.muted = isMute
-        currentVideo.play()
-      }
+      // z: 10
     }, 'hideLogos')
 
   // top logo
@@ -108,10 +100,6 @@ domLoaded.then(() => {
     id: "mama",
     paused: true
   })
-  mamaTl.eventCallback('onStart', () => {
-    currentVideo = mamaVideo
-    currentTl = mamaTl
-  })
 
   // logos
   mamaTl
@@ -131,11 +119,7 @@ domLoaded.then(() => {
   mamaTl
     .to(mamaVideo, 1, {
       autoAlpha: 1,
-      onStart: () => {
-        currentVideo.currentTime = 0
-        currentVideo.muted = isMute
-        currentVideo.play()
-      }
+      // z: 10
     }, 'hideLogos')
 
   // top logo
@@ -219,7 +203,6 @@ domLoaded.then(() => {
     })
 
   // start / close
-
     for (var i = 0; i < ctrlClose.length; i++) {
       ctrlClose[i].addEventListener(clickEvent, () => {
         currentTl.reverse('hideBackgrounds')
@@ -229,11 +212,27 @@ domLoaded.then(() => {
     }
 
     guru.addEventListener(clickEvent, (event) => {
-      guruTl.play()
+      currentVideo = guruVideo
+      currentTl = guruTl
+
+      currentVideo.currentTime = 0
+      currentVideo.muted = isMute
+
+      currentVideo.play().then(()=>{
+        guruTl.play()
+      })
     })
 
     mama.addEventListener(clickEvent, (event) => {
-      mamaTl.play()
+      currentVideo = mamaVideo
+      currentTl = mamaTl
+
+      currentVideo.currentTime = 0
+      currentVideo.muted = isMute
+
+      currentVideo.play().then(()=>{
+        mamaTl.play()
+      })
     })
 
     window.addEventListener('resize', () => {

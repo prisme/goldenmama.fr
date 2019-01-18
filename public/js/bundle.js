@@ -10620,10 +10620,6 @@ _domLoaded.default.then(() => {
   const guruTl = new _TweenMax.TimelineLite({
     id: "guru",
     paused: true
-  });
-  guruTl.eventCallback('onStart', () => {
-    currentVideo = guruVideo;
-    currentTl = guruTl;
   }); // logos
 
   guruTl.to(guruLogo, 0.8, {
@@ -10652,12 +10648,8 @@ _domLoaded.default.then(() => {
   }, 'hideLogos').addLabel('hideBackgrounds'); // video
 
   guruTl.to(guruVideo, 1, {
-    autoAlpha: 1,
-    onStart: () => {
-      currentVideo.currentTime = 0;
-      currentVideo.muted = isMute;
-      currentVideo.play();
-    }
+    autoAlpha: 1 // z: 10
+
   }, 'hideLogos'); // top logo
 
   const guruLogoTop = root.appendChild(guruLogo.cloneNode(true));
@@ -10696,10 +10688,6 @@ _domLoaded.default.then(() => {
   const mamaTl = new _TweenMax.TimelineLite({
     id: "mama",
     paused: true
-  });
-  mamaTl.eventCallback('onStart', () => {
-    currentVideo = mamaVideo;
-    currentTl = mamaTl;
   }); // logos
 
   mamaTl.to(mamaLogo, 0.8, {
@@ -10728,12 +10716,8 @@ _domLoaded.default.then(() => {
   }, 'hideLogos').addLabel('hideBackgrounds'); // video
 
   mamaTl.to(mamaVideo, 1, {
-    autoAlpha: 1,
-    onStart: () => {
-      currentVideo.currentTime = 0;
-      currentVideo.muted = isMute;
-      currentVideo.play();
-    }
+    autoAlpha: 1 // z: 10
+
   }, 'hideLogos'); // top logo
 
   const mamaLogoTop = root.appendChild(mamaLogo.cloneNode(true));
@@ -10837,10 +10821,22 @@ _domLoaded.default.then(() => {
   }
 
   guru.addEventListener(clickEvent, event => {
-    guruTl.play();
+    currentVideo = guruVideo;
+    currentTl = guruTl;
+    currentVideo.currentTime = 0;
+    currentVideo.muted = isMute;
+    currentVideo.play().then(() => {
+      guruTl.play();
+    });
   });
   mama.addEventListener(clickEvent, event => {
-    mamaTl.play();
+    currentVideo = mamaVideo;
+    currentTl = mamaTl;
+    currentVideo.currentTime = 0;
+    currentVideo.muted = isMute;
+    currentVideo.play().then(() => {
+      mamaTl.play();
+    });
   });
   window.addEventListener('resize', () => {
     console.log('resize');
