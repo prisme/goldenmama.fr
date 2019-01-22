@@ -299,6 +299,10 @@
   	z-index: 2;
   }
 
+  .contact .toggle{
+    font-size: 2em;
+  }
+
   .contact a{
     color: white;
     padding: 1em;
