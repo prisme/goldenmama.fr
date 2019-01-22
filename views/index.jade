@@ -5,24 +5,21 @@ block content
 
     .contact
       button.toggle
-        💬
+        include ../public/img/chat.svg
       .expand
-        //- https://wa.me/33647273347
-        //- uggcf://jn.zr/88192728892
-        //- https://wa.me/33660800261
-        a.scramble.whatsapp(href='uggcf://jn.zr/88192728892', target='_blank')
-          | WhatsApp
+        //- https://wa.me/33647273347 - uggcf://jn.zr/88192728892
         //- a.scramble.whatsapp(href='uggcf://ncv.jungfncc.pbz/fraq?cubar=+88192728892')
-        //-   | WhatsApp mobile
+        a.scramble.whatsapp(href='uggcf://jn.zr/88192728892', target='_blank', title='WhatsApp')
+          include ../public/img/whatsapp.svg
         //- mailto:hello@goldenmama.fr
-        a.scramble.mailto(href='znvygb:uryyb@tbyqraznzn.se', target='_blank')
-          | e-mail
+        a.scramble.mailto(href='znvygb:uryyb@tbyqraznzn.se', target='_blank', title='e-mail')
+          include ../public/img/email.svg
 
 
 
     .controls.guru
       .close
-        include ../public/img/close2.svg
+        include ../public/img/close.svg
       .unmute
         include ../public/img/muted.svg
       .mute
@@ -34,7 +31,7 @@ block content
       .unmute
         include ../public/img/muted.svg
       .close
-        include ../public/img/close2.svg
+        include ../public/img/close.svg
 
     article.mama
       .logo
@@ -73,15 +70,15 @@ block content
           | Savoir-faire is french, so are we.
 
     video.mama.loop.muted(muted='', loop='', preload='auto', playsinline='')
-      //- source(src='video/MAMA.webm', type='video/webm')
-      //- source(src='video/MAMA.mp4', type='video/mp4')
-      source(src='https://storage.googleapis.com/goldenmama/MAMA.webm', type='video/webm')
-      source(src='https://storage.googleapis.com/goldenmama/MAMA.mp4', type='video/mp4')
+      source(src='video/MAMA.webm', type='video/webm')
+      source(src='video/MAMA.mp4', type='video/mp4')
+      //- source(src='https://storage.googleapis.com/goldenmama/MAMA.webm', type='video/webm')
+      //- source(src='https://storage.googleapis.com/goldenmama/MAMA.mp4', type='video/mp4')
 
     video.guru.loop.muted(muted='', loop='', preload='auto', playsinline='')
-      //- source(src='video/GURU.webm', type='video/webm')
-      //- source(src='video/GURU.mp4', type='video/mp4')
-      source(src='https://storage.googleapis.com/goldenmama/GURU.webm', type='video/webm')
-      source(src='https://storage.googleapis.com/goldenmama/GURU.mp4', type='video/mp4')
+      source(src='video/GURU.webm', type='video/webm')
+      source(src='video/GURU.mp4', type='video/mp4')
+      //- source(src='https://storage.googleapis.com/goldenmama/GURU.webm', type='video/webm')
+      //- source(src='https://storage.googleapis.com/goldenmama/GURU.mp4', type='video/mp4')
 
 
