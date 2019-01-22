@@ -159,9 +159,9 @@ domLoaded.then(() => {
     yoyo: true
   }, 5, 'hideBackgrounds+=1')
 
-// Listeners
+// Handlers
 
-  // Mute State
+  // Mute
     const handleUnmute = () => {
       isMute = false
       currentVideo.muted = false
@@ -175,15 +175,7 @@ domLoaded.then(() => {
       TweenLite.to(ctrlMute, 0.1, {autoAlpha: 0})
     }
 
-    /*
-    for (var i = 0; i < ctrlUnmute.length; i++) {
-      ctrlUnmute[i].addEventListener(clickEvent, handleUnmute);
-    }
-    for (var i = 0; i < ctrlMute.length; i++) {
-      ctrlMute[i].addEventListener(clickEvent, handleMute);
-    }
-    */
-
+  // VisibilityChange
     let hidden, visibilityChange
     if (typeof document.hidden !== "undefined") {
       hidden = "hidden";
@@ -203,9 +195,7 @@ domLoaded.then(() => {
       }
     }
 
-    // document.addEventListener(visibilityChange, handleVisibilityChange)
-
-  // close
+  // Close
     for (var i = 0; i < ctrlClose.length; i++) {
       ctrlClose[i].addEventListener(clickEvent, () => {
         currentVideo.muted = true
@@ -222,7 +212,8 @@ domLoaded.then(() => {
       })
     }
 
-  // start
+  // Start
+    // @TODO : factorize
     guru.addEventListener(clickEvent, (event) => {
       currentVideo = guruVideo
       currentTl = guruTl
@@ -264,10 +255,10 @@ domLoaded.then(() => {
     })
 
     window.addEventListener('resize', () => {
-      console.log('resize')
+      // console.log('resize')
     })
 
-  // videos
+  // Videos
     const onCanPlay = (event) => {
       console.log('video canPlay')
       event.target.removeEventListener(canplayEvent, onCanPlay, false);
