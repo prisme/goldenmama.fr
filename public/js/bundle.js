@@ -10775,14 +10775,15 @@ _domLoaded.default.then(() => {
       autoAlpha: 0
     });
   };
-
+  /*
   for (var i = 0; i < ctrlUnmute.length; i++) {
     ctrlUnmute[i].addEventListener(clickEvent, handleUnmute);
   }
-
   for (var i = 0; i < ctrlMute.length; i++) {
     ctrlMute[i].addEventListener(clickEvent, handleMute);
   }
+  */
+
 
   let hidden, visibilityChange;
 
@@ -10797,8 +10798,7 @@ _domLoaded.default.then(() => {
     visibilityChange = "webkitvisibilitychange";
   }
 
-  document.addEventListener(visibilityChange, () => {
-    // todo? pause/resume video & animation?
+  const handleVisibilityChange = () => {
     if (isMute) return;
 
     switch (document.visibilityState) {
@@ -10810,21 +10810,43 @@ _domLoaded.default.then(() => {
         currentVideo.muted = false;
         break;
     }
-  }); // start / close
+  }; // document.addEventListener(visibilityChange, handleVisibilityChange)
+  // close
+
 
   for (var i = 0; i < ctrlClose.length; i++) {
     ctrlClose[i].addEventListener(clickEvent, () => {
+      currentVideo.muted = true;
+      document.removeEventListener(visibilityChange, handleVisibilityChange);
+
+      for (var i = 0; i < ctrlUnmute.length; i++) {
+        ctrlUnmute[i].removeEventListener(clickEvent, handleUnmute);
+      }
+
+      for (var i = 0; i < ctrlMute.length; i++) {
+        ctrlMute[i].removeEventListener(clickEvent, handleMute);
+      }
+
       currentTl.reverse('hideBackgrounds');
-      isMute = true;
-      currentVideo.muted = isMute;
     });
-  }
+  } // start
+
 
   guru.addEventListener(clickEvent, event => {
     currentVideo = guruVideo;
     currentTl = guruTl;
     currentVideo.currentTime = 0;
     currentVideo.muted = isMute;
+    document.addEventListener(visibilityChange, handleVisibilityChange);
+
+    for (var i = 0; i < ctrlUnmute.length; i++) {
+      ctrlUnmute[i].addEventListener(clickEvent, handleUnmute);
+    }
+
+    for (var i = 0; i < ctrlMute.length; i++) {
+      ctrlMute[i].addEventListener(clickEvent, handleMute);
+    }
+
     currentVideo.play().then(() => {
       guruTl.play();
     });
@@ -10834,6 +10856,16 @@ _domLoaded.default.then(() => {
     currentTl = mamaTl;
     currentVideo.currentTime = 0;
     currentVideo.muted = isMute;
+    document.addEventListener(visibilityChange, handleVisibilityChange);
+
+    for (var i = 0; i < ctrlUnmute.length; i++) {
+      ctrlUnmute[i].addEventListener(clickEvent, handleUnmute);
+    }
+
+    for (var i = 0; i < ctrlMute.length; i++) {
+      ctrlMute[i].addEventListener(clickEvent, handleMute);
+    }
+
     currentVideo.play().then(() => {
       mamaTl.play();
     });
