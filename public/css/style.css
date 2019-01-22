@@ -267,17 +267,45 @@
   }
 
 
-.contact{
+  button {
+      -webkit-box-sizing: content-box;
+         -moz-box-sizing: content-box;
+              box-sizing: content-box;
+  }
+
+  /* Reset `button` default styles */
+  button {
+      background: none;
+      border: 0;
+      color: inherit;
+      cursor: pointer;
+      font: inherit;
+      line-height: normal;
+      overflow: visible;
+      padding: 0;
+  }
+  input::-moz-focus-inner,
+  button::-moz-focus-inner,
+  button:hover,
+  button:focus {
+      outline: none;
+      outline-offset: -4px;
+      border: 0;
+      padding: 0;
+  }
+
+  .contact{
   	position: absolute;
-	z-index: 2;
-}
+  	z-index: 2;
+  }
 
-.contact a{
-  color: white;
-  padding: 1em;
-  line-height: 3em;
-}
+  .contact a{
+    color: white;
+    padding: 1em;
+    line-height: 3em;
+    text-decoration: none;
+  }
 
-.gs-dev-tools{
-  z-index: 1;
-}
+  .gs-dev-tools{
+    z-index: 1;
+  }

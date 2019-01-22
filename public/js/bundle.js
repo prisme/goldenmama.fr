@@ -10662,7 +10662,7 @@ window.emailScramble = _emailScramble.default;
 
 const isTouchDevice = require('is-touch-device');
 
-const clickEvent = isTouchDevice() ? 'touchstart' : 'click';
+const clickEvent = isTouchDevice() ? 'touchend' : 'click';
 const canplayEvent = 'canplaythrough';
 let isMute = false;
 let currentVideo;
