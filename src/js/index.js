@@ -3,7 +3,7 @@ import { TweenMax, TimelineMax, Eases, CSSPlugin, ScrollToPlugin } from 'gsap/Tw
 import emailScramble from 'email-scramble';
 
 const isTouchDevice = require('is-touch-device')
-const clickEvent = isTouchDevice() ? 'touchstart' : 'click'
+const clickEvent = isTouchDevice() ? 'touchend' : 'click'
 const canplayEvent = 'canplaythrough'
 let isMute = false
 let currentVideo
