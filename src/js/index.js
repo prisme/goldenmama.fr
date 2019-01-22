@@ -1,5 +1,6 @@
 import domLoaded from 'dom-loaded';
 import { TweenMax, Eases, CSSPlugin, ScrollToPlugin, TimelineMax } from 'gsap/TweenMax';
+import emailScramble from 'email-scramble';
 
 const isTouchDevice = require('is-touch-device')
 const clickEvent = isTouchDevice() ? 'touchstart' : 'click'
@@ -102,7 +103,6 @@ domLoaded.then(() => {
   }, 5)
 
   guruTl.add(guruSubsTl, 'hideBackgrounds+=1')
-
 
 // Animation Mama
   const mamaTl = new TimelineMax({
