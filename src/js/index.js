@@ -294,4 +294,14 @@ domLoaded.then(() => {
       // attach pointer listeners
     }
 
+  // Contact
+    const contactToggle = document.querySelector('.contact .toggle')
+    const contactExpand = document.querySelector('.contact .expand')
+
+    contactToggle.addEventListener(clickEvent, () => {
+      TweenLite.to(contactExpand, 0.3, {
+          autoAlpha: contactExpand.classList.contains('active') ? 0 : 1,
+          onComplete: () => { contactExpand.classList.toggle('active') }})
+    })
+
 })

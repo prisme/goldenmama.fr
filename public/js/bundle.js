@@ -10961,7 +10961,19 @@ _domLoaded.default.then(() => {
   for (let i = 0; i < videos.length; i++) {
     videos[i].addEventListener(canplayEvent, onCanPlay, false); // end loader
     // attach pointer listeners
-  }
+  } // Contact
+
+
+  const contactToggle = document.querySelector('.contact .toggle');
+  const contactExpand = document.querySelector('.contact .expand');
+  contactToggle.addEventListener(clickEvent, () => {
+    TweenLite.to(contactExpand, 0.3, {
+      autoAlpha: contactExpand.classList.contains('active') ? 0 : 1,
+      onComplete: () => {
+        contactExpand.classList.toggle('active');
+      }
+    });
+  });
 });
 
 },{"dom-loaded":1,"email-scramble":2,"gsap/TweenMax":12,"is-touch-device":14}]},{},[15]);

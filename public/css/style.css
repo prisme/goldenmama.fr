@@ -306,6 +306,11 @@
     text-decoration: none;
   }
 
+  .contact .expand{
+    visibility: hidden;
+    opacity: 0;
+  }
+
   .gs-dev-tools{
     z-index: 1;
   }
