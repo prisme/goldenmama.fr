@@ -267,6 +267,17 @@
   }
 
 
+.contact{
+  	position: absolute;
+	z-index: 2;
+}
+
+.contact a{
+  color: white;
+  padding: 1em;
+  line-height: 3em;
+}
+
 .gs-dev-tools{
   z-index: 1;
 }

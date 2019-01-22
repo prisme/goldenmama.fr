@@ -1,12 +1,11 @@
 import domLoaded from 'dom-loaded';
-import { TweenMax, Eases, CSSPlugin, ScrollToPlugin, TimelineMax } from 'gsap/TweenMax';
+import { TweenMax, TimelineMax, Eases, CSSPlugin, ScrollToPlugin } from 'gsap/TweenMax';
 import emailScramble from 'email-scramble';
 
 const isTouchDevice = require('is-touch-device')
 const clickEvent = isTouchDevice() ? 'touchstart' : 'click'
 const canplayEvent = 'canplaythrough'
 let isMute = false
-// let isMute = true
 let currentVideo
 let currentTl
 
@@ -29,8 +28,15 @@ domLoaded.then(() => {
   const mamaVideo = document.querySelector('video.mama')
   const guruVideo = document.querySelector('video.guru')
 
+// Defaults
   TweenLite.set(isMute ? ctrlMute : ctrlUnmute, {autoAlpha: 0})
   // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
+
+  const scrambled = document.querySelectorAll('.scramble')
+
+  scrambled.forEach( (link) => {
+    link.href = emailScramble.decode(link.href)
+  })
 
 // Animation Guru
   const guruTl = new TimelineMax({

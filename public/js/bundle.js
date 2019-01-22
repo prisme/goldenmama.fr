@@ -16,6 +16,74 @@ module.exports = new Promise(resolve => {
 });
 
 },{}],2:[function(require,module,exports){
+(function wrapEmailScramble(root, factory) {
+  'use strict';
+  if (typeof define === 'function' && define.amd) {
+    define('email-scramble', factory(root));
+  } else if (typeof exports === 'object') {
+    module.exports = factory(root);
+  } else {
+    root.emailScramble = factory(root);
+  }
+}(this, function emailScramble(root) {
+  'use strict';
+
+  // Largely taken from https://github.com/mathiasbynens/rot.
+  var rot = function rot(charRot, numRot, str) {
+    var numbers = '0123456789';
+    var lowercase = 'abcdefghijklmnopqrstuvwxyz';
+    var uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var regexNumber = /[0-9]/;
+    var regexLowercase = /[a-z]/;
+    var regexUppercase = /[A-Z]/;
+
+    str = String(str);
+
+    if (charRot < 0) {
+      charRot += 26;
+    }
+    if (numRot < 0) {
+      numRot += 10;
+    }
+    var length = str.length; // note: no need to account for astral symbols
+    var index = -1;
+    var result = '';
+    var character;
+    var currentPosition;
+    var shiftedPosition;
+    while (++index < length) {
+      character = str.charAt(index);
+      if (regexNumber.test(character)) {
+        currentPosition = numbers.indexOf(character);
+        shiftedPosition = (currentPosition + numRot) % 10;
+        result += numbers.charAt(shiftedPosition);
+      } else if (regexLowercase.test(character)) {
+        currentPosition = lowercase.indexOf(character);
+        shiftedPosition = (currentPosition + charRot) % 26;
+        result += lowercase.charAt(shiftedPosition);
+      } else if (regexUppercase.test(character)) {
+        currentPosition = uppercase.indexOf(character);
+        shiftedPosition = (currentPosition + charRot) % 26;
+        result += uppercase.charAt(shiftedPosition);
+      } else {
+        result += character;
+      }
+    }
+    return result;
+  };
+
+  var rot18 = function rot18(str) {
+    return rot(13, 5, str);
+  };
+
+  return {
+    rot: rot,
+    encode: rot18,
+    decode: rot18
+  };
+}));
+
+},{}],3:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -66,7 +134,7 @@ var AttrPlugin = _TweenLite._gsScope._gsDefine.plugin({
 
 exports.default = exports.AttrPlugin = AttrPlugin;
 
-},{"./TweenLite.js":10}],3:[function(require,module,exports){
+},{"./TweenLite.js":11}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -865,7 +933,7 @@ p._kill = function (lookup) {
   return this._super._kill.call(this, lookup);
 };
 
-},{"./TweenLite.js":10}],4:[function(require,module,exports){
+},{"./TweenLite.js":11}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4638,7 +4706,7 @@ _TweenLite._gsScope._gsDefine("plugins.CSSPlugin", ["plugins.TweenPlugin", "Twee
 var CSSPlugin = _TweenLite.globals.CSSPlugin;
 exports.default = exports.CSSPlugin = CSSPlugin;
 
-},{"./TweenLite.js":10}],5:[function(require,module,exports){
+},{"./TweenLite.js":11}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4748,7 +4816,7 @@ var DirectionalRotationPlugin = _TweenLite._gsScope._gsDefine.plugin({
 exports.default = exports.DirectionalRotationPlugin = DirectionalRotationPlugin;
 DirectionalRotationPlugin._autoCSS = true;
 
-},{"./TweenLite.js":10}],6:[function(require,module,exports){
+},{"./TweenLite.js":11}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5193,7 +5261,7 @@ exports.Sine = Sine;
 var ExpoScaleEase = _TweenLite.globals.ExpoScaleEase;
 exports.ExpoScaleEase = ExpoScaleEase;
 
-},{"./TweenLite.js":10}],7:[function(require,module,exports){
+},{"./TweenLite.js":11}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5319,7 +5387,7 @@ p._add = function (target, p, s, c, mod) {
   this._overwriteProps.push(p);
 };
 
-},{"./TweenLite.js":10}],8:[function(require,module,exports){
+},{"./TweenLite.js":11}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6301,7 +6369,7 @@ _TweenLite._gsScope._gsDefine("TimelineLite", ["core.Animation", "core.SimpleTim
 var TimelineLite = _TweenLite.globals.TimelineLite;
 exports.default = exports.TimelineLite = TimelineLite;
 
-},{"./TweenLite.js":10}],9:[function(require,module,exports){
+},{"./TweenLite.js":11}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6963,7 +7031,7 @@ _TweenLite._gsScope._gsDefine("TimelineMax", ["TimelineLite", "TweenLite", "easi
 var TimelineMax = _TweenLite.globals.TimelineMax;
 exports.default = exports.TimelineMax = TimelineMax;
 
-},{"./TimelineLite.js":8,"./TweenLite.js":10}],10:[function(require,module,exports){
+},{"./TimelineLite.js":9,"./TweenLite.js":11}],11:[function(require,module,exports){
 (function (global){
 "use strict";
 
@@ -9521,7 +9589,7 @@ var EventDispatcher = nonGlobals.events.EventDispatcher;
 exports.EventDispatcher = EventDispatcher;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9725,7 +9793,7 @@ var TweenMax = _TweenMaxBase.default;
 exports.default = exports.TweenMax = TweenMax;
 TweenMax._autoActivated = [_TimelineLite.default, _TimelineMax.default, _CSSPlugin.default, _AttrPlugin.default, _BezierPlugin.default, _RoundPropsPlugin.default, _DirectionalRotationPlugin.default, _EasePack.Back, _EasePack.Elastic, _EasePack.Bounce, _EasePack.RoughEase, _EasePack.SlowMo, _EasePack.SteppedEase, _EasePack.Circ, _EasePack.Expo, _EasePack.Sine, _EasePack.ExpoScaleEase];
 
-},{"./AttrPlugin.js":2,"./BezierPlugin.js":3,"./CSSPlugin.js":4,"./DirectionalRotationPlugin.js":5,"./EasePack.js":6,"./RoundPropsPlugin.js":7,"./TimelineLite.js":8,"./TimelineMax.js":9,"./TweenLite.js":10,"./TweenMaxBase.js":12}],12:[function(require,module,exports){
+},{"./AttrPlugin.js":3,"./BezierPlugin.js":4,"./CSSPlugin.js":5,"./DirectionalRotationPlugin.js":6,"./EasePack.js":7,"./RoundPropsPlugin.js":8,"./TimelineLite.js":9,"./TimelineMax.js":10,"./TweenLite.js":11,"./TweenMaxBase.js":13}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10570,7 +10638,7 @@ exports.default = exports.TweenMax = TweenMax;
 var TweenMaxBase = TweenMax;
 exports.TweenMaxBase = TweenMaxBase;
 
-},{"./TweenLite.js":10}],13:[function(require,module,exports){
+},{"./TweenLite.js":11}],14:[function(require,module,exports){
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -10579,21 +10647,24 @@ function isTouchDevice() {
   return !!(typeof window !== 'undefined' && ('ontouchstart' in window || window.DocumentTouch && typeof document !== 'undefined' && document instanceof window.DocumentTouch)) || !!(typeof navigator !== 'undefined' && (navigator.maxTouchPoints || navigator.msMaxTouchPoints));
 }
 module.exports = exports['default'];
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 "use strict";
 
 var _domLoaded = _interopRequireDefault(require("dom-loaded"));
 
 var _TweenMax = require("gsap/TweenMax");
 
+var _emailScramble = _interopRequireDefault(require("email-scramble"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+window.emailScramble = _emailScramble.default;
 
 const isTouchDevice = require('is-touch-device');
 
 const clickEvent = isTouchDevice() ? 'touchstart' : 'click';
 const canplayEvent = 'canplaythrough';
-let isMute = false; // let isMute = true
-
+let isMute = false;
 let currentVideo;
 let currentTl;
 
@@ -10611,11 +10682,16 @@ _domLoaded.default.then(() => {
   const mamaLogo = mama.querySelector('.logo');
   const videos = document.querySelectorAll('video');
   const mamaVideo = document.querySelector('video.mama');
-  const guruVideo = document.querySelector('video.guru');
+  const guruVideo = document.querySelector('video.guru'); // Defaults
+
   TweenLite.set(isMute ? ctrlMute : ctrlUnmute, {
     autoAlpha: 0
   }); // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
-  // Animation Guru
+
+  const scrambled = document.querySelectorAll('.scramble');
+  scrambled.forEach(link => {
+    link.href = _emailScramble.default.decode(link.href);
+  }); // Animation Guru
 
   const guruTl = new _TweenMax.TimelineMax({
     id: "guru",
@@ -10888,4 +10964,4 @@ _domLoaded.default.then(() => {
   }
 });
 
-},{"dom-loaded":1,"gsap/TweenMax":11,"is-touch-device":13}]},{},[14]);
+},{"dom-loaded":1,"email-scramble":2,"gsap/TweenMax":12,"is-touch-device":14}]},{},[15]);
