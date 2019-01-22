@@ -1,5 +1,5 @@
 import domLoaded from 'dom-loaded';
-import { TweenMax, Eases, CSSPlugin, ScrollToPlugin, TimelineLite } from 'gsap/TweenMax';
+import { TweenMax, Eases, CSSPlugin, ScrollToPlugin, TimelineMax } from 'gsap/TweenMax';
 
 const isTouchDevice = require('is-touch-device')
 const clickEvent = isTouchDevice() ? 'touchstart' : 'click'
@@ -32,7 +32,7 @@ domLoaded.then(() => {
   // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
 
 // Animation Guru
-  const guruTl = new TimelineLite({
+  const guruTl = new TimelineMax({
     id: "guru",
     paused: true
   })
@@ -89,14 +89,23 @@ domLoaded.then(() => {
     }, 'hideBackgrounds+=0.3')
 
   // subtitles
-  guruTl.staggerTo('.guru .claim p', 1.5, {
+  const guruSubsTl = new TimelineMax({
+    id: "guruSubs",
+    repeat: -1,
+    repeatDelay: 1
+  })
+
+  guruSubsTl.staggerTo('.guru .claim p', 1.5, {
     opacity : 1,
     repeat: 1,
     yoyo: true
-  }, 5, 'hideBackgrounds+=1')
+  }, 5)
+
+  guruTl.add(guruSubsTl, 'hideBackgrounds+=1')
+
 
 // Animation Mama
-  const mamaTl = new TimelineLite({
+  const mamaTl = new TimelineMax({
     id: "mama",
     paused: true
   })
@@ -153,11 +162,19 @@ domLoaded.then(() => {
     }, 'hideBackgrounds+=0.3')
 
   // subtitles
-  mamaTl.staggerTo('.mama .claim p', 1.5, {
+  const mamaSubsTl = new TimelineMax({
+    id: "mamaSubs",
+    repeat: -1,
+    repeatDelay: 1
+  })
+
+  mamaSubsTl.staggerTo('.mama .claim p', 1.5, {
     opacity : 1,
     repeat: 1,
     yoyo: true
-  }, 5, 'hideBackgrounds+=1')
+  }, 5)
+
+  mamaTl.add(mamaSubsTl, 'hideBackgrounds+=1')
 
 // Handlers
 

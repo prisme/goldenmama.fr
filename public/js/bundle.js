@@ -10617,7 +10617,7 @@ _domLoaded.default.then(() => {
   }); // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
   // Animation Guru
 
-  const guruTl = new _TweenMax.TimelineLite({
+  const guruTl = new _TweenMax.TimelineMax({
     id: "guru",
     paused: true
   }); // logos
@@ -10679,13 +10679,19 @@ _domLoaded.default.then(() => {
     ease: Power4.easeOut
   }, 'hideBackgrounds+=0.3'); // subtitles
 
-  guruTl.staggerTo('.guru .claim p', 1.5, {
+  const guruSubsTl = new _TweenMax.TimelineMax({
+    id: "guruSubs",
+    repeat: -1,
+    repeatDelay: 1
+  });
+  guruSubsTl.staggerTo('.guru .claim p', 1.5, {
     opacity: 1,
     repeat: 1,
     yoyo: true
-  }, 5, 'hideBackgrounds+=1'); // Animation Mama
+  }, 5);
+  guruTl.add(guruSubsTl, 'hideBackgrounds+=1'); // Animation Mama
 
-  const mamaTl = new _TweenMax.TimelineLite({
+  const mamaTl = new _TweenMax.TimelineMax({
     id: "mama",
     paused: true
   }); // logos
@@ -10747,12 +10753,18 @@ _domLoaded.default.then(() => {
     ease: Power4.easeOut
   }, 'hideBackgrounds+=0.3'); // subtitles
 
-  mamaTl.staggerTo('.mama .claim p', 1.5, {
+  const mamaSubsTl = new _TweenMax.TimelineMax({
+    id: "mamaSubs",
+    repeat: -1,
+    repeatDelay: 1
+  });
+  mamaSubsTl.staggerTo('.mama .claim p', 1.5, {
     opacity: 1,
     repeat: 1,
     yoyo: true
-  }, 5, 'hideBackgrounds+=1'); // Listeners
-  // Mute State
+  }, 5);
+  mamaTl.add(mamaSubsTl, 'hideBackgrounds+=1'); // Handlers
+  // Mute
 
   const handleUnmute = () => {
     isMute = false;
@@ -10774,15 +10786,7 @@ _domLoaded.default.then(() => {
     TweenLite.to(ctrlMute, 0.1, {
       autoAlpha: 0
     });
-  };
-  /*
-  for (var i = 0; i < ctrlUnmute.length; i++) {
-    ctrlUnmute[i].addEventListener(clickEvent, handleUnmute);
-  }
-  for (var i = 0; i < ctrlMute.length; i++) {
-    ctrlMute[i].addEventListener(clickEvent, handleMute);
-  }
-  */
+  }; // VisibilityChange
 
 
   let hidden, visibilityChange;
@@ -10810,8 +10814,7 @@ _domLoaded.default.then(() => {
         currentVideo.muted = false;
         break;
     }
-  }; // document.addEventListener(visibilityChange, handleVisibilityChange)
-  // close
+  }; // Close
 
 
   for (var i = 0; i < ctrlClose.length; i++) {
@@ -10829,7 +10832,8 @@ _domLoaded.default.then(() => {
 
       currentTl.reverse('hideBackgrounds');
     });
-  } // start
+  } // Start
+  // @TODO : factorize
 
 
   guru.addEventListener(clickEvent, event => {
@@ -10870,9 +10874,8 @@ _domLoaded.default.then(() => {
       mamaTl.play();
     });
   });
-  window.addEventListener('resize', () => {
-    console.log('resize');
-  }); // videos
+  window.addEventListener('resize', () => {// console.log('resize')
+  }); // Videos
 
   const onCanPlay = event => {
     console.log('video canPlay');
