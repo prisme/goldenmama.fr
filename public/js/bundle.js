@@ -10675,9 +10675,9 @@ _domLoaded.default.then(() => {
   const mama = root.querySelector('article.mama');
   const ctrlGuru = document.querySelector('.controls.guru');
   const ctrlMama = document.querySelector('.controls.mama');
-  const ctrlUnmute = document.querySelectorAll('.unmute');
-  const ctrlMute = document.querySelectorAll('.mute');
-  const ctrlClose = document.querySelectorAll('.close');
+  const ctrlUnmute = document.querySelectorAll('.controls .unmute');
+  const ctrlMute = document.querySelectorAll('.controls .mute');
+  const ctrlClose = document.querySelectorAll('.controls .close');
   const guruLogo = guru.querySelector('.logo');
   const mamaLogo = mama.querySelector('.logo');
   const videos = document.querySelectorAll('video');
@@ -10965,14 +10965,24 @@ _domLoaded.default.then(() => {
 
 
   const contactToggle = document.querySelector('.contact .toggle');
+  const contactOpen = contactToggle.querySelector('.open');
+  const contactClose = contactToggle.querySelector('.close');
   const contactExpand = document.querySelector('.contact .expand');
-  contactToggle.addEventListener(clickEvent, () => {
-    TweenLite.to(contactExpand, 0.3, {
-      autoAlpha: contactExpand.classList.contains('active') ? 0 : 1,
-      onComplete: () => {
-        contactExpand.classList.toggle('active');
-      }
+  let contactActive = false;
+  contactToggle.addEventListener(clickEvent, event => {
+    TweenLite.to(contactOpen, 0.2, {
+      autoAlpha: contactActive ? 1 : 0
     });
+    TweenLite.to(contactClose, 0.2, {
+      autoAlpha: contactActive ? 0 : 1,
+      rotation: contactActive ? 0 : -90,
+      ease: contactActive ? Power3.easeIn : Power0.easeOut
+    });
+    TweenLite.to(contactExpand, 0.4, {
+      autoAlpha: contactActive ? 0 : 1,
+      xPercent: contactActive ? 0 : -10
+    });
+    contactActive = !contactActive;
   });
 });
 
