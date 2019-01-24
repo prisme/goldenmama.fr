@@ -2,6 +2,43 @@ extends layout
 
 block content
   .root
+
+    article.mama
+      .logo
+        include ../public/img/golden-mama-logo.svg
+        h1.baseline
+          | Brand Activation
+
+      .claim
+        p
+          | Date your target.
+        p
+          | We create strategic conversations,
+        p
+          | To produce sensitive relationships.
+        p
+          | Building trust before gaining growth.
+        p
+          | You’ll thank us later.
+
+    article.guru
+      .logo
+        include ../public/img/guru-logo.svg
+        h1.baseline
+          | Luxury Events
+
+      .claim
+        p
+          | Creatives at their finest.
+        p
+          | We are thrill producers based in Paris,
+        p
+          | Transforming each moment into a daring experience
+        p
+          | All around the world.
+        p
+          | Savoir-faire is french, so are we.
+
     .contact
       button.toggle
         .open
@@ -32,52 +69,15 @@ block content
       .close
         include ../public/img/close.svg
 
-    article.mama
-      .logo
-        include ../public/img/golden-mama-logo.svg
-        .baseline
-          | Brand Activation
-
-      .claim
-        p
-          | Date your target.
-        p
-          | We create strategic conversations,
-        p
-          | To produce sensitive relationships.
-        p
-          | Building trust before gaining growth.
-        p
-          | You’ll thank us later.
-
-    article.guru
-      .logo
-        include ../public/img/guru-logo.svg
-        .baseline
-          | Luxury Events
-
-      .claim
-        p
-          | Creatives at their finest.
-        p
-          | We are thrill producers based in Paris,
-        p
-          | Transforming each moment into a daring experience
-        p
-          | All around the world.
-        p
-          | Savoir-faire is french, so are we.
-
     video.mama.loop.muted(muted='', loop='', preload='auto', playsinline='')
-      //- source(src='video/MAMA.webm', type='video/webm')
-      //- source(src='video/MAMA.mp4', type='video/mp4')
-      source(src='https://storage.googleapis.com/goldenmama/MAMA.webm', type='video/webm')
-      source(src='https://storage.googleapis.com/goldenmama/MAMA.mp4', type='video/mp4')
+      source(src='video/MAMA.webm', type='video/webm')
+      source(src='video/MAMA.mp4', type='video/mp4')
+      //- source(src='https://storage.googleapis.com/goldenmama/MAMA.webm', type='video/webm')
+      //- source(src='https://storage.googleapis.com/goldenmama/MAMA.mp4', type='video/mp4')
 
     video.guru.loop.muted(muted='', loop='', preload='auto', playsinline='')
-      //- source(src='video/GURU.webm', type='video/webm')
-      //- source(src='video/GURU.mp4', type='video/mp4')
-      source(src='https://storage.googleapis.com/goldenmama/GURU.webm', type='video/webm')
-      source(src='https://storage.googleapis.com/goldenmama/GURU.mp4', type='video/mp4')
-
+      source(src='video/GURU.webm', type='video/webm')
+      source(src='video/GURU.mp4', type='video/mp4')
+      //- source(src='https://storage.googleapis.com/goldenmama/GURU.webm', type='video/webm')
+      //- source(src='https://storage.googleapis.com/goldenmama/GURU.mp4', type='video/mp4')
 
