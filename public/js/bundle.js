@@ -10663,7 +10663,7 @@ window.emailScramble = _emailScramble.default;
 const isTouchDevice = require('is-touch-device');
 
 const clickEvent = isTouchDevice() ? 'touchend' : 'click';
-const canplayEvent = 'canplaythrough';
+const canplayEvent = 'canplay';
 let isPortrait = false;
 let isMute = false;
 let isPlaying = false;
@@ -10967,10 +10967,10 @@ _domLoaded.default.then(() => {
     currentVideo.play().then(() => {
       mamaTl.play();
     });
-  };
+  }; // guru.addEventListener(clickEvent, guruClickHandler)
+  // mama.addEventListener(clickEvent, mamaClickHandler)
+  // Resize
 
-  guru.addEventListener(clickEvent, guruClickHandler);
-  mama.addEventListener(clickEvent, mamaClickHandler); // Resize
 
   const resizeHandler = () => {
     isPortrait = window.matchMedia('( max-width: 42em) and ( max-aspect-ratio: 13/9 )').matches;
@@ -10989,11 +10989,11 @@ _domLoaded.default.then(() => {
   window.addEventListener('resize', resizeHandler); // Videos
 
   const onCanPlay = event => {
-    // let element = event.target
-    // let parent = element.classList.contains('guru') ? guru : mama
-    // let handler = element.classList.contains('guru') ? guruClickHandler : mamaClickHandler
-    // parent.classList.add('loaded')
-    // parent.addEventListener(clickEvent, handler)
+    let element = event.target;
+    let parent = element.classList.contains('guru') ? guru : mama;
+    let handler = element.classList.contains('guru') ? guruClickHandler : mamaClickHandler;
+    parent.classList.add('loaded');
+    parent.addEventListener(clickEvent, handler);
     element.removeEventListener(canplayEvent, onCanPlay);
   };
 
