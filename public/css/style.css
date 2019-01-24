@@ -89,12 +89,13 @@
     flex-grow: 1;
     z-index: 1;
 
-    cursor: wait;
+    cursor: pointer;
+    /*cursor: wait;*/
   }
 
   article.mama.loaded,
   article.guru.loaded{
-    cursor: pointer;
+    /*cursor: pointer;*/
   }
 
   @media only screen and ( max-width: 42em) and ( max-aspect-ratio: 13/9 ) {

@@ -10967,8 +10967,22 @@ _domLoaded.default.then(() => {
     currentVideo.play().then(() => {
       mamaTl.play();
     });
-  }; // guru.addEventListener(clickEvent, guruClickHandler)
-  // mama.addEventListener(clickEvent, mamaClickHandler)
+  };
+
+  guru.addEventListener(clickEvent, guruClickHandler);
+  mama.addEventListener(clickEvent, mamaClickHandler); // Videos
+
+  const onCanPlay = event => {
+    let element = event.target;
+    let parent = element.classList.contains('guru') ? guru : mama;
+    let handler = element.classList.contains('guru') ? guruClickHandler : mamaClickHandler;
+    parent.classList.add('loaded');
+    parent.addEventListener(clickEvent, handler);
+    console.log('canplay', element);
+    element.removeEventListener(canplayEvent, onCanPlay);
+  };
+
+  for (let i = 0; i < videos.length; i++) {} // videos[i].addEventListener(canplayEvent, onCanPlay)
   // Resize
 
 
@@ -10986,21 +11000,7 @@ _domLoaded.default.then(() => {
     }
   };
 
-  window.addEventListener('resize', resizeHandler); // Videos
-
-  const onCanPlay = event => {
-    let element = event.target;
-    let parent = element.classList.contains('guru') ? guru : mama;
-    let handler = element.classList.contains('guru') ? guruClickHandler : mamaClickHandler;
-    parent.classList.add('loaded');
-    parent.addEventListener(clickEvent, handler);
-    element.removeEventListener(canplayEvent, onCanPlay);
-  };
-
-  for (let i = 0; i < videos.length; i++) {
-    videos[i].addEventListener(canplayEvent, onCanPlay);
-  } // Contact
-
+  window.addEventListener('resize', resizeHandler); // Contact
 
   let contactActive = false;
   contactToggle.addEventListener(clickEvent, event => {

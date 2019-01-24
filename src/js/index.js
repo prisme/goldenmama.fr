@@ -288,8 +288,25 @@ domLoaded.then(() => {
       })
     }
 
-    // guru.addEventListener(clickEvent, guruClickHandler)
-    // mama.addEventListener(clickEvent, mamaClickHandler)
+    guru.addEventListener(clickEvent, guruClickHandler)
+    mama.addEventListener(clickEvent, mamaClickHandler)
+
+  // Videos
+    const onCanPlay = (event) => {
+      let element = event.target
+      let parent = element.classList.contains('guru') ? guru : mama
+      let handler = element.classList.contains('guru') ? guruClickHandler : mamaClickHandler
+
+      parent.classList.add('loaded')
+      parent.addEventListener(clickEvent, handler)
+
+      console.log('canplay', element)
+      element.removeEventListener(canplayEvent, onCanPlay)
+    }
+
+    for (let i = 0; i < videos.length; i++) {
+      // videos[i].addEventListener(canplayEvent, onCanPlay)
+    }
 
   // Resize
     const resizeHandler = () => {
@@ -303,22 +320,6 @@ domLoaded.then(() => {
     }
 
     window.addEventListener('resize', resizeHandler)
-
-  // Videos
-    const onCanPlay = (event) => {
-      let element = event.target
-      let parent = element.classList.contains('guru') ? guru : mama
-      let handler = element.classList.contains('guru') ? guruClickHandler : mamaClickHandler
-
-      parent.classList.add('loaded')
-      parent.addEventListener(clickEvent, handler)
-
-      element.removeEventListener(canplayEvent, onCanPlay);
-    }
-
-    for (let i = 0; i < videos.length; i++) {
-      videos[i].addEventListener(canplayEvent, onCanPlay);
-    }
 
   // Contact
     let contactActive = false
