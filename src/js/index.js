@@ -43,8 +43,8 @@ domLoaded.then(() => {
   const scrambled = document.querySelectorAll('.scramble')
 
 // Defaults
-  isPortrait = window.matchMedia('( max-width: 42em) and ( max-aspect-ratio: 13/9 )').matches
   // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
+  isPortrait = window.matchMedia('( max-width: 42em) and ( max-aspect-ratio: 13/9 )').matches
   TweenLite.to('.baseline', 1, { autoAlpha: 1, y: 0, delay: 1 }) // @TODO replace delay with event: npm install fontfaceobserver
 
   // controls
@@ -194,13 +194,14 @@ domLoaded.then(() => {
 // Handlers
 
   // Mute
-    const handleUnmute = () => {
+    const unmuteHandler = () => {
       isMute = false
       currentVideo.muted = false
       TweenLite.to(ctrlMute, 0.3, {autoAlpha: 1})
       TweenLite.to(ctrlUnmute, 0.1, {autoAlpha: 0})
     }
-    const handleMute = () => {
+
+    const muteHandler = () => {
       isMute = true
       currentVideo.muted = true
       TweenLite.to(ctrlUnmute, 0.3, {autoAlpha: 1})
@@ -219,7 +220,7 @@ domLoaded.then(() => {
       hidden = "webkitHidden";
       visibilityChange = "webkitvisibilitychange";
     }
-    const handleVisibilityChange = () => {
+    const visibilityChangeHandler = () => {
       if (isMute) return;
       switch (document.visibilityState) {
         case 'hidden': currentVideo.muted = true; break;
@@ -231,13 +232,14 @@ domLoaded.then(() => {
     for (var i = 0; i < ctrlClose.length; i++) {
       ctrlClose[i].addEventListener(clickEvent, () => {
         currentVideo.muted = true
+        // @TODO: pause video & animation ?
 
-        document.removeEventListener(visibilityChange, handleVisibilityChange)
+        document.removeEventListener(visibilityChange, visibilityChangeHandler)
         for (var i = 0; i < ctrlUnmute.length; i++) {
-          ctrlUnmute[i].removeEventListener(clickEvent, handleUnmute);
+          ctrlUnmute[i].removeEventListener(clickEvent, unmuteHandler);
         }
         for (var i = 0; i < ctrlMute.length; i++) {
-          ctrlMute[i].removeEventListener(clickEvent, handleMute);
+          ctrlMute[i].removeEventListener(clickEvent, muteHandler);
         }
 
         if( isPortrait ) {
@@ -248,65 +250,73 @@ domLoaded.then(() => {
     }
 
   // Start
-    // @TODO : factorize
-    guru.addEventListener(clickEvent, (event) => {
-      currentVideo = guruVideo
-      currentTl = guruTl
-
+    const clickHandler = () => {
       currentVideo.currentTime = 0
       currentVideo.muted = isMute
 
-      document.addEventListener(visibilityChange, handleVisibilityChange)
+      document.addEventListener(visibilityChange, visibilityChangeHandler)
       for (var i = 0; i < ctrlUnmute.length; i++) {
-        ctrlUnmute[i].addEventListener(clickEvent, handleUnmute);
+        ctrlUnmute[i].addEventListener(clickEvent, unmuteHandler);
       }
       for (var i = 0; i < ctrlMute.length; i++) {
-        ctrlMute[i].addEventListener(clickEvent, handleMute);
+        ctrlMute[i].addEventListener(clickEvent, muteHandler);
       }
+    }
+
+    const guruClickHandler = (event) => {
+      currentVideo = guruVideo
+      currentTl = guruTl
+
+      clickHandler()
 
       currentVideo.play().then(()=>{
         guruTl.play()
       })
-    })
+    }
 
-    mama.addEventListener(clickEvent, (event) => {
+    const mamaClickHandler = (event) => {
       currentVideo = mamaVideo
       currentTl = mamaTl
 
-      currentVideo.currentTime = 0
-      currentVideo.muted = isMute
-
-      document.addEventListener(visibilityChange, handleVisibilityChange)
-      for (var i = 0; i < ctrlUnmute.length; i++) {
-        ctrlUnmute[i].addEventListener(clickEvent, handleUnmute);
-      }
-      for (var i = 0; i < ctrlMute.length; i++) {
-        ctrlMute[i].addEventListener(clickEvent, handleMute);
-      }
+      clickHandler()
 
       currentVideo.play().then(()=>{
         mamaTl.play()
       })
-    })
+    }
 
-    window.addEventListener('resize', () => {
+    // guru.addEventListener(clickEvent, guruClickHandler)
+    // mama.addEventListener(clickEvent, mamaClickHandler)
+
+  // Resize
+    const resizeHandler = () => {
       isPortrait = window.matchMedia('( max-width: 42em) and ( max-aspect-ratio: 13/9 )').matches
-    })
+
+      if( isPortrait ) {
+        TweenLite.set(mama, { height: '100vh' })
+      } else {
+        TweenLite.set(mama, { height: 'auto' })
+      }
+    }
+
+    window.addEventListener('resize', resizeHandler)
 
   // Videos
     const onCanPlay = (event) => {
-      console.log('video canPlay')
-      event.target.removeEventListener(canplayEvent, onCanPlay, false);
+      let element = event.target
+      let parent = element.classList.contains('guru') ? guru : mama
+
+      parent.classList.add('loaded')
+      parent.addEventListener(clickEvent, guruClickHandler)
+
+      element.removeEventListener(canplayEvent, onCanPlay);
     }
 
     for (let i = 0; i < videos.length; i++) {
-      videos[i].addEventListener(canplayEvent, onCanPlay, false);
-      // end loader
-      // attach pointer listeners
+      videos[i].addEventListener(canplayEvent, onCanPlay);
     }
 
   // Contact
-
     let contactActive = false
 
     contactToggle.addEventListener(clickEvent, (event) => {
