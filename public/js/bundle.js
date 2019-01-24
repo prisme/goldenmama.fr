@@ -10677,8 +10677,8 @@ _domLoaded.default.then(() => {
   const guruLogo = guru.querySelector('.logo');
   const mamaLogo = mama.querySelector('.logo');
   const guruLogoTop = root.appendChild(guruLogo.cloneNode(true));
-  guruLogoTop.removeChild(guruLogoTop.querySelector('.baseline'));
   const mamaLogoTop = root.appendChild(mamaLogo.cloneNode(true));
+  guruLogoTop.removeChild(guruLogoTop.querySelector('.baseline'));
   mamaLogoTop.removeChild(mamaLogoTop.querySelector('.baseline'));
   const ctrlGuru = document.querySelector('.controls.guru');
   const ctrlMama = document.querySelector('.controls.mama');
@@ -10694,9 +10694,15 @@ _domLoaded.default.then(() => {
   const mamaVideo = document.querySelector('video.mama');
   const guruVideo = document.querySelector('video.guru');
   const scrambled = document.querySelectorAll('.scramble'); // Defaults
-  // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
 
-  isPortrait = window.matchMedia('( max-width: 42em) and ( max-aspect-ratio: 13/9 )').matches; // controls
+  isPortrait = window.matchMedia('( max-width: 42em) and ( max-aspect-ratio: 13/9 )').matches; // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
+
+  TweenLite.to('.baseline', 1, {
+    autoAlpha: 1,
+    y: 0,
+    delay: 1
+  }); // @TODO replace delay with event: npm install fontfaceobserver
+  // controls
 
   TweenLite.set(isMute ? ctrlMute : ctrlUnmute, {
     autoAlpha: 0
@@ -10972,7 +10978,7 @@ _domLoaded.default.then(() => {
 
   const onCanPlay = event => {
     console.log('video canPlay');
-    event.target.removeEventListener(canplayEvent, onCanPlay, false); // event.target.parentNode.classList.add('loaded'); //TODO
+    event.target.removeEventListener(canplayEvent, onCanPlay, false);
   };
 
   for (let i = 0; i < videos.length; i++) {

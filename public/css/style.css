@@ -139,6 +139,10 @@
     margin-top: 6vh;
     line-height: 1em;
     white-space: nowrap;
+
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-5px);
   }
 
   .guru .baseline{
