@@ -285,8 +285,8 @@ domLoaded.then(() => {
       })
     }
 
-    // guru.addEventListener(clickEvent, guruClickHandler)
-    // mama.addEventListener(clickEvent, mamaClickHandler)
+    guru.addEventListener(clickEvent, guruClickHandler)
+    mama.addEventListener(clickEvent, mamaClickHandler)
 
   // Resize
     const resizeHandler = () => {
@@ -303,12 +303,12 @@ domLoaded.then(() => {
 
   // Videos
     const onCanPlay = (event) => {
-      let element = event.target
-      let parent = element.classList.contains('guru') ? guru : mama
-      let handler = element.classList.contains('guru') ? guruClickHandler : mamaClickHandler
+      // let element = event.target
+      // let parent = element.classList.contains('guru') ? guru : mama
+      // let handler = element.classList.contains('guru') ? guruClickHandler : mamaClickHandler
 
-      parent.classList.add('loaded')
-      parent.addEventListener(clickEvent, handler)
+      // parent.classList.add('loaded')
+      // parent.addEventListener(clickEvent, handler)
 
       element.removeEventListener(canplayEvent, onCanPlay);
     }
