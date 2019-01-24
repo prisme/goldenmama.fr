@@ -22,6 +22,12 @@ domLoaded.then(() => {
   const ctrlMute = document.querySelectorAll('.controls .mute')
   const ctrlClose = document.querySelectorAll('.controls .close')
 
+  const contact = document.querySelector('.contact')
+  const contactToggle = contact.querySelector('.toggle')
+  const contactOpen = contactToggle.querySelector('.open')
+  const contactClose = contactToggle.querySelector('.close')
+  const contactExpand = contact.querySelector('.expand')
+
   const guruLogo = guru.querySelector('.logo')
   const mamaLogo = mama.querySelector('.logo')
 
@@ -47,8 +53,7 @@ domLoaded.then(() => {
 
   // logos
   guruTl
-    .to(guruLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut }, 0)
-    .to(mamaLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut }, 0)
+    .to([guruLogo, mamaLogo, contact], 0.8, { autoAlpha: 0, ease: Power2.easeOut }, 0)
     .addLabel('hideLogos', '-=0.6')
 
   // backgrounds
@@ -119,8 +124,7 @@ domLoaded.then(() => {
 
   // logos
   mamaTl
-    .to(mamaLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut }, 0)
-    .to(guruLogo, 0.8, { autoAlpha: 0, ease: Power2.easeOut }, 0)
+    .to([guruLogo, mamaLogo, contact], 0.8, { autoAlpha: 0, ease: Power2.easeOut }, 0)
     .addLabel('hideLogos', '-=0.6')
 
   // backgrounds
@@ -296,10 +300,7 @@ domLoaded.then(() => {
     }
 
   // Contact
-    const contactToggle = document.querySelector('.contact .toggle')
-    const contactOpen = contactToggle.querySelector('.open')
-    const contactClose = contactToggle.querySelector('.close')
-    const contactExpand = document.querySelector('.contact .expand')
+
     let contactActive = false
 
     contactToggle.addEventListener(clickEvent, (event) => {
