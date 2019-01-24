@@ -138,6 +138,7 @@
     font-weight: lighter;
     margin-top: 6vh;
     line-height: 1em;
+    white-space: nowrap;
   }
 
   .guru .baseline{
