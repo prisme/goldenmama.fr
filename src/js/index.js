@@ -17,6 +17,13 @@ domLoaded.then(() => {
   const guru = root.querySelector('article.guru')
   const mama = root.querySelector('article.mama')
 
+  const guruLogo = guru.querySelector('.logo')
+  const mamaLogo = mama.querySelector('.logo')
+  const guruLogoTop = root.appendChild(guruLogo.cloneNode(true))
+  guruLogoTop.removeChild(guruLogoTop.querySelector('.baseline'))
+  const mamaLogoTop = root.appendChild(mamaLogo.cloneNode(true))
+  mamaLogoTop.removeChild(mamaLogoTop.querySelector('.baseline'))
+
   const ctrlGuru = document.querySelector('.controls.guru')
   const ctrlMama = document.querySelector('.controls.mama')
   const ctrlUnmute = document.querySelectorAll('.controls .unmute')
@@ -29,19 +36,40 @@ domLoaded.then(() => {
   const contactClose = contactToggle.querySelector('.close')
   const contactExpand = contact.querySelector('.expand')
 
-  const guruLogo = guru.querySelector('.logo')
-  const mamaLogo = mama.querySelector('.logo')
-
   const videos = document.querySelectorAll('video')
   const mamaVideo = document.querySelector('video.mama')
   const guruVideo = document.querySelector('video.guru')
 
-// Defaults
-  isPortrait = window.matchMedia('( max-width: 42em) and ( max-aspect-ratio: 13/9 )').matches
-  TweenLite.set(isMute ? ctrlMute : ctrlUnmute, {autoAlpha: 0})
-  // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
-
   const scrambled = document.querySelectorAll('.scramble')
+
+// Defaults
+  // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
+  isPortrait = window.matchMedia('( max-width: 42em) and ( max-aspect-ratio: 13/9 )').matches
+
+  // controls
+    TweenLite.set(isMute ? ctrlMute : ctrlUnmute, { autoAlpha: 0 })
+    TweenLite.set(ctrlGuru, { xPercent: -100 })
+    TweenLite.set(ctrlMama, { xPercent: 100 })
+
+  // top logos
+    TweenLite.set(guruLogoTop.querySelectorAll('g *'), { fill: '#e5e5e5' })
+    TweenLite.set(guruLogoTop, {
+      width: guruLogo.offsetWidth * 0.6 +'px',
+      height: guruLogo.offsetHeight * 0.6 +'px',
+      top: '1vh',
+      right: 0,
+      xPercent: 100
+    })
+
+    TweenLite.set(mamaLogoTop.querySelectorAll('g *'), { fill: '#fd386d' })
+    TweenLite.set(mamaLogoTop, {
+      width: mamaLogo.offsetWidth * 0.6 +'px',
+      height: mamaLogo.offsetHeight * 0.6 +'px',
+      top: '1vh',
+      left: 0,
+      xPercent: -100
+    })
+
   scrambled.forEach( (link) => {
     link.href = emailScramble.decode(link.href)
   })
@@ -73,28 +101,12 @@ domLoaded.then(() => {
     }, 'hideLogos')
 
   // top logo
-  const guruLogoTop = root.appendChild(guruLogo.cloneNode(true))
-  guruLogoTop.removeChild(guruLogoTop.querySelector('.baseline'))
-
-  TweenLite.set(guruLogoTop.querySelectorAll('g *'), { fill: '#e5e5e5' })
-  TweenLite.set(guruLogoTop, {
-    width: guruLogo.offsetWidth * 0.6 +'px',
-    height: guruLogo.offsetHeight * 0.6 +'px',
-    top: '1vh',
-    right: 0,
-    xPercent: 100
-  })
-
   guruTl
     .to(guruLogoTop, 0.5, {
       xPercent: 0, right: '1vh', ease: Power4.easeOut
     }, 'hideBackgrounds+=0.3')
 
   // controls
-  TweenLite.set(ctrlGuru, {
-    xPercent: -100
-  })
-
   guruTl
     .to(ctrlGuru, 0.5, {
       xPercent: 0,
@@ -150,28 +162,12 @@ domLoaded.then(() => {
     }, 'hideLogos')
 
   // top logo
-  const mamaLogoTop = root.appendChild(mamaLogo.cloneNode(true))
-  mamaLogoTop.removeChild(mamaLogoTop.querySelector('.baseline'))
-
-  TweenLite.set(mamaLogoTop.querySelectorAll('g *'), { fill: '#fd386d' })
-  TweenLite.set(mamaLogoTop, {
-    width: mamaLogo.offsetWidth * 0.6 +'px',
-    height: mamaLogo.offsetHeight * 0.6 +'px',
-    top: '1vh',
-    left: 0,
-    xPercent: -100
-  })
-
   mamaTl
     .to(mamaLogoTop, 0.5, {
       xPercent: 0, left: '1vh', ease: Power4.easeOut
     }, 'hideBackgrounds+=0.3')
 
   // controls
-  TweenLite.set(ctrlMama, {
-    xPercent: 100
-  })
-
   mamaTl
     .to(ctrlMama, 0.5, {
       xPercent: 0,
