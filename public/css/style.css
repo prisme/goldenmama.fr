@@ -136,13 +136,13 @@
     font-size: 1.2em;
     text-transform: uppercase;
     font-weight: lighter;
-    margin-top: 3em;
+    margin-top: 6vh;
     line-height: 1em;
   }
 
   .guru .baseline{
     color: #343434;
-    padding-top: 0.8em;
+    padding-top: 1.5vh;
   }
 
   .mama .baseline{
@@ -173,7 +173,7 @@
   .claim{
     z-index: 2;
     position: absolute;
-    bottom: 2vh;
+    bottom: 10vh;
     width: 90%;
     height: 50vh;
     font-size: 2em;
