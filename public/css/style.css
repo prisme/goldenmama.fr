@@ -88,8 +88,8 @@
     position: relative;
     flex-grow: 1;
     z-index: 1;
-    cursor: pointer;
-    /*cursor: wait;*/
+
+    cursor: wait;
   }
 
   article.mama.loaded,
@@ -317,8 +317,8 @@
   .contact{
   	position: absolute;
   	z-index: 2;
-  	bottom: 5vh;
-  	right: 5vh;
+  	bottom: 1vh;
+  	right: 0.8vh;
   	height: 42px;
   }
   .contact .toggle{
@@ -335,7 +335,7 @@
     height: 42px;
     top: 0;
   }
-
+  /*
   .contact .toggle::before{
     display: block;
     content: '';
@@ -347,23 +347,24 @@
     width: 42px;
     top: 0;
   }
-
+  */
   .contact .close svg{
     transform: scale(0.8)
   }
 
-  .contact .close svg *{
-   fill: white;
-  }
+  .contact .close svg *,
   .contact .open svg *,
-  .contact .expand svg *{
-    fill: #fd386d;
+  .contact .expand svg * {
+    fill: #343434;
   }
 
   .contact .expand a{
     line-height: 52px;
     text-decoration: none;
     margin: 0 10px;
+  }
+  .contact .expand a:last-child{
+    margin-right: 0;
   }
 
   .contact .expand,
