@@ -114,6 +114,7 @@
     right: 50%;
     top: 50%;
     transform: translateX(50%) translateY(-50%);
+    /* border: 1px solid red; */
   }
 
   .guru .logo {
@@ -130,16 +131,18 @@
     font-family: 'AvantGarde-ExtraLight';
     text-align: center;
     font-style: italic;
-    position: absolute;
+    position: relative;
     width: 100%;
-    bottom: -3em;
     font-size: 1.2em;
     text-transform: uppercase;
     font-weight: lighter;
+    margin-top: 3em;
+    line-height: 1em;
   }
 
   .guru .baseline{
     color: #343434;
+    padding-top: 0.8em;
   }
 
   .mama .baseline{
