@@ -10990,7 +10990,7 @@ _domLoaded.default.then(() => {
     let parent = element.classList.contains('guru') ? guru : mama;
     let handler = element.classList.contains('guru') ? guruClickHandler : mamaClickHandler;
     parent.classList.add('loaded');
-    parent.addEventListener(clickEvent, guruClickHandler);
+    parent.addEventListener(clickEvent, handler);
     element.removeEventListener(canplayEvent, onCanPlay);
   };
 
