@@ -8,6 +8,7 @@ const clickEvent = isTouchDevice() ? 'touchend' : 'click'
 const canplayEvent = 'canplaythrough'
 let isPortrait = false
 let isMute = false
+let isPlaying = false
 let currentVideo
 let currentTl
 
@@ -232,6 +233,7 @@ domLoaded.then(() => {
     for (var i = 0; i < ctrlClose.length; i++) {
       ctrlClose[i].addEventListener(clickEvent, () => {
         currentVideo.muted = true
+        isPlaying = false
         // @TODO: pause video & animation ?
 
         document.removeEventListener(visibilityChange, visibilityChangeHandler)
@@ -253,6 +255,7 @@ domLoaded.then(() => {
     const clickHandler = () => {
       currentVideo.currentTime = 0
       currentVideo.muted = isMute
+      isPlaying = true
 
       document.addEventListener(visibilityChange, visibilityChangeHandler)
       for (var i = 0; i < ctrlUnmute.length; i++) {
@@ -292,7 +295,7 @@ domLoaded.then(() => {
     const resizeHandler = () => {
       isPortrait = window.matchMedia('( max-width: 42em) and ( max-aspect-ratio: 13/9 )').matches
 
-      if( isPortrait ) {
+      if( isPlaying && isPortrait ) {
         TweenLite.set(mama, { height: '100vh' })
       } else {
         TweenLite.set(mama, { height: 'auto' })
