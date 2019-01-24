@@ -10664,6 +10664,7 @@ const isTouchDevice = require('is-touch-device');
 
 const clickEvent = isTouchDevice() ? 'touchend' : 'click';
 const canplayEvent = 'canplaythrough';
+let isPortrait = false;
 let isMute = false;
 let currentVideo;
 let currentTl;
@@ -10689,6 +10690,7 @@ _domLoaded.default.then(() => {
   const mamaVideo = document.querySelector('video.mama');
   const guruVideo = document.querySelector('video.guru'); // Defaults
 
+  isPortrait = window.matchMedia('( max-width: 42em) and ( max-aspect-ratio: 13/9 )').matches;
   TweenLite.set(isMute ? ctrlMute : ctrlUnmute, {
     autoAlpha: 0
   }); // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
@@ -10790,9 +10792,16 @@ _domLoaded.default.then(() => {
     force3D: true,
     ease: Power3.easeIn,
     onComplete: () => {
-      TweenLite.set(mama, {
-        xPercent: 0
-      });
+      if (isPortrait) {
+        TweenLite.set(mama, {
+          xPercent: 0,
+          height: '100vh'
+        });
+      } else {
+        TweenLite.set(mama, {
+          xPercent: 0
+        });
+      }
     }
   }, 'hideLogos').addLabel('hideBackgrounds'); // video
 
@@ -10905,6 +10914,12 @@ _domLoaded.default.then(() => {
         ctrlMute[i].removeEventListener(clickEvent, handleMute);
       }
 
+      if (isPortrait) {
+        TweenLite.set(mama, {
+          height: 'auto'
+        });
+      }
+
       currentTl.reverse('hideBackgrounds');
     });
   } // Start
@@ -10949,7 +10964,8 @@ _domLoaded.default.then(() => {
       mamaTl.play();
     });
   });
-  window.addEventListener('resize', () => {// console.log('resize')
+  window.addEventListener('resize', () => {
+    isPortrait = window.matchMedia('( max-width: 42em) and ( max-aspect-ratio: 13/9 )').matches;
   }); // Videos
 
   const onCanPlay = event => {

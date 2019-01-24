@@ -6,6 +6,7 @@ window.emailScramble = emailScramble
 const isTouchDevice = require('is-touch-device')
 const clickEvent = isTouchDevice() ? 'touchend' : 'click'
 const canplayEvent = 'canplaythrough'
+let isPortrait = false
 let isMute = false
 let currentVideo
 let currentTl
@@ -36,11 +37,11 @@ domLoaded.then(() => {
   const guruVideo = document.querySelector('video.guru')
 
 // Defaults
+  isPortrait = window.matchMedia('( max-width: 42em) and ( max-aspect-ratio: 13/9 )').matches
   TweenLite.set(isMute ? ctrlMute : ctrlUnmute, {autoAlpha: 0})
   // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
 
   const scrambled = document.querySelectorAll('.scramble')
-
   scrambled.forEach( (link) => {
     link.href = emailScramble.decode(link.href)
   })
@@ -131,7 +132,13 @@ domLoaded.then(() => {
   mamaTl
     .to(mama, 0.8, { backgroundColor: 'rgba(45, 46, 131, 0)', xPercent:-100, force3D: true, ease: Power3.easeIn }, 'hideLogos')
     .to(guru, 0.8, { backgroundColor: 'rgba(229, 229, 229, 0)', xPercent: 100, force3D: true, ease: Power3.easeIn,
-      onComplete: () => { TweenLite.set(mama, { xPercent: 0 }) }
+      onComplete: () => {
+        if( isPortrait ) {
+          TweenLite.set(mama, { xPercent: 0, height: '100vh' })
+        } else {
+          TweenLite.set(mama, { xPercent: 0 })
+        }
+      }
     }, 'hideLogos')
     .addLabel('hideBackgrounds')
 
@@ -236,6 +243,9 @@ domLoaded.then(() => {
           ctrlMute[i].removeEventListener(clickEvent, handleMute);
         }
 
+        if( isPortrait ) {
+          TweenLite.set(mama, { height: 'auto' })
+        }
         currentTl.reverse('hideBackgrounds')
       })
     }
@@ -283,7 +293,7 @@ domLoaded.then(() => {
     })
 
     window.addEventListener('resize', () => {
-      // console.log('resize')
+      isPortrait = window.matchMedia('( max-width: 42em) and ( max-aspect-ratio: 13/9 )').matches
     })
 
   // Videos
