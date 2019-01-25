@@ -148,7 +148,7 @@
 
     visibility: hidden;
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateY(-6px);
   }
 
   .guru .baseline{
