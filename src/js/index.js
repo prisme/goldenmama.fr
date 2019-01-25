@@ -288,8 +288,8 @@ domLoaded.then(() => {
       })
     }
 
-    guru.addEventListener(clickEvent, guruClickHandler)
-    mama.addEventListener(clickEvent, mamaClickHandler)
+    // guru.addEventListener(clickEvent, guruClickHandler)
+    // mama.addEventListener(clickEvent, mamaClickHandler)
 
   // Videos
     const onCanPlay = (event) => {
@@ -305,7 +305,16 @@ domLoaded.then(() => {
     }
 
     for (let i = 0; i < videos.length; i++) {
-      // videos[i].addEventListener(canplayEvent, onCanPlay)
+      videos[i].load()
+
+      videos[i].addEventListener(canplayEvent, onCanPlay)
+
+      videos[i].addEventListener('loadedmetadata', function() {
+          if (videos[i].buffered.length === 0) return;
+
+          var bufferedSeconds = videos[i].buffered.end(0) - videos[i].buffered.start(0);
+          console.log(bufferedSeconds + ' seconds of video are ready to play!');
+        });
     }
 
   // Resize

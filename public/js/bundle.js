@@ -10967,10 +10967,10 @@ _domLoaded.default.then(() => {
     currentVideo.play().then(() => {
       mamaTl.play();
     });
-  };
+  }; // guru.addEventListener(clickEvent, guruClickHandler)
+  // mama.addEventListener(clickEvent, mamaClickHandler)
+  // Videos
 
-  guru.addEventListener(clickEvent, guruClickHandler);
-  mama.addEventListener(clickEvent, mamaClickHandler); // Videos
 
   const onCanPlay = event => {
     let element = event.target;
@@ -10982,8 +10982,15 @@ _domLoaded.default.then(() => {
     element.removeEventListener(canplayEvent, onCanPlay);
   };
 
-  for (let i = 0; i < videos.length; i++) {} // videos[i].addEventListener(canplayEvent, onCanPlay)
-  // Resize
+  for (let i = 0; i < videos.length; i++) {
+    videos[i].load();
+    videos[i].addEventListener(canplayEvent, onCanPlay);
+    videos[i].addEventListener('loadedmetadata', function () {
+      if (videos[i].buffered.length === 0) return;
+      var bufferedSeconds = videos[i].buffered.end(0) - videos[i].buffered.start(0);
+      console.log(bufferedSeconds + ' seconds of video are ready to play!');
+    });
+  } // Resize
 
 
   const resizeHandler = () => {
