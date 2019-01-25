@@ -37,12 +37,11 @@ domLoaded.then(() => {
   const contactOpen = contactToggle.querySelector('.open')
   const contactClose = contactToggle.querySelector('.close')
   const contactExpand = contact.querySelector('.expand')
+  const scrambled = document.querySelectorAll('.scramble')
 
   const videos = document.querySelectorAll('video')
   const mamaVideo = document.querySelector('video.mama')
   const guruVideo = document.querySelector('video.guru')
-
-  const scrambled = document.querySelectorAll('.scramble')
 
 // Defaults
   // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
@@ -92,8 +91,8 @@ domLoaded.then(() => {
 
   // backgrounds
   guruTl
-    .to(mama, 0.8, { backgroundColor: 'rgba(45, 46, 131, 0)', xPercent:-100, force3D: true, ease: Power3.easeIn }, 'hideLogos')
-    .to(guru, 0.8, { backgroundColor: 'rgba(229, 229, 229, 0)', xPercent: 100, force3D: true, ease: Power3.easeIn,
+    .to(mama, 0.8, { opacity: 0, xPercent:-100, force3D: true, ease: Power3.easeIn }, 'hideLogos')
+    .to(guru, 0.8, { opacity: 0, xPercent: 100, force3D: true, ease: Power3.easeIn,
       onComplete: () => { TweenLite.set(guru, { xPercent: 0 }) }
     }, 'hideLogos')
     .addLabel('hideBackgrounds')
@@ -147,8 +146,8 @@ domLoaded.then(() => {
 
   // backgrounds
   mamaTl
-    .to(mama, 0.8, { backgroundColor: 'rgba(45, 46, 131, 0)', xPercent:-100, force3D: true, ease: Power3.easeIn }, 'hideLogos')
-    .to(guru, 0.8, { backgroundColor: 'rgba(229, 229, 229, 0)', xPercent: 100, force3D: true, ease: Power3.easeIn,
+    .to(mama, 0.8, { opacity: 0, xPercent:-100, force3D: true, ease: Power3.easeIn }, 'hideLogos')
+    .to(guru, 0.8, { opacity: 0, xPercent: 100, force3D: true, ease: Power3.easeIn,
       onComplete: () => {
         if( isPortrait ) {
           TweenLite.set(mama, { xPercent: 0, height: '100vh' })
@@ -303,7 +302,7 @@ domLoaded.then(() => {
       parent.classList.add('loaded')
       parent.addEventListener(clickEvent, handler)
 
-      console.log('canplay', element)
+      // console.log('canplay', element)
       element.removeEventListener(canplayEvent, onCanPlay)
     }
 
@@ -311,13 +310,14 @@ domLoaded.then(() => {
       videos[i].load()
 
       videos[i].addEventListener(canplayEvent, onCanPlay)
-
+      /*
       videos[i].addEventListener('loadedmetadata', function() {
-          if (videos[i].buffered.length === 0) return;
+        if (videos[i].buffered.length === 0) return;
 
-          var bufferedSeconds = videos[i].buffered.end(0) - videos[i].buffered.start(0);
-          console.log(bufferedSeconds + ' seconds of video are ready to play!');
-        });
+        var bufferedSeconds = videos[i].buffered.end(0) - videos[i].buffered.start(0);
+        console.log(bufferedSeconds + ' seconds of video are ready to play!');
+      });
+      */
     }
 
   // Resize
