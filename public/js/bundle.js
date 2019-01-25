@@ -10982,9 +10982,7 @@ _domLoaded.default.then(() => {
     currentVideo.play().then(() => {
       mamaTl.play();
     });
-  }; // guru.addEventListener(clickEvent, guruClickHandler)
-  // mama.addEventListener(clickEvent, mamaClickHandler)
-  // Videos
+  }; // Videos
 
 
   const onCanPlay = event => {
@@ -10992,21 +10990,13 @@ _domLoaded.default.then(() => {
     let parent = element.classList.contains('guru') ? guru : mama;
     let handler = element.classList.contains('guru') ? guruClickHandler : mamaClickHandler;
     parent.classList.add('loaded');
-    parent.addEventListener(clickEvent, handler); // console.log('canplay', element)
-
+    parent.addEventListener(clickEvent, handler);
     element.removeEventListener(canplayEvent, onCanPlay);
   };
 
   for (let i = 0; i < videos.length; i++) {
     videos[i].load();
     videos[i].addEventListener(canplayEvent, onCanPlay);
-    /*
-    videos[i].addEventListener('loadedmetadata', function() {
-      if (videos[i].buffered.length === 0) return;
-       var bufferedSeconds = videos[i].buffered.end(0) - videos[i].buffered.start(0);
-      console.log(bufferedSeconds + ' seconds of video are ready to play!');
-    });
-    */
   } // Resize
 
 
