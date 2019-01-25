@@ -184,7 +184,7 @@
   .claim{
     z-index: 2;
     position: absolute;
-    bottom: 10vh;
+    bottom: 15vh;
     width: 90%;
     height: 50vh;
     font-size: 2em;
