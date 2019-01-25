@@ -1,8 +1,9 @@
 import domLoaded from 'dom-loaded';
 import { TweenMax, TimelineMax, Eases, CSSPlugin, ScrollToPlugin } from 'gsap/TweenMax';
 import emailScramble from 'email-scramble';
-window.emailScramble = emailScramble
+import FontFaceObserver from 'fontfaceobserver';
 
+const font = new FontFaceObserver('AvantGarde-ExtraLight')
 const isTouchDevice = require('is-touch-device')
 const clickEvent = isTouchDevice() ? 'touchend' : 'click'
 const canplayEvent = 'canplay'
@@ -46,7 +47,9 @@ domLoaded.then(() => {
 // Defaults
   // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
   isPortrait = window.matchMedia('( max-width: 42em) and ( max-aspect-ratio: 13/9 )').matches
-  TweenLite.to('.baseline', 1, { autoAlpha: 1, y: 0, delay: 1 }) // @TODO replace delay with event: npm install fontfaceobserver
+  font.load().then(function () {
+    TweenLite.to('.baseline', 1, { autoAlpha: 1, y: 0, delay: 1 })
+  })
 
   // controls
     TweenLite.set(isMute ? ctrlMute : ctrlUnmute, { autoAlpha: 0 })

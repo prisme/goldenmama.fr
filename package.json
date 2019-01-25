@@ -17,6 +17,7 @@
     "dom-loaded": "^1.0.1",
     "email-scramble": "^2.0.1",
     "express": "~4.16.0",
+    "fontfaceobserver": "^2.1.0",
     "gsap": "^2.0.2",
     "http-errors": "~1.6.2",
     "is-touch-device": "^1.0.1",
