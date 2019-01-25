@@ -121,15 +121,14 @@ domLoaded.then(() => {
   // subtitles
   const guruSubsTl = new TimelineMax({
     id: "guruSubs",
-    repeat: -1,
-    repeatDelay: 1
+    repeat: -1
   })
-
-  guruSubsTl.staggerTo('.guru .claim p', 1.5, {
+  // total 26s
+  guruSubsTl.staggerTo('.guru .claim p', 1.6, {
     opacity : 1,
     repeat: 1,
     yoyo: true
-  }, 5)
+  }, 5.2)
 
   guruTl.add(guruSubsTl, 'hideBackgrounds+=1')
 
@@ -182,15 +181,14 @@ domLoaded.then(() => {
   // subtitles
   const mamaSubsTl = new TimelineMax({
     id: "mamaSubs",
-    repeat: -1,
-    repeatDelay: 1
+    // repeat: -1
   })
-
-  mamaSubsTl.staggerTo('.mama .claim p', 1.5, {
+  // total : 24s
+  mamaSubsTl.staggerTo('.mama .claim p', 1.4, {
     opacity : 1,
     repeat: 1,
     yoyo: true
-  }, 5)
+  }, 4.8)
 
   mamaTl.add(mamaSubsTl, 'hideBackgrounds+=1')
 
@@ -266,6 +264,9 @@ domLoaded.then(() => {
       for (var i = 0; i < ctrlMute.length; i++) {
         ctrlMute[i].addEventListener(clickEvent, muteHandler);
       }
+
+      // console.log('mama', mamaTl._totalDuration)
+      // console.log('guru', guruTl._totalDuration)
     }
 
     const guruClickHandler = (event) => {

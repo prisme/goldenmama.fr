@@ -10703,10 +10703,10 @@ _domLoaded.default.then(() => {
   const contactOpen = contactToggle.querySelector('.open');
   const contactClose = contactToggle.querySelector('.close');
   const contactExpand = contact.querySelector('.expand');
+  const scrambled = document.querySelectorAll('.scramble');
   const videos = document.querySelectorAll('video');
   const mamaVideo = document.querySelector('video.mama');
-  const guruVideo = document.querySelector('video.guru');
-  const scrambled = document.querySelectorAll('.scramble'); // Defaults
+  const guruVideo = document.querySelector('video.guru'); // Defaults
   // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
 
   isPortrait = window.matchMedia('( max-width: 42em) and ( max-aspect-ratio: 13/9 )').matches;
@@ -10763,12 +10763,12 @@ _domLoaded.default.then(() => {
   }, 0).addLabel('hideLogos', '-=0.6'); // backgrounds
 
   guruTl.to(mama, 0.8, {
-    backgroundColor: 'rgba(45, 46, 131, 0)',
+    opacity: 0,
     xPercent: -100,
     force3D: true,
     ease: Power3.easeIn
   }, 'hideLogos').to(guru, 0.8, {
-    backgroundColor: 'rgba(229, 229, 229, 0)',
+    opacity: 0,
     xPercent: 100,
     force3D: true,
     ease: Power3.easeIn,
@@ -10798,14 +10798,14 @@ _domLoaded.default.then(() => {
 
   const guruSubsTl = new _TweenMax.TimelineMax({
     id: "guruSubs",
-    repeat: -1,
-    repeatDelay: 1
-  });
-  guruSubsTl.staggerTo('.guru .claim p', 1.5, {
+    repeat: -1
+  }); // total 26s
+
+  guruSubsTl.staggerTo('.guru .claim p', 1.6, {
     opacity: 1,
     repeat: 1,
     yoyo: true
-  }, 5);
+  }, 5.2);
   guruTl.add(guruSubsTl, 'hideBackgrounds+=1'); // Animation Mama
 
   const mamaTl = new _TweenMax.TimelineMax({
@@ -10819,12 +10819,12 @@ _domLoaded.default.then(() => {
   }, 0).addLabel('hideLogos', '-=0.6'); // backgrounds
 
   mamaTl.to(mama, 0.8, {
-    backgroundColor: 'rgba(45, 46, 131, 0)',
+    opacity: 0,
     xPercent: -100,
     force3D: true,
     ease: Power3.easeIn
   }, 'hideLogos').to(guru, 0.8, {
-    backgroundColor: 'rgba(229, 229, 229, 0)',
+    opacity: 0,
     xPercent: 100,
     force3D: true,
     ease: Power3.easeIn,
@@ -10860,15 +10860,15 @@ _domLoaded.default.then(() => {
   }, 'hideBackgrounds+=0.3'); // subtitles
 
   const mamaSubsTl = new _TweenMax.TimelineMax({
-    id: "mamaSubs",
-    repeat: -1,
-    repeatDelay: 1
-  });
-  mamaSubsTl.staggerTo('.mama .claim p', 1.5, {
+    id: "mamaSubs" // repeat: -1
+
+  }); // total : 24s
+
+  mamaSubsTl.staggerTo('.mama .claim p', 1.4, {
     opacity: 1,
     repeat: 1,
     yoyo: true
-  }, 5);
+  }, 4.8);
   mamaTl.add(mamaSubsTl, 'hideBackgrounds+=1'); // Handlers
   // Mute
 
@@ -10961,7 +10961,9 @@ _domLoaded.default.then(() => {
 
     for (var i = 0; i < ctrlMute.length; i++) {
       ctrlMute[i].addEventListener(clickEvent, muteHandler);
-    }
+    } // console.log('mama', mamaTl._totalDuration)
+    // console.log('guru', guruTl._totalDuration)
+
   };
 
   const guruClickHandler = event => {
@@ -10990,19 +10992,21 @@ _domLoaded.default.then(() => {
     let parent = element.classList.contains('guru') ? guru : mama;
     let handler = element.classList.contains('guru') ? guruClickHandler : mamaClickHandler;
     parent.classList.add('loaded');
-    parent.addEventListener(clickEvent, handler);
-    console.log('canplay', element);
+    parent.addEventListener(clickEvent, handler); // console.log('canplay', element)
+
     element.removeEventListener(canplayEvent, onCanPlay);
   };
 
   for (let i = 0; i < videos.length; i++) {
     videos[i].load();
     videos[i].addEventListener(canplayEvent, onCanPlay);
-    videos[i].addEventListener('loadedmetadata', function () {
+    /*
+    videos[i].addEventListener('loadedmetadata', function() {
       if (videos[i].buffered.length === 0) return;
-      var bufferedSeconds = videos[i].buffered.end(0) - videos[i].buffered.start(0);
+       var bufferedSeconds = videos[i].buffered.end(0) - videos[i].buffered.start(0);
       console.log(bufferedSeconds + ' seconds of video are ready to play!');
     });
+    */
   } // Resize
 
 
