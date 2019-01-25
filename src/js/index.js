@@ -322,7 +322,7 @@ domLoaded.then(() => {
       isPortrait = window.matchMedia('( max-width: 42em) and ( max-aspect-ratio: 13/9 )').matches
 
       if( isPlaying && isPortrait ) {
-        TweenLite.set(mama, { height: '100vh' })
+        TweenLite.set(mama, { height: '100vh'})
       } else {
         TweenLite.set(mama, { height: 'auto' })
       }
