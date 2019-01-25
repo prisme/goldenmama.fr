@@ -91,8 +91,8 @@ domLoaded.then(() => {
 
   // backgrounds
   guruTl
-    .to(mama, 0.8, { opacity: 0, xPercent:-100, force3D: true, ease: Power3.easeIn }, 'hideLogos')
-    .to(guru, 0.8, { opacity: 0, xPercent: 100, force3D: true, ease: Power3.easeIn,
+    .to(mama, 0.8, { backgroundColor: 'rgba(45, 46, 131, 0)', xPercent:-100, force3D: true, ease: Power3.easeIn }, 'hideLogos')
+    .to(guru, 0.8, { backgroundColor: 'rgba(229, 229, 229, 0)', xPercent: 100, force3D: true, ease: Power3.easeIn,
       onComplete: () => { TweenLite.set(guru, { xPercent: 0 }) }
     }, 'hideLogos')
     .addLabel('hideBackgrounds')
@@ -145,8 +145,8 @@ domLoaded.then(() => {
 
   // backgrounds
   mamaTl
-    .to(mama, 0.8, { opacity: 0, xPercent:-100, force3D: true, ease: Power3.easeIn }, 'hideLogos')
-    .to(guru, 0.8, { opacity: 0, xPercent: 100, force3D: true, ease: Power3.easeIn,
+    .to(mama, 0.8, { backgroundColor: 'rgba(45, 46, 131, 0)', xPercent:-100, force3D: true, ease: Power3.easeIn }, 'hideLogos')
+    .to(guru, 0.8, { backgroundColor: 'rgba(229, 229, 229, 0)', xPercent: 100, force3D: true, ease: Power3.easeIn,
       onComplete: () => {
         if( isPortrait ) {
           TweenLite.set(mama, { xPercent: 0, height: '100vh' })

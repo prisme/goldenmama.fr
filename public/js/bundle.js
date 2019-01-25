@@ -10763,12 +10763,12 @@ _domLoaded.default.then(() => {
   }, 0).addLabel('hideLogos', '-=0.6'); // backgrounds
 
   guruTl.to(mama, 0.8, {
-    opacity: 0,
+    backgroundColor: 'rgba(45, 46, 131, 0)',
     xPercent: -100,
     force3D: true,
     ease: Power3.easeIn
   }, 'hideLogos').to(guru, 0.8, {
-    opacity: 0,
+    backgroundColor: 'rgba(229, 229, 229, 0)',
     xPercent: 100,
     force3D: true,
     ease: Power3.easeIn,
@@ -10819,12 +10819,12 @@ _domLoaded.default.then(() => {
   }, 0).addLabel('hideLogos', '-=0.6'); // backgrounds
 
   mamaTl.to(mama, 0.8, {
-    opacity: 0,
+    backgroundColor: 'rgba(45, 46, 131, 0)',
     xPercent: -100,
     force3D: true,
     ease: Power3.easeIn
   }, 'hideLogos').to(guru, 0.8, {
-    opacity: 0,
+    backgroundColor: 'rgba(229, 229, 229, 0)',
     xPercent: 100,
     force3D: true,
     ease: Power3.easeIn,
