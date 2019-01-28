@@ -256,14 +256,17 @@ dark-grey: #343434
 
   .controls > * {
     cursor: pointer;
-    margin: 1vh;
-    width: 3vh;
+    margin: 0.5vh;
+    width: 6vh;
     height: auto;
+    /*border: 1px solid white;*/
+    min-width: 42px;
   }
 
   .controls svg{
-    width: 100%;
+    width: 50%;
     height: auto;
+    margin: 25%;
   }
 
   .controls svg *{
@@ -274,10 +277,10 @@ dark-grey: #343434
     position: relative;
   }
   .controls.guru .mute{
-    left: -5vh;
+    left: -7.5vh;
   }
   .controls.mama .mute{
-    left: 5vh;
+    left: 7.5vh;
   }
 
   .controls .close{
@@ -322,11 +325,11 @@ dark-grey: #343434
   }
 
   .contact{
-  	position: absolute;
-  	z-index: 2;
-  	bottom: 1vh;
-  	right: 0.8vh;
-  	height: 42px;
+    position: absolute;
+    z-index: 2;
+    bottom: 1vh;
+    right: 0.8vh;
+    height: 42px;
   }
   .contact .toggle{
     position: relative;
