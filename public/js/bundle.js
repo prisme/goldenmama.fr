@@ -10860,8 +10860,8 @@ _domLoaded.default.then(() => {
   }, 'hideBackgrounds+=0.3'); // subtitles
 
   const mamaSubsTl = new _TweenMax.TimelineMax({
-    id: "mamaSubs" // repeat: -1
-
+    id: "mamaSubs",
+    repeat: -1
   }); // total : 24s
 
   mamaSubsTl.staggerTo('.mama .claim p', 1.4, {

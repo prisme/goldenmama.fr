@@ -181,7 +181,7 @@ domLoaded.then(() => {
   // subtitles
   const mamaSubsTl = new TimelineMax({
     id: "mamaSubs",
-    // repeat: -1
+    repeat: -1
   })
   // total : 24s
   mamaSubsTl.staggerTo('.mama .claim p', 1.4, {
