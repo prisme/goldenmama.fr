@@ -376,6 +376,9 @@ dark-grey: #343434
     line-height: 52px;
     text-decoration: none;
     margin: 0 10px;
+    font-family: 'AvantGarde-ExtraLight';
+    color: #343434;
+    line-height: 2.7em;
   }
   .contact .expand a:last-child{
     margin-right: 0;
