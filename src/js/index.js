@@ -328,20 +328,32 @@ domLoaded.then(() => {
 
   // Contact
     let contactActive = false
+    let contactTL = new TimelineMax({ paused: true })
+
+    contactTL.to(contactOpen, 0.1, { autoAlpha: 0 })
+    contactTL.to(contactClose, 0.2, {
+      autoAlpha: 1,
+      rotation: -90,
+      ease: Power0.easeOut
+    })
+
+    contactTL.to(contactExpand, 0.4, {
+      autoAlpha: 1,
+      xPercent: -10
+    }, 0)
+
+    contactTL.staggerFrom(contactExpand.children, 0.1, {
+      xPercent: 5,
+      ease: Power3.easeOut,
+      yoyo: true
+    }, 0.1, 0)
 
     contactToggle.addEventListener(clickEvent, (event) => {
-      TweenLite.to(contactOpen, 0.2, { autoAlpha: contactActive ? 1 : 0 })
 
-      TweenLite.to(contactClose, 0.2, {
-        autoAlpha: contactActive ? 0 : 1,
-        rotation: contactActive ? 0 : -90,
-        ease: contactActive ? Power3.easeIn : Power0.easeOut
-      })
-
-      TweenLite.to(contactExpand, 0.4, {
-          autoAlpha: contactActive ? 0 : 1,
-          xPercent: contactActive ? 0 : -10
-      })
+      if (contactActive)
+        contactTL.play()
+      else
+        contactTL.reverse()
 
       contactActive = !contactActive
     })
