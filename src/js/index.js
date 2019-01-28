@@ -322,6 +322,7 @@ domLoaded.then(() => {
     }
 
     window.addEventListener('resize', resizeHandler)
+    resizeHandler()
 
   // Contact
     let contactActive = false

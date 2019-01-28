@@ -11018,7 +11018,8 @@ _domLoaded.default.then(() => {
     });
   };
 
-  window.addEventListener('resize', resizeHandler); // Contact
+  window.addEventListener('resize', resizeHandler);
+  resizeHandler(); // Contact
 
   let contactActive = false;
   contactToggle.addEventListener(clickEvent, event => {
