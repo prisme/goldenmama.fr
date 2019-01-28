@@ -10961,9 +10961,10 @@ _domLoaded.default.then(() => {
 
     for (var i = 0; i < ctrlMute.length; i++) {
       ctrlMute[i].addEventListener(clickEvent, muteHandler);
-    } // console.log('mama', mamaTl._totalDuration)
-    // console.log('guru', guruTl._totalDuration)
+    }
 
+    contactToggle.click(); // console.log('mama', mamaTl._totalDuration)
+    // console.log('guru', guruTl._totalDuration)
   };
 
   const guruClickHandler = event => {

@@ -265,6 +265,8 @@ domLoaded.then(() => {
         ctrlMute[i].addEventListener(clickEvent, muteHandler);
       }
 
+      contactToggle.click()
+
       // console.log('mama', mamaTl._totalDuration)
       // console.log('guru', guruTl._totalDuration)
     }
