@@ -276,10 +276,10 @@ dark-grey: #343434
     position: relative;
   }
   .controls.guru .mute{
-    left: -7.5vh;
+    left: -7vh;
   }
   .controls.mama .mute{
-    left: 7.5vh;
+    left: 7vh;
   }
 
   .controls .close{
