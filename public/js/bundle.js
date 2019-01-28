@@ -10734,7 +10734,7 @@ _domLoaded.default.then(() => {
   TweenLite.set(guruLogoTop, {
     width: guruLogo.offsetWidth * 0.6 + 'px',
     height: guruLogo.offsetHeight * 0.6 + 'px',
-    top: '1vh',
+    top: '1.5vh',
     right: 0,
     xPercent: 100
   });
@@ -11005,13 +11005,17 @@ _domLoaded.default.then(() => {
 
     if (isPlaying && isPortrait) {
       TweenLite.set(mama, {
-        height: '100vh'
+        height: window.innerHeight + 'px'
       });
     } else {
       TweenLite.set(mama, {
         height: 'auto'
       });
     }
+
+    TweenLite.set(root, {
+      height: window.innerHeight + 'px'
+    });
   };
 
   window.addEventListener('resize', resizeHandler); // Contact

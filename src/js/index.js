@@ -60,7 +60,7 @@ domLoaded.then(() => {
     TweenLite.set(guruLogoTop, {
       width: guruLogo.offsetWidth * 0.6 +'px',
       height: guruLogo.offsetHeight * 0.6 +'px',
-      top: '1vh',
+      top: '1.5vh',
       right: 0,
       xPercent: 100
     })
@@ -313,10 +313,12 @@ domLoaded.then(() => {
       isPortrait = window.matchMedia('( max-width: 42em) and ( max-aspect-ratio: 13/9 )').matches
 
       if( isPlaying && isPortrait ) {
-        TweenLite.set(mama, { height: '100vh'})
+        TweenLite.set(mama, { height: window.innerHeight + 'px' })
       } else {
         TweenLite.set(mama, { height: 'auto' })
       }
+
+      TweenLite.set(root, { height : window.innerHeight + 'px' })
     }
 
     window.addEventListener('resize', resizeHandler)
@@ -326,6 +328,7 @@ domLoaded.then(() => {
 
     contactToggle.addEventListener(clickEvent, (event) => {
       TweenLite.to(contactOpen, 0.2, { autoAlpha: contactActive ? 1 : 0 })
+
       TweenLite.to(contactClose, 0.2, {
         autoAlpha: contactActive ? 0 : 1,
         rotation: contactActive ? 0 : -90,
