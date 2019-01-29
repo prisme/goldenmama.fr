@@ -10,6 +10,7 @@ const canplayEvent = 'canplay'
 let isPortrait = false
 let isMute = false
 let isPlaying = false
+let contactActive = false
 let currentVideo
 let currentTl
 
@@ -265,7 +266,9 @@ domLoaded.then(() => {
         ctrlMute[i].addEventListener(clickEvent, muteHandler);
       }
 
-      contactToggle.click()
+      if (contactActive) {
+        contactToggle.click()
+      }
 
       // console.log('mama', mamaTl._totalDuration)
       // console.log('guru', guruTl._totalDuration)
@@ -327,8 +330,10 @@ domLoaded.then(() => {
     resizeHandler()
 
   // Contact
-    let contactActive = false
     let contactTL = new TimelineMax({ paused: true })
+
+    contactTL.eventCallback('onComplete', () => { contactActive = !contactActive })
+    contactTL.eventCallback('onReverseComplete', () => { contactActive = !contactActive })
 
     contactTL.to(contactOpen, 0.1, { autoAlpha: 0 })
     contactTL.to(contactClose, 0.2, {
@@ -349,13 +354,11 @@ domLoaded.then(() => {
     }, 0.1, 0)
 
     contactToggle.addEventListener(clickEvent, (event) => {
-
+      console.log(contactActive)
       if (contactActive)
-        contactTL.play()
-      else
         contactTL.reverse()
-
-      contactActive = !contactActive
+      else
+        contactTL.play()
     })
 
 })
