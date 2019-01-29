@@ -7,6 +7,8 @@ html
     include ./partials/favicon
 
     title= title
+    link(rel="preload", href='/css/style.css' )
+    link(rel="preload", href='/js/bundle.js' )
     link(rel="stylesheet", href="https://use.typekit.net/hrg3ppb.css")
     link(rel='stylesheet', href='/css/style.css')
     // link(rel='stylesheet', href='/css/style.min.css')
@@ -16,4 +18,5 @@ html
 
   // script(src='/js/bundle.min.js')
   script(src='/js/bundle.js')
+
   include ./partials/analytics
