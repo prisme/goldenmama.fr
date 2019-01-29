@@ -10670,15 +10670,16 @@ var _fontfaceobserver = _interopRequireDefault(require("fontfaceobserver"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const font = new _fontfaceobserver.default('AvantGarde-ExtraLight');
-
 const isTouchDevice = require('is-touch-device');
 
+const font = new _fontfaceobserver.default('AvantGarde-ExtraLight');
+const isPortraitQuery = '( max-width: 720px) and ( max-aspect-ratio: 13/9 )';
 const clickEvent = isTouchDevice() ? 'touchend' : 'click';
 const canplayEvent = 'canplay';
 let isPortrait = false;
 let isMute = false;
 let isPlaying = false;
+let contactActive = false;
 let currentVideo;
 let currentTl;
 
@@ -10709,7 +10710,6 @@ _domLoaded.default.then(() => {
   const guruVideo = document.querySelector('video.guru'); // Defaults
   // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
 
-  isPortrait = window.matchMedia('( max-width: 42em) and ( max-aspect-ratio: 13/9 )').matches;
   font.load().then(function () {
     TweenLite.to('.baseline', 1, {
       autoAlpha: 1,
@@ -10923,30 +10923,38 @@ _domLoaded.default.then(() => {
   }; // Close
 
 
+  const closeHandler = () => {
+    currentVideo.muted = true;
+    isPlaying = false; // @TODO: pause video & animation ?
+
+    document.removeEventListener(visibilityChange, visibilityChangeHandler);
+
+    for (var i = 0; i < ctrlUnmute.length; i++) {
+      ctrlUnmute[i].removeEventListener(clickEvent, unmuteHandler);
+    }
+
+    for (var i = 0; i < ctrlMute.length; i++) {
+      ctrlMute[i].removeEventListener(clickEvent, muteHandler);
+    }
+
+    if (isPortrait) {
+      TweenLite.set(mama, {
+        height: 'auto'
+      });
+    }
+
+    currentTl.reverse('hideBackgrounds');
+  };
+
   for (var i = 0; i < ctrlClose.length; i++) {
-    ctrlClose[i].addEventListener(clickEvent, () => {
-      currentVideo.muted = true;
-      isPlaying = false; // @TODO: pause video & animation ?
+    ctrlClose[i].addEventListener(clickEvent, closeHandler);
+  }
 
-      document.removeEventListener(visibilityChange, visibilityChangeHandler);
-
-      for (var i = 0; i < ctrlUnmute.length; i++) {
-        ctrlUnmute[i].removeEventListener(clickEvent, unmuteHandler);
-      }
-
-      for (var i = 0; i < ctrlMute.length; i++) {
-        ctrlMute[i].removeEventListener(clickEvent, muteHandler);
-      }
-
-      if (isPortrait) {
-        TweenLite.set(mama, {
-          height: 'auto'
-        });
-      }
-
-      currentTl.reverse('hideBackgrounds');
-    });
-  } // Start
+  document.onkeyup = function (event) {
+    if (event.key === 'Escape') {
+      closeHandler();
+    }
+  }; // Start
 
 
   const clickHandler = () => {
@@ -10963,8 +10971,11 @@ _domLoaded.default.then(() => {
       ctrlMute[i].addEventListener(clickEvent, muteHandler);
     }
 
-    contactToggle.click(); // console.log('mama', mamaTl._totalDuration)
+    if (contactActive) {
+      contactToggle.click();
+    } // console.log('mama', mamaTl._totalDuration)
     // console.log('guru', guruTl._totalDuration)
+
   };
 
   const guruClickHandler = event => {
@@ -11002,7 +11013,7 @@ _domLoaded.default.then(() => {
 
 
   const resizeHandler = () => {
-    isPortrait = window.matchMedia('( max-width: 42em) and ( max-aspect-ratio: 13/9 )').matches;
+    isPortrait = window.matchMedia(isPortrait).matches;
 
     if (isPlaying && isPortrait) {
       TweenLite.set(mama, {
@@ -11022,9 +11033,14 @@ _domLoaded.default.then(() => {
   window.addEventListener('resize', resizeHandler);
   resizeHandler(); // Contact
 
-  let contactActive = false;
   let contactTL = new _TweenMax.TimelineMax({
     paused: true
+  });
+  contactTL.eventCallback('onComplete', () => {
+    contactActive = !contactActive;
+  });
+  contactTL.eventCallback('onReverseComplete', () => {
+    contactActive = !contactActive;
   });
   contactTL.to(contactOpen, 0.1, {
     autoAlpha: 0
@@ -11044,8 +11060,8 @@ _domLoaded.default.then(() => {
     yoyo: true
   }, 0.1, 0);
   contactToggle.addEventListener(clickEvent, event => {
-    if (contactActive) contactTL.play();else contactTL.reverse();
-    contactActive = !contactActive;
+    console.log(contactActive);
+    if (contactActive) contactTL.reverse();else contactTL.play();
   });
 });
 
