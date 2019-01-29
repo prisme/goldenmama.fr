@@ -223,13 +223,22 @@ dark-grey: #343434
     position: absolute;
     top: 50%;
     left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    transform: translateX(-50%) translateY(-50%);
     z-index: 0;
+    transform: translateX(-50%) translateY(-50%);
     pointer-events: none;
+  }
+
+  @media only screen and ( max-width: 42em) and ( max-aspect-ratio: 13/9 ) {
+    .root video{
+      height: 100%;
+      width: auto;
+    }
+  }
+  @media only screen and ( max-width:42em ) and ( min-aspect-ratio: 13/9 ) {
+    .root video{
+      width: 100%;
+      height: auto;
+    }
   }
 
   .root video{
@@ -325,7 +334,7 @@ dark-grey: #343434
 
   .contact{
     position: absolute;
-    z-index: 2;
+    z-index: 3;
     bottom: 1vh;
     right: 0.8vh;
     height: 42px;
@@ -336,6 +345,7 @@ dark-grey: #343434
     width: 42px;
     line-height: 52px;
     -webkit-appearance: inherit;
+    z-index: 3;
   }
 
   .contact .toggle .open svg{
