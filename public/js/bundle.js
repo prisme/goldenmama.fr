@@ -11013,7 +11013,7 @@ _domLoaded.default.then(() => {
 
 
   const resizeHandler = () => {
-    isPortrait = window.matchMedia(isPortrait).matches;
+    isPortrait = window.matchMedia(isPortraitQuery).matches;
 
     if (isPlaying && isPortrait) {
       TweenLite.set(mama, {
