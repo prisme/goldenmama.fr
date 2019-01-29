@@ -231,25 +231,35 @@ domLoaded.then(() => {
     }
 
   // Close
+    const closeHandler = () => {
+      currentVideo.muted = true
+      isPlaying = false
+      // @TODO: pause video & animation ?
+
+      document.removeEventListener(visibilityChange, visibilityChangeHandler)
+
+      for (var i = 0; i < ctrlUnmute.length; i++) {
+        ctrlUnmute[i].removeEventListener(clickEvent, unmuteHandler);
+      }
+      for (var i = 0; i < ctrlMute.length; i++) {
+        ctrlMute[i].removeEventListener(clickEvent, muteHandler);
+      }
+
+      if( isPortrait ) {
+        TweenLite.set(mama, { height: 'auto' })
+      }
+
+      currentTl.reverse('hideBackgrounds')
+    }
+
     for (var i = 0; i < ctrlClose.length; i++) {
-      ctrlClose[i].addEventListener(clickEvent, () => {
-        currentVideo.muted = true
-        isPlaying = false
-        // @TODO: pause video & animation ?
+      ctrlClose[i].addEventListener(clickEvent, closeHandler)
+    }
 
-        document.removeEventListener(visibilityChange, visibilityChangeHandler)
-        for (var i = 0; i < ctrlUnmute.length; i++) {
-          ctrlUnmute[i].removeEventListener(clickEvent, unmuteHandler);
-        }
-        for (var i = 0; i < ctrlMute.length; i++) {
-          ctrlMute[i].removeEventListener(clickEvent, muteHandler);
-        }
-
-        if( isPortrait ) {
-          TweenLite.set(mama, { height: 'auto' })
-        }
-        currentTl.reverse('hideBackgrounds')
-      })
+    document.onkeyup = function(event) {
+       if (event.key === 'Escape'){
+         closeHandler()
+       }
     }
 
   // Start
