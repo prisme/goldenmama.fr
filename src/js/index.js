@@ -2,10 +2,12 @@ import domLoaded from 'dom-loaded';
 import { TweenMax, TimelineMax, Eases, CSSPlugin, ScrollToPlugin } from 'gsap/TweenMax';
 import emailScramble from 'email-scramble';
 import FontFaceObserver from 'fontfaceobserver';
-const isTouchDevice = require('is-touch-device')
+import videoSrcset from './video-srcset';
+import objectFitPolyfill from 'objectFitPolyfill';
+const isTouchDevice = require('is-touch-device');
 
 const font = new FontFaceObserver('AvantGarde-ExtraLight')
-const isPortraitQuery = '( max-width: 42em) and ( max-aspect-ratio: 13/9 )'
+const isPortraitQuery = '( max-width: 720px) and ( max-aspect-ratio: 13/9 )'
 const clickEvent = isTouchDevice() ? 'touchend' : 'click'
 const canplayEvent = 'canplay'
 let isPortrait = false
@@ -47,6 +49,10 @@ domLoaded.then(() => {
 
 // Defaults
   // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
+
+  videoSrcset()
+  // objectFitPolyfill()
+
   font.load().then(function () {
     TweenLite.to('.baseline', 1, { autoAlpha: 1, y: 0, delay: 1 })
   })
@@ -326,10 +332,24 @@ domLoaded.then(() => {
   // Resize
     const resizeHandler = () => {
       isPortrait = window.matchMedia(isPortraitQuery).matches
+
       if (isPortrait)
         TweenLite.set(root, { height : window.innerHeight + 'px' })
       else
         TweenLite.set(root, { height : '100vh' })
+
+      /*
+        if( isPortrait )
+          video.src = portrait
+        else {
+          video.src = other
+          return
+        }
+
+        if isPlaying
+          set height
+      */
+
 
       if( isPlaying && isPortrait ) {
         TweenLite.set(mama, { height: window.innerHeight + 'px' })
@@ -366,8 +386,7 @@ domLoaded.then(() => {
       yoyo: true
     }, 0.1, 0)
 
-    contactToggle.addEventListener(clickEvent, (event) => {
-      console.log(contactActive)
+    contactToggle.addEventListener(clickEvent, () => {
       if (contactActive)
         contactTL.reverse()
       else

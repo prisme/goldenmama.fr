@@ -10658,6 +10658,8 @@ function isTouchDevice() {
 }
 module.exports = exports['default'];
 },{}],16:[function(require,module,exports){
+!function(){"use strict";if("undefined"!=typeof window){var t=window.navigator.userAgent.match(/Edge\/(\d{2})\./),e=!!t&&parseInt(t[1],10)>=16;if("objectFit"in document.documentElement.style!=!1&&!e)return void(window.objectFitPolyfill=function(){return!1});var i=function(t){var e=window.getComputedStyle(t,null),i=e.getPropertyValue("position"),n=e.getPropertyValue("overflow"),o=e.getPropertyValue("display");i&&"static"!==i||(t.style.position="relative"),"hidden"!==n&&(t.style.overflow="hidden"),o&&"inline"!==o||(t.style.display="block"),0===t.clientHeight&&(t.style.height="100%"),-1===t.className.indexOf("object-fit-polyfill")&&(t.className=t.className+" object-fit-polyfill")},n=function(t){var e=window.getComputedStyle(t,null),i={"max-width":"none","max-height":"none","min-width":"0px","min-height":"0px",top:"auto",right:"auto",bottom:"auto",left:"auto","margin-top":"0px","margin-right":"0px","margin-bottom":"0px","margin-left":"0px"};for(var n in i){e.getPropertyValue(n)!==i[n]&&(t.style[n]=i[n])}},o=function(t,e,i){var n,o,l,a,d;if(i=i.split(" "),i.length<2&&(i[1]=i[0]),"x"===t)n=i[0],o=i[1],l="left",a="right",d=e.clientWidth;else{if("y"!==t)return;n=i[1],o=i[0],l="top",a="bottom",d=e.clientHeight}return n===l||o===l?void(e.style[l]="0"):n===a||o===a?void(e.style[a]="0"):"center"===n||"50%"===n?(e.style[l]="50%",void(e.style["margin-"+l]=d/-2+"px")):n.indexOf("%")>=0?(n=parseInt(n),void(n<50?(e.style[l]=n+"%",e.style["margin-"+l]=d*(n/-100)+"px"):(n=100-n,e.style[a]=n+"%",e.style["margin-"+a]=d*(n/-100)+"px"))):void(e.style[l]=n)},l=function(t){var e=t.dataset?t.dataset.objectFit:t.getAttribute("data-object-fit"),l=t.dataset?t.dataset.objectPosition:t.getAttribute("data-object-position");e=e||"cover",l=l||"50% 50%";var a=t.parentNode;i(a),n(t),t.style.position="absolute",t.style.height="100%",t.style.width="auto","scale-down"===e&&(t.style.height="auto",t.clientWidth<a.clientWidth&&t.clientHeight<a.clientHeight?(o("x",t,l),o("y",t,l)):(e="contain",t.style.height="100%")),"none"===e?(t.style.width="auto",t.style.height="auto",o("x",t,l),o("y",t,l)):"cover"===e&&t.clientWidth>a.clientWidth||"contain"===e&&t.clientWidth<a.clientWidth?(t.style.top="0",t.style.marginTop="0",o("x",t,l)):"scale-down"!==e&&(t.style.width="100%",t.style.height="auto",t.style.left="0",t.style.marginLeft="0",o("y",t,l))},a=function(t){if(void 0===t)t=document.querySelectorAll("[data-object-fit]");else if(t&&t.nodeName)t=[t];else{if("object"!=typeof t||!t.length||!t[0].nodeName)return!1;t=t}for(var i=0;i<t.length;i++)if(t[i].nodeName){var n=t[i].nodeName.toLowerCase();"img"!==n||e?"video"===n&&(t[i].readyState>0?l(t[i]):t[i].addEventListener("loadedmetadata",function(){l(this)})):t[i].complete?l(t[i]):t[i].addEventListener("load",function(){l(this)})}return!0};document.addEventListener("DOMContentLoaded",function(){a()}),window.addEventListener("resize",function(){a()}),window.objectFitPolyfill=a}}();
+},{}],17:[function(require,module,exports){
 "use strict";
 
 var _domLoaded = _interopRequireDefault(require("dom-loaded"));
@@ -10668,12 +10670,16 @@ var _emailScramble = _interopRequireDefault(require("email-scramble"));
 
 var _fontfaceobserver = _interopRequireDefault(require("fontfaceobserver"));
 
+var _videoSrcset = _interopRequireDefault(require("./video-srcset"));
+
+var _objectFitPolyfill = _interopRequireDefault(require("objectFitPolyfill"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const isTouchDevice = require('is-touch-device');
 
 const font = new _fontfaceobserver.default('AvantGarde-ExtraLight');
-const isPortraitQuery = '( max-width: 42em) and ( max-aspect-ratio: 13/9 )';
+const isPortraitQuery = '( max-width: 720px) and ( max-aspect-ratio: 13/9 )';
 const clickEvent = isTouchDevice() ? 'touchend' : 'click';
 const canplayEvent = 'canplay';
 let isPortrait = false;
@@ -10709,6 +10715,8 @@ _domLoaded.default.then(() => {
   const mamaVideo = document.querySelector('video.mama');
   const guruVideo = document.querySelector('video.guru'); // Defaults
   // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
+
+  (0, _videoSrcset.default)(); // objectFitPolyfill()
 
   font.load().then(function () {
     TweenLite.to('.baseline', 1, {
@@ -11019,6 +11027,16 @@ _domLoaded.default.then(() => {
     });else TweenLite.set(root, {
       height: '100vh'
     });
+    /*
+      if( isPortrait )
+        video.src = portrait
+      else {
+        video.src = other
+        return
+      }
+       if isPlaying
+        set height
+    */
 
     if (isPlaying && isPortrait) {
       TweenLite.set(mama, {
@@ -11060,10 +11078,162 @@ _domLoaded.default.then(() => {
     ease: Power3.easeOut,
     yoyo: true
   }, 0.1, 0);
-  contactToggle.addEventListener(clickEvent, event => {
-    console.log(contactActive);
+  contactToggle.addEventListener(clickEvent, () => {
     if (contactActive) contactTL.reverse();else contactTL.play();
   });
 });
 
-},{"dom-loaded":1,"email-scramble":2,"fontfaceobserver":3,"gsap/TweenMax":13,"is-touch-device":15}]},{},[16]);
+},{"./video-srcset":18,"dom-loaded":1,"email-scramble":2,"fontfaceobserver":3,"gsap/TweenMax":13,"is-touch-device":15,"objectFitPolyfill":16}],18:[function(require,module,exports){
+(function (window, undefined) {
+
+
+	function videoSourceSet(options, elements) {
+
+		options = Object.assign({}, {
+			resize: false,
+			resizeDelay: 50
+		}, options);
+
+		// If no specific elements recieved -> take all the video tags in the page
+		if (elements === undefined) {
+			elements = document.getElementsByTagName('video');
+		}
+
+		// Pattern of a src set element
+		var regex = /^\s*(.+)\s+(\d+)([wh])?\s*$/;
+
+		/**
+		 * @param string def The srcset attribute value
+		 * @returns Array<{width:number, src:string}> List of source options - with their max width value
+		 */
+		function getSourceSets(def) {
+			var sources = [];
+			var parts = def.split(',');
+			for (var i in parts) {
+				var result;
+				if (result = parts[i].match(regex)) {
+					sources.push({
+						width: parseInt(result[2]),
+						src: result[1],
+					});
+				}
+			}
+
+			return sources;
+		}
+
+		/**
+		 * @param srcsrt The definition of the srcset attribute
+		 * @param screenWidth The width of the container to find matching src for
+		 * @returns string The best matching video source
+		 */
+		function selectSource(srcsrt, screenWidth) {
+			var sources = getSourceSets(srcsrt);
+
+			var selectedDiff = null;
+			var source = null;
+
+			for (var i in sources) {
+				var candidate = sources[i];
+				var candidateDiff = candidate.width - screenWidth;
+
+				if (source === null ||  // First One
+						(selectedDiff < 0 && candidateDiff >= 0) || // Got smaller - and then larger
+						(candidateDiff < 0 && candidateDiff > selectedDiff) ||
+						(candidateDiff >= 0 && candidateDiff < selectedDiff ) // Got one that match better
+				) {
+					selectedDiff = candidateDiff;
+					source = candidate.src;
+				}
+			}
+
+			return source;
+		}
+
+		function init(elements) {
+			// Select sources for valid elements from the requested ones
+			for (var i = 0; i < elements.length; i++) {
+				var element = elements[i];
+				// If the element isn't a <video> tag with srcset="..." attribute - don't even check it
+				if (element.tagName == 'VIDEO' && element.hasAttribute('srcset')) {
+					var srcset = element.getAttribute('srcset');
+
+					// check if srcset is not empty
+					if(srcset) {
+						var selectedSource = selectSource(srcset, window.innerWidth);
+						// Don't reapply the same src (to prevent reloading of the same video if run in resize, etc...)
+						if(selectedSource !== element.src) {
+							element.src = selectedSource;
+						}
+					}
+				}
+			}
+		}
+
+		init(elements);
+
+		if(options.resize) {
+			var resizeDelayTimeout = null;
+			window.addEventListener('resize', function() {
+				if(resizeDelayTimeout!==null) {
+					clearTimeout(resizeDelayTimeout);
+				}
+				resizeDelayTimeout = setTimeout(function() {
+					init(elements);
+				}, options.resizeDelay);
+			});
+		}
+
+	}
+
+
+	// Polyfill for Object.assign
+	// Source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign#Polyfill
+	if (typeof Object.assign != 'function') {
+		// Must be writable: true, enumerable: false, configurable: true
+		Object.defineProperty(Object, "assign", {
+			value: function assign(target, varArgs) { // .length of function is 2
+				'use strict';
+				if (target == null) { // TypeError if undefined or null
+					throw new TypeError('Cannot convert undefined or null to object');
+				}
+
+				var to = Object(target);
+
+				for (var index = 1; index < arguments.length; index++) {
+					var nextSource = arguments[index];
+
+					if (nextSource != null) { // Skip over if undefined or null
+						for (var nextKey in nextSource) {
+							// Avoid bugs when hasOwnProperty is shadowed
+							if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+								to[nextKey] = nextSource[nextKey];
+							}
+						}
+					}
+				}
+				return to;
+			},
+			writable: true,
+			configurable: true
+		});
+	}
+
+
+	if (typeof window.jQuery !== 'undefined') {
+		(function ($) {
+			$.fn.videoSrcset = function (options) {
+				return new videoSourceSet(options || {}, $(this).filter('video[srcset]'));
+			}
+		})(window.jQuery);
+	}
+
+	if(typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+		module.exports = videoSourceSet;
+	}
+
+	window.videoSourceSet = videoSourceSet;
+
+})(window);
+
+},{}]},{},[17]);

@@ -22,7 +22,8 @@
     "http-errors": "~1.6.2",
     "is-touch-device": "^1.0.1",
     "jade": "~1.11.0",
-    "morgan": "~1.9.0"
+    "morgan": "~1.9.0",
+    "objectFitPolyfill": "^2.1.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.6",
