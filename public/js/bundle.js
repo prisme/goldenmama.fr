@@ -10673,7 +10673,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const isTouchDevice = require('is-touch-device');
 
 const font = new _fontfaceobserver.default('AvantGarde-ExtraLight');
-const isPortraitQuery = '( max-width: 720px) and ( max-aspect-ratio: 13/9 )';
+const isPortraitQuery = '( max-width: 42em) and ( max-aspect-ratio: 13/9 )';
 const clickEvent = isTouchDevice() ? 'touchend' : 'click';
 const canplayEvent = 'canplay';
 let isPortrait = false;
@@ -11014,6 +11014,11 @@ _domLoaded.default.then(() => {
 
   const resizeHandler = () => {
     isPortrait = window.matchMedia(isPortraitQuery).matches;
+    if (isPortrait) TweenLite.set(root, {
+      height: window.innerHeight + 'px'
+    });else TweenLite.set(root, {
+      height: '100vh'
+    });
 
     if (isPlaying && isPortrait) {
       TweenLite.set(mama, {
@@ -11024,10 +11029,6 @@ _domLoaded.default.then(() => {
         height: 'auto'
       });
     }
-
-    TweenLite.set(root, {
-      height: window.innerHeight + 'px'
-    });
   };
 
   window.addEventListener('resize', resizeHandler);
