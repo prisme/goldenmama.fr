@@ -100,9 +100,24 @@ domLoaded.then(() => {
 
   // backgrounds
   guruTl
-    .to(mama, 0.8, { backgroundColor: 'rgba(45, 46, 131, 0)', xPercent:-100, force3D: true, ease: Power3.easeIn }, 'hideLogos')
-    .to(guru, 0.8, { backgroundColor: 'rgba(229, 229, 229, 0)', xPercent: 100, force3D: true, ease: Power3.easeIn,
-      onComplete: () => { TweenLite.set(guru, { xPercent: 0 }) }
+    .to(mama, 0.8, {
+      backgroundColor: 'rgba(45, 46, 131, 0)',
+      xPercent:-100,
+      force3D: true,
+      ease: Power3.easeIn
+    }, 'hideLogos')
+    .to(guru, 0.8, {
+      backgroundColor: 'rgba(229, 229, 229, 0)',
+      xPercent: 100,
+      force3D: true,
+      ease: Power3.easeIn,
+      onComplete : () => {
+        TweenLite.set(guru, { xPercent: 0 })
+        TweenLite.set([mama, guru], { pointerEvents: 'none', cursor: 'default' })
+      },
+      onReverseComplete : () => {
+        TweenLite.set([mama, guru], { pointerEvents: 'all', cursor: 'pointer' })
+      }
     }, 'hideLogos')
     .addLabel('hideBackgrounds')
 
@@ -154,14 +169,23 @@ domLoaded.then(() => {
 
   // backgrounds
   mamaTl
-    .to(mama, 0.8, { backgroundColor: 'rgba(45, 46, 131, 0)', xPercent:-100, force3D: true, ease: Power3.easeIn }, 'hideLogos')
-    .to(guru, 0.8, { backgroundColor: 'rgba(229, 229, 229, 0)', xPercent: 100, force3D: true, ease: Power3.easeIn,
-      onComplete: () => {
-        if( isPortrait ) {
-          TweenLite.set(mama, { xPercent: 0, height: H })
-        } else {
-          TweenLite.set(mama, { xPercent: 0 })
-        }
+    .to(mama, 0.8, {
+      backgroundColor: 'rgba(45, 46, 131, 0)',
+      xPercent:-100,
+      force3D: true,
+      ease: Power3.easeIn
+    }, 'hideLogos')
+    .to(guru, 0.8, {
+      backgroundColor: 'rgba(229, 229, 229, 0)',
+      xPercent: 100,
+      force3D: true,
+      ease: Power3.easeIn,
+      onComplete : () => {
+        TweenLite.set(mama, { xPercent: 0, height: H })
+        TweenLite.set([mama, guru], { pointerEvents: 'none', cursor: 'default' })
+      },
+      onReverseComplete : () => {
+        TweenLite.set([mama, guru], { pointerEvents: 'all', cursor: 'pointer' })
       }
     }, 'hideLogos')
     .addLabel('hideBackgrounds')

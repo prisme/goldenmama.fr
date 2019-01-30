@@ -10688,6 +10688,7 @@ let isPlaying = false;
 let contactActive = false;
 let currentVideo;
 let currentTl;
+let H;
 
 _domLoaded.default.then(() => {
   // Elements
@@ -10784,6 +10785,16 @@ _domLoaded.default.then(() => {
       TweenLite.set(guru, {
         xPercent: 0
       });
+      TweenLite.set([mama, guru], {
+        pointerEvents: 'none',
+        cursor: 'default'
+      });
+    },
+    onReverseComplete: () => {
+      TweenLite.set([mama, guru], {
+        pointerEvents: 'all',
+        cursor: 'pointer'
+      });
     }
   }, 'hideLogos').addLabel('hideBackgrounds'); // video
 
@@ -10837,16 +10848,20 @@ _domLoaded.default.then(() => {
     force3D: true,
     ease: Power3.easeIn,
     onComplete: () => {
-      if (isPortrait) {
-        TweenLite.set(mama, {
-          xPercent: 0,
-          height: '100vh'
-        });
-      } else {
-        TweenLite.set(mama, {
-          xPercent: 0
-        });
-      }
+      TweenLite.set(mama, {
+        xPercent: 0,
+        height: H
+      });
+      TweenLite.set([mama, guru], {
+        pointerEvents: 'none',
+        cursor: 'default'
+      });
+    },
+    onReverseComplete: () => {
+      TweenLite.set([mama, guru], {
+        pointerEvents: 'all',
+        cursor: 'pointer'
+      });
     }
   }, 'hideLogos').addLabel('hideBackgrounds'); // video
 
@@ -11022,8 +11037,9 @@ _domLoaded.default.then(() => {
 
   const resizeHandler = () => {
     isPortrait = window.matchMedia(isPortraitQuery).matches;
+    H = window.innerHeight;
     if (isPortrait) TweenLite.set(root, {
-      height: window.innerHeight + 'px'
+      height: H + 'px'
     });else TweenLite.set(root, {
       height: '100vh'
     });
@@ -11040,7 +11056,7 @@ _domLoaded.default.then(() => {
 
     if (isPlaying && isPortrait) {
       TweenLite.set(mama, {
-        height: window.innerHeight + 'px'
+        height: H + 'px'
       });
     } else {
       TweenLite.set(mama, {
