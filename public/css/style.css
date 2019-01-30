@@ -73,13 +73,9 @@ dark-grey: #343434
 
   body {
     font-family: 'itc-avant-garde-gothic-pro', sans-serif;
-    /*font-weight: 300;*/
     font-weight: 700;
     font-size: 16px;
-    line-height: 1
-  }
-
-  body.noscroll {
+    line-height: 1;
     overflow: hidden;
   }
 
