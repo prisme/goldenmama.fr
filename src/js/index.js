@@ -16,6 +16,8 @@ let isPlaying = false
 let contactActive = false
 let currentVideo
 let currentTl
+let H
+
 
 domLoaded.then(() => {
 // Elements
@@ -156,7 +158,7 @@ domLoaded.then(() => {
     .to(guru, 0.8, { backgroundColor: 'rgba(229, 229, 229, 0)', xPercent: 100, force3D: true, ease: Power3.easeIn,
       onComplete: () => {
         if( isPortrait ) {
-          TweenLite.set(mama, { xPercent: 0, height: '100vh' })
+          TweenLite.set(mama, { xPercent: 0, height: H })
         } else {
           TweenLite.set(mama, { xPercent: 0 })
         }
@@ -332,9 +334,10 @@ domLoaded.then(() => {
   // Resize
     const resizeHandler = () => {
       isPortrait = window.matchMedia(isPortraitQuery).matches
+      H = window.innerHeight
 
       if (isPortrait)
-        TweenLite.set(root, { height : window.innerHeight + 'px' })
+        TweenLite.set(root, { height : H + 'px' })
       else
         TweenLite.set(root, { height : '100vh' })
 
@@ -352,7 +355,7 @@ domLoaded.then(() => {
 
 
       if( isPlaying && isPortrait ) {
-        TweenLite.set(mama, { height: window.innerHeight + 'px' })
+        TweenLite.set(mama, { height: H + 'px' })
       } else {
         TweenLite.set(mama, { height: 'auto' })
       }
