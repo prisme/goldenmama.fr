@@ -357,36 +357,16 @@ domLoaded.then(() => {
 
   // Resize
     const resizeHandler = () => {
-
       isPortrait = window.matchMedia(isPortraitQuery).matches
       H = innerHeight()
 
-      console.log(isPortrait, H)
-
-      if (isPortrait)
-        TweenLite.set(root, { height : H + 'px' })
-      else
-        TweenLite.set(root, { height : '100vh' })
-
-      /*
-        if( isPortrait )
-          video.src = portrait
-        else {
-          video.src = other
-          return
-        }
-
-        if isPlaying
-          set height
-      */
-
+      TweenLite.set(root, { height : H + 'px' })
 
       if( isPlaying && isPortrait ) {
         TweenLite.set(mama, { height: H + 'px' })
       } else {
         TweenLite.set(mama, { height: 'auto' })
       }
-
     }
 
     window.addEventListener('resize', resizeHandler)
