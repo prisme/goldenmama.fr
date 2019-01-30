@@ -44,6 +44,39 @@ dark-grey: #343434
     font-weight: bold;
   }
 
+  button {
+      -webkit-box-sizing: content-box;
+         -moz-box-sizing: content-box;
+              box-sizing: content-box;
+  }
+
+  /* Reset `button` default styles */
+  button {
+      background: none;
+      border: 0;
+      color: inherit;
+      cursor: pointer;
+      font: inherit;
+      line-height: normal;
+      overflow: visible;
+      padding: 0;
+  }
+
+  button:hover,
+  button:focus {
+      outline: none;
+      outline-offset: -4px;
+      border: 0;
+      padding: 0;
+  }
+  input::-moz-focus-inner,
+  button::-moz-focus-inner{
+      outline: none;
+      outline-offset: -4px;
+      border: 0;
+      padding: 0;
+  }
+
 /* global */
   @font-face {
     font-family: 'AvantGarde-ExtraLight';
@@ -226,9 +259,7 @@ dark-grey: #343434
     height: 100%;
     object-fit: cover;
     overflow: hidden;
-  }
 
-  .root video{
     opacity: 0;
   }
 
@@ -254,7 +285,6 @@ dark-grey: #343434
     margin: 0.5vh;
     width: 6vh;
     height: auto;
-    /*border: 1px solid white;*/
     min-width: 42px;
   }
 
@@ -283,40 +313,6 @@ dark-grey: #343434
   }
   .controls .close path{
     stroke: transparent;
-  }
-
-
-  button {
-      -webkit-box-sizing: content-box;
-         -moz-box-sizing: content-box;
-              box-sizing: content-box;
-  }
-
-  /* Reset `button` default styles */
-  button {
-      background: none;
-      border: 0;
-      color: inherit;
-      cursor: pointer;
-      font: inherit;
-      line-height: normal;
-      overflow: visible;
-      padding: 0;
-  }
-
-  button:hover,
-  button:focus {
-      outline: none;
-      outline-offset: -4px;
-      border: 0;
-      padding: 0;
-  }
-  input::-moz-focus-inner,
-  button::-moz-focus-inner{
-      outline: none;
-      outline-offset: -4px;
-      border: 0;
-      padding: 0;
   }
 
   .contact{
