@@ -360,13 +360,17 @@ domLoaded.then(() => {
       isPortrait = window.matchMedia(isPortraitQuery).matches
       H = innerHeight()
 
-      TweenLite.set(root, { height : H + 'px' })
+      if (isPortrait)
+        TweenLite.set(root, { height : H + 'px' })
+      else
+        TweenLite.set(root, { height : '100vh' })
 
       if( isPlaying && isPortrait ) {
         TweenLite.set(mama, { height: H + 'px' })
       } else {
         TweenLite.set(mama, { height: 'auto' })
       }
+
     }
 
     window.addEventListener('resize', resizeHandler)
