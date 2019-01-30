@@ -12,6 +12,7 @@
     "encode": "./encodevideos.sh"
   },
   "dependencies": {
+    "body-scroll-lock": "^2.6.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "dom-loaded": "^1.0.1",

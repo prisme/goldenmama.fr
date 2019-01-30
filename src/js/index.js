@@ -1,5 +1,6 @@
 import domLoaded from 'dom-loaded';
 import { TweenMax, TimelineMax, Eases, CSSPlugin } from 'gsap/TweenMax';
+import { disableBodyScroll } from 'body-scroll-lock';
 import emailScramble from 'email-scramble';
 import FontFaceObserver from 'fontfaceobserver';
 import videoSrcset from './video-srcset';
@@ -53,7 +54,6 @@ domLoaded.then(() => {
 // Defaults
 
   videoSrcset()
-  // objectFitPolyfill()
 
   font.load().then(function () {
     TweenLite.to('.baseline', 1, { autoAlpha: 1, y: 0, delay: 1 })
@@ -358,7 +358,7 @@ domLoaded.then(() => {
   // Resize
     const resizeHandler = () => {
       isPortrait = window.matchMedia(isPortraitQuery).matches
-      H = Math.max(innerHeight(), window.innerHeight)
+      H = ( innerHeight() - window.innerHeight > 100 ) ? innerHeight() : window.innerHeight
 
       if (isPortrait)
         TweenLite.set(root, { height : H + 'px' })
@@ -371,6 +371,7 @@ domLoaded.then(() => {
         TweenLite.set(mama, { height: 'auto' })
       }
 
+      disableBodyScroll(root)
     }
 
     window.addEventListener('resize', resizeHandler)

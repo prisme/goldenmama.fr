@@ -1,4 +1,7 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+!function(e,t){if("function"==typeof define&&define.amd)define(["exports"],t);else if("undefined"!=typeof exports)t(exports);else{var o={};t(o),e.bodyScrollLock=o}}(this,function(exports){"use strict";function r(e){if(Array.isArray(e)){for(var t=0,o=Array(e.length);t<e.length;t++)o[t]=e[t];return o}return Array.from(e)}Object.defineProperty(exports,"__esModule",{value:!0});var l=!1;if("undefined"!=typeof window){var e={get passive(){l=!0}};window.addEventListener("testPassive",null,e),window.removeEventListener("testPassive",null,e)}var d="undefined"!=typeof window&&window.navigator&&window.navigator.platform&&/iP(ad|hone|od)/.test(window.navigator.platform),c=[],u=!1,a=-1,s=void 0,v=void 0,f=function(t){return c.some(function(e){return!(!e.options.allowTouchMove||!e.options.allowTouchMove(t))})},m=function(e){var t=e||window.event;return!!f(t.target)||(1<t.touches.length||(t.preventDefault&&t.preventDefault(),!1))},o=function(){setTimeout(function(){void 0!==v&&(document.body.style.paddingRight=v,v=void 0),void 0!==s&&(document.body.style.overflow=s,s=void 0)})};exports.disableBodyScroll=function(i,e){if(d){if(!i)return void console.error("disableBodyScroll unsuccessful - targetElement must be provided when calling disableBodyScroll on IOS devices.");if(i&&!c.some(function(e){return e.targetElement===i})){var t={targetElement:i,options:e||{}};c=[].concat(r(c),[t]),i.ontouchstart=function(e){1===e.targetTouches.length&&(a=e.targetTouches[0].clientY)},i.ontouchmove=function(e){var t,o,n,r;1===e.targetTouches.length&&(o=i,r=(t=e).targetTouches[0].clientY-a,!f(t.target)&&(o&&0===o.scrollTop&&0<r?m(t):(n=o)&&n.scrollHeight-n.scrollTop<=n.clientHeight&&r<0?m(t):t.stopPropagation()))},u||(document.addEventListener("touchmove",m,l?{passive:!1}:void 0),u=!0)}}else{n=e,setTimeout(function(){if(void 0===v){var e=!!n&&!0===n.reserveScrollBarGap,t=window.innerWidth-document.documentElement.clientWidth;e&&0<t&&(v=document.body.style.paddingRight,document.body.style.paddingRight=t+"px")}void 0===s&&(s=document.body.style.overflow,document.body.style.overflow="hidden")});var o={targetElement:i,options:e||{}};c=[].concat(r(c),[o])}var n},exports.clearAllBodyScrollLocks=function(){d?(c.forEach(function(e){e.targetElement.ontouchstart=null,e.targetElement.ontouchmove=null}),u&&(document.removeEventListener("touchmove",m,l?{passive:!1}:void 0),u=!1),c=[],a=-1):(o(),c=[])},exports.enableBodyScroll=function(t){if(d){if(!t)return void console.error("enableBodyScroll unsuccessful - targetElement must be provided when calling enableBodyScroll on IOS devices.");t.ontouchstart=null,t.ontouchmove=null,c=c.filter(function(e){return e.targetElement!==t}),u&&0===c.length&&(document.removeEventListener("touchmove",m,l?{passive:!1}:void 0),u=!1)}else 1===c.length&&c[0].targetElement===t?(o(),c=[]):c=c.filter(function(e){return e.targetElement!==t})}});
+
+},{}],2:[function(require,module,exports){
 'use strict';
 
 module.exports = new Promise(resolve => {
@@ -15,7 +18,7 @@ module.exports = new Promise(resolve => {
 	}
 });
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 (function wrapEmailScramble(root, factory) {
   'use strict';
   if (typeof define === 'function' && define.amd) {
@@ -83,7 +86,7 @@ module.exports = new Promise(resolve => {
   };
 }));
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 /* Font Face Observer v2.1.0 - © Bram Stein. License: BSD-3-Clause */(function(){function l(a,b){document.addEventListener?a.addEventListener("scroll",b,!1):a.attachEvent("scroll",b)}function m(a){document.body?a():document.addEventListener?document.addEventListener("DOMContentLoaded",function c(){document.removeEventListener("DOMContentLoaded",c);a()}):document.attachEvent("onreadystatechange",function k(){if("interactive"==document.readyState||"complete"==document.readyState)document.detachEvent("onreadystatechange",k),a()})};function t(a){this.a=document.createElement("div");this.a.setAttribute("aria-hidden","true");this.a.appendChild(document.createTextNode(a));this.b=document.createElement("span");this.c=document.createElement("span");this.h=document.createElement("span");this.f=document.createElement("span");this.g=-1;this.b.style.cssText="max-width:none;display:inline-block;position:absolute;height:100%;width:100%;overflow:scroll;font-size:16px;";this.c.style.cssText="max-width:none;display:inline-block;position:absolute;height:100%;width:100%;overflow:scroll;font-size:16px;";
 this.f.style.cssText="max-width:none;display:inline-block;position:absolute;height:100%;width:100%;overflow:scroll;font-size:16px;";this.h.style.cssText="display:inline-block;width:200%;height:200%;font-size:16px;max-width:none;";this.b.appendChild(this.h);this.c.appendChild(this.f);this.a.appendChild(this.b);this.a.appendChild(this.c)}
 function u(a,b){a.a.style.cssText="max-width:none;min-width:20px;min-height:20px;display:inline-block;overflow:hidden;position:absolute;width:auto;margin:0;padding:0;top:-999px;white-space:nowrap;font-synthesis:none;font:"+b+";"}function z(a){var b=a.a.offsetWidth,c=b+100;a.f.style.width=c+"px";a.c.scrollLeft=c;a.b.scrollLeft=a.b.scrollWidth+100;return a.g!==b?(a.g=b,!0):!1}function A(a,b){function c(){var a=k;z(a)&&a.a.parentNode&&b(a.g)}var k=a;l(a.b,c);l(a.c,c);z(a)};function B(a,b){var c=b||{};this.family=a;this.style=c.style||"normal";this.weight=c.weight||"normal";this.stretch=c.stretch||"normal"}var C=null,D=null,E=null,F=null;function G(){if(null===D)if(J()&&/Apple/.test(window.navigator.vendor)){var a=/AppleWebKit\/([0-9]+)(?:\.([0-9]+))(?:\.([0-9]+))/.exec(window.navigator.userAgent);D=!!a&&603>parseInt(a[1],10)}else D=!1;return D}function J(){null===F&&(F=!!document.fonts);return F}
@@ -93,7 +96,7 @@ b)}else m(function(){function v(){var b;if(b=-1!=f&&-1!=g||-1!=f&&-1!=h||-1!=g&&
 n+"ms timeout exceeded"));else{var a=document.hidden;if(!0===a||void 0===a)f=e.a.offsetWidth,g=p.a.offsetWidth,h=q.a.offsetWidth,v();r=setTimeout(I,50)}}var e=new t(k),p=new t(k),q=new t(k),f=-1,g=-1,h=-1,w=-1,x=-1,y=-1,d=document.createElement("div");d.dir="ltr";u(e,L(c,"sans-serif"));u(p,L(c,"serif"));u(q,L(c,"monospace"));d.appendChild(e.a);d.appendChild(p.a);d.appendChild(q.a);document.body.appendChild(d);w=e.a.offsetWidth;x=p.a.offsetWidth;y=q.a.offsetWidth;I();A(e,function(a){f=a;v()});u(e,
 L(c,'"'+c.family+'",sans-serif'));A(p,function(a){g=a;v()});u(p,L(c,'"'+c.family+'",serif'));A(q,function(a){h=a;v()});u(q,L(c,'"'+c.family+'",monospace'))})})};"object"===typeof module?module.exports=B:(window.FontFaceObserver=B,window.FontFaceObserver.prototype.load=B.prototype.load);}());
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -144,7 +147,7 @@ var AttrPlugin = _TweenLite._gsScope._gsDefine.plugin({
 
 exports.default = exports.AttrPlugin = AttrPlugin;
 
-},{"./TweenLite.js":12}],5:[function(require,module,exports){
+},{"./TweenLite.js":13}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -943,7 +946,7 @@ p._kill = function (lookup) {
   return this._super._kill.call(this, lookup);
 };
 
-},{"./TweenLite.js":12}],6:[function(require,module,exports){
+},{"./TweenLite.js":13}],7:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4716,7 +4719,7 @@ _TweenLite._gsScope._gsDefine("plugins.CSSPlugin", ["plugins.TweenPlugin", "Twee
 var CSSPlugin = _TweenLite.globals.CSSPlugin;
 exports.default = exports.CSSPlugin = CSSPlugin;
 
-},{"./TweenLite.js":12}],7:[function(require,module,exports){
+},{"./TweenLite.js":13}],8:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -4826,7 +4829,7 @@ var DirectionalRotationPlugin = _TweenLite._gsScope._gsDefine.plugin({
 exports.default = exports.DirectionalRotationPlugin = DirectionalRotationPlugin;
 DirectionalRotationPlugin._autoCSS = true;
 
-},{"./TweenLite.js":12}],8:[function(require,module,exports){
+},{"./TweenLite.js":13}],9:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5271,7 +5274,7 @@ exports.Sine = Sine;
 var ExpoScaleEase = _TweenLite.globals.ExpoScaleEase;
 exports.ExpoScaleEase = ExpoScaleEase;
 
-},{"./TweenLite.js":12}],9:[function(require,module,exports){
+},{"./TweenLite.js":13}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5397,7 +5400,7 @@ p._add = function (target, p, s, c, mod) {
   this._overwriteProps.push(p);
 };
 
-},{"./TweenLite.js":12}],10:[function(require,module,exports){
+},{"./TweenLite.js":13}],11:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -6379,7 +6382,7 @@ _TweenLite._gsScope._gsDefine("TimelineLite", ["core.Animation", "core.SimpleTim
 var TimelineLite = _TweenLite.globals.TimelineLite;
 exports.default = exports.TimelineLite = TimelineLite;
 
-},{"./TweenLite.js":12}],11:[function(require,module,exports){
+},{"./TweenLite.js":13}],12:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -7041,7 +7044,7 @@ _TweenLite._gsScope._gsDefine("TimelineMax", ["TimelineLite", "TweenLite", "easi
 var TimelineMax = _TweenLite.globals.TimelineMax;
 exports.default = exports.TimelineMax = TimelineMax;
 
-},{"./TimelineLite.js":10,"./TweenLite.js":12}],12:[function(require,module,exports){
+},{"./TimelineLite.js":11,"./TweenLite.js":13}],13:[function(require,module,exports){
 (function (global){
 "use strict";
 
@@ -9599,7 +9602,7 @@ var EventDispatcher = nonGlobals.events.EventDispatcher;
 exports.EventDispatcher = EventDispatcher;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -9803,7 +9806,7 @@ var TweenMax = _TweenMaxBase.default;
 exports.default = exports.TweenMax = TweenMax;
 TweenMax._autoActivated = [_TimelineLite.default, _TimelineMax.default, _CSSPlugin.default, _AttrPlugin.default, _BezierPlugin.default, _RoundPropsPlugin.default, _DirectionalRotationPlugin.default, _EasePack.Back, _EasePack.Elastic, _EasePack.Bounce, _EasePack.RoughEase, _EasePack.SlowMo, _EasePack.SteppedEase, _EasePack.Circ, _EasePack.Expo, _EasePack.Sine, _EasePack.ExpoScaleEase];
 
-},{"./AttrPlugin.js":4,"./BezierPlugin.js":5,"./CSSPlugin.js":6,"./DirectionalRotationPlugin.js":7,"./EasePack.js":8,"./RoundPropsPlugin.js":9,"./TimelineLite.js":10,"./TimelineMax.js":11,"./TweenLite.js":12,"./TweenMaxBase.js":14}],14:[function(require,module,exports){
+},{"./AttrPlugin.js":5,"./BezierPlugin.js":6,"./CSSPlugin.js":7,"./DirectionalRotationPlugin.js":8,"./EasePack.js":9,"./RoundPropsPlugin.js":10,"./TimelineLite.js":11,"./TimelineMax.js":12,"./TweenLite.js":13,"./TweenMaxBase.js":15}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10648,7 +10651,7 @@ exports.default = exports.TweenMax = TweenMax;
 var TweenMaxBase = TweenMax;
 exports.TweenMaxBase = TweenMaxBase;
 
-},{"./TweenLite.js":12}],15:[function(require,module,exports){
+},{"./TweenLite.js":13}],16:[function(require,module,exports){
 (function (global){
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.iosInnerHeight = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 'use strict';
@@ -10726,7 +10729,7 @@ module.exports = (function () {
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -10735,14 +10738,16 @@ function isTouchDevice() {
   return !!(typeof window !== 'undefined' && ('ontouchstart' in window || window.DocumentTouch && typeof document !== 'undefined' && document instanceof window.DocumentTouch)) || !!(typeof navigator !== 'undefined' && (navigator.maxTouchPoints || navigator.msMaxTouchPoints));
 }
 module.exports = exports['default'];
-},{}],17:[function(require,module,exports){
-!function(){"use strict";if("undefined"!=typeof window){var t=window.navigator.userAgent.match(/Edge\/(\d{2})\./),e=!!t&&parseInt(t[1],10)>=16;if("objectFit"in document.documentElement.style!=!1&&!e)return void(window.objectFitPolyfill=function(){return!1});var i=function(t){var e=window.getComputedStyle(t,null),i=e.getPropertyValue("position"),n=e.getPropertyValue("overflow"),o=e.getPropertyValue("display");i&&"static"!==i||(t.style.position="relative"),"hidden"!==n&&(t.style.overflow="hidden"),o&&"inline"!==o||(t.style.display="block"),0===t.clientHeight&&(t.style.height="100%"),-1===t.className.indexOf("object-fit-polyfill")&&(t.className=t.className+" object-fit-polyfill")},n=function(t){var e=window.getComputedStyle(t,null),i={"max-width":"none","max-height":"none","min-width":"0px","min-height":"0px",top:"auto",right:"auto",bottom:"auto",left:"auto","margin-top":"0px","margin-right":"0px","margin-bottom":"0px","margin-left":"0px"};for(var n in i){e.getPropertyValue(n)!==i[n]&&(t.style[n]=i[n])}},o=function(t,e,i){var n,o,l,a,d;if(i=i.split(" "),i.length<2&&(i[1]=i[0]),"x"===t)n=i[0],o=i[1],l="left",a="right",d=e.clientWidth;else{if("y"!==t)return;n=i[1],o=i[0],l="top",a="bottom",d=e.clientHeight}return n===l||o===l?void(e.style[l]="0"):n===a||o===a?void(e.style[a]="0"):"center"===n||"50%"===n?(e.style[l]="50%",void(e.style["margin-"+l]=d/-2+"px")):n.indexOf("%")>=0?(n=parseInt(n),void(n<50?(e.style[l]=n+"%",e.style["margin-"+l]=d*(n/-100)+"px"):(n=100-n,e.style[a]=n+"%",e.style["margin-"+a]=d*(n/-100)+"px"))):void(e.style[l]=n)},l=function(t){var e=t.dataset?t.dataset.objectFit:t.getAttribute("data-object-fit"),l=t.dataset?t.dataset.objectPosition:t.getAttribute("data-object-position");e=e||"cover",l=l||"50% 50%";var a=t.parentNode;i(a),n(t),t.style.position="absolute",t.style.height="100%",t.style.width="auto","scale-down"===e&&(t.style.height="auto",t.clientWidth<a.clientWidth&&t.clientHeight<a.clientHeight?(o("x",t,l),o("y",t,l)):(e="contain",t.style.height="100%")),"none"===e?(t.style.width="auto",t.style.height="auto",o("x",t,l),o("y",t,l)):"cover"===e&&t.clientWidth>a.clientWidth||"contain"===e&&t.clientWidth<a.clientWidth?(t.style.top="0",t.style.marginTop="0",o("x",t,l)):"scale-down"!==e&&(t.style.width="100%",t.style.height="auto",t.style.left="0",t.style.marginLeft="0",o("y",t,l))},a=function(t){if(void 0===t)t=document.querySelectorAll("[data-object-fit]");else if(t&&t.nodeName)t=[t];else{if("object"!=typeof t||!t.length||!t[0].nodeName)return!1;t=t}for(var i=0;i<t.length;i++)if(t[i].nodeName){var n=t[i].nodeName.toLowerCase();"img"!==n||e?"video"===n&&(t[i].readyState>0?l(t[i]):t[i].addEventListener("loadedmetadata",function(){l(this)})):t[i].complete?l(t[i]):t[i].addEventListener("load",function(){l(this)})}return!0};document.addEventListener("DOMContentLoaded",function(){a()}),window.addEventListener("resize",function(){a()}),window.objectFitPolyfill=a}}();
 },{}],18:[function(require,module,exports){
+!function(){"use strict";if("undefined"!=typeof window){var t=window.navigator.userAgent.match(/Edge\/(\d{2})\./),e=!!t&&parseInt(t[1],10)>=16;if("objectFit"in document.documentElement.style!=!1&&!e)return void(window.objectFitPolyfill=function(){return!1});var i=function(t){var e=window.getComputedStyle(t,null),i=e.getPropertyValue("position"),n=e.getPropertyValue("overflow"),o=e.getPropertyValue("display");i&&"static"!==i||(t.style.position="relative"),"hidden"!==n&&(t.style.overflow="hidden"),o&&"inline"!==o||(t.style.display="block"),0===t.clientHeight&&(t.style.height="100%"),-1===t.className.indexOf("object-fit-polyfill")&&(t.className=t.className+" object-fit-polyfill")},n=function(t){var e=window.getComputedStyle(t,null),i={"max-width":"none","max-height":"none","min-width":"0px","min-height":"0px",top:"auto",right:"auto",bottom:"auto",left:"auto","margin-top":"0px","margin-right":"0px","margin-bottom":"0px","margin-left":"0px"};for(var n in i){e.getPropertyValue(n)!==i[n]&&(t.style[n]=i[n])}},o=function(t,e,i){var n,o,l,a,d;if(i=i.split(" "),i.length<2&&(i[1]=i[0]),"x"===t)n=i[0],o=i[1],l="left",a="right",d=e.clientWidth;else{if("y"!==t)return;n=i[1],o=i[0],l="top",a="bottom",d=e.clientHeight}return n===l||o===l?void(e.style[l]="0"):n===a||o===a?void(e.style[a]="0"):"center"===n||"50%"===n?(e.style[l]="50%",void(e.style["margin-"+l]=d/-2+"px")):n.indexOf("%")>=0?(n=parseInt(n),void(n<50?(e.style[l]=n+"%",e.style["margin-"+l]=d*(n/-100)+"px"):(n=100-n,e.style[a]=n+"%",e.style["margin-"+a]=d*(n/-100)+"px"))):void(e.style[l]=n)},l=function(t){var e=t.dataset?t.dataset.objectFit:t.getAttribute("data-object-fit"),l=t.dataset?t.dataset.objectPosition:t.getAttribute("data-object-position");e=e||"cover",l=l||"50% 50%";var a=t.parentNode;i(a),n(t),t.style.position="absolute",t.style.height="100%",t.style.width="auto","scale-down"===e&&(t.style.height="auto",t.clientWidth<a.clientWidth&&t.clientHeight<a.clientHeight?(o("x",t,l),o("y",t,l)):(e="contain",t.style.height="100%")),"none"===e?(t.style.width="auto",t.style.height="auto",o("x",t,l),o("y",t,l)):"cover"===e&&t.clientWidth>a.clientWidth||"contain"===e&&t.clientWidth<a.clientWidth?(t.style.top="0",t.style.marginTop="0",o("x",t,l)):"scale-down"!==e&&(t.style.width="100%",t.style.height="auto",t.style.left="0",t.style.marginLeft="0",o("y",t,l))},a=function(t){if(void 0===t)t=document.querySelectorAll("[data-object-fit]");else if(t&&t.nodeName)t=[t];else{if("object"!=typeof t||!t.length||!t[0].nodeName)return!1;t=t}for(var i=0;i<t.length;i++)if(t[i].nodeName){var n=t[i].nodeName.toLowerCase();"img"!==n||e?"video"===n&&(t[i].readyState>0?l(t[i]):t[i].addEventListener("loadedmetadata",function(){l(this)})):t[i].complete?l(t[i]):t[i].addEventListener("load",function(){l(this)})}return!0};document.addEventListener("DOMContentLoaded",function(){a()}),window.addEventListener("resize",function(){a()}),window.objectFitPolyfill=a}}();
+},{}],19:[function(require,module,exports){
 "use strict";
 
 var _domLoaded = _interopRequireDefault(require("dom-loaded"));
 
 var _TweenMax = require("gsap/TweenMax");
+
+var _bodyScrollLock = require("body-scroll-lock");
 
 var _emailScramble = _interopRequireDefault(require("email-scramble"));
 
@@ -10796,8 +10801,7 @@ _domLoaded.default.then(() => {
   const mamaVideo = document.querySelector('video.mama');
   const guruVideo = document.querySelector('video.guru'); // Defaults
 
-  (0, _videoSrcset.default)(); // objectFitPolyfill()
-
+  (0, _videoSrcset.default)();
   font.load().then(function () {
     TweenLite.to('.baseline', 1, {
       autoAlpha: 1,
@@ -11116,7 +11120,7 @@ _domLoaded.default.then(() => {
 
   const resizeHandler = () => {
     isPortrait = window.matchMedia(isPortraitQuery).matches;
-    H = Math.max((0, _iosInnerHeight.default)(), window.innerHeight);
+    H = (0, _iosInnerHeight.default)() - window.innerHeight > 100 ? (0, _iosInnerHeight.default)() : window.innerHeight;
     if (isPortrait) TweenLite.set(root, {
       height: H + 'px'
     });else TweenLite.set(root, {
@@ -11132,6 +11136,8 @@ _domLoaded.default.then(() => {
         height: 'auto'
       });
     }
+
+    (0, _bodyScrollLock.disableBodyScroll)(root);
   };
 
   window.addEventListener('resize', resizeHandler);
@@ -11168,7 +11174,7 @@ _domLoaded.default.then(() => {
   });
 });
 
-},{"./video-srcset":19,"dom-loaded":1,"email-scramble":2,"fontfaceobserver":3,"gsap/TweenMax":13,"ios-inner-height":15,"is-touch-device":16,"objectFitPolyfill":17}],19:[function(require,module,exports){
+},{"./video-srcset":20,"body-scroll-lock":1,"dom-loaded":2,"email-scramble":3,"fontfaceobserver":4,"gsap/TweenMax":14,"ios-inner-height":16,"is-touch-device":17,"objectFitPolyfill":18}],20:[function(require,module,exports){
 (function (window, undefined) {
 
 
@@ -11321,4 +11327,4 @@ _domLoaded.default.then(() => {
 
 })(window);
 
-},{}]},{},[18]);
+},{}]},{},[19]);
