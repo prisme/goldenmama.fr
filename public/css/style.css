@@ -298,14 +298,14 @@ dark-grey: #343434
     fill: #e5e5e5;
   }
 
-  .controls .mute{
+  .controls .sound{
     position: relative;
   }
-  .controls.guru .mute{
-    left: -7vh;
-  }
-  .controls.mama .mute{
-    left: 7vh;
+
+  .controls .mute,
+  .controls .unmute{
+    position: absolute;
+    width: 100%;   
   }
 
   .controls .close{
