@@ -20,6 +20,7 @@
     "fontfaceobserver": "^2.1.0",
     "gsap": "^2.0.2",
     "http-errors": "~1.6.2",
+    "ios-inner-height": "^1.1.0",
     "is-touch-device": "^1.0.1",
     "jade": "~1.11.0",
     "morgan": "~1.9.0",

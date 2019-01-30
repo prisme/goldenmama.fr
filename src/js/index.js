@@ -1,10 +1,11 @@
 import domLoaded from 'dom-loaded';
-import { TweenMax, TimelineMax, Eases, CSSPlugin, ScrollToPlugin } from 'gsap/TweenMax';
+import { TweenMax, TimelineMax, Eases, CSSPlugin } from 'gsap/TweenMax';
 import emailScramble from 'email-scramble';
 import FontFaceObserver from 'fontfaceobserver';
 import videoSrcset from './video-srcset';
 import objectFitPolyfill from 'objectFitPolyfill';
-const isTouchDevice = require('is-touch-device');
+import isTouchDevice from 'is-touch-device';
+import innerHeight from 'ios-inner-height';
 
 const font = new FontFaceObserver('AvantGarde-ExtraLight')
 const isPortraitQuery = '( max-width: 720px) and ( max-aspect-ratio: 13/9 )'
@@ -50,7 +51,6 @@ domLoaded.then(() => {
   const guruVideo = document.querySelector('video.guru')
 
 // Defaults
-  // TweenLite.to(window, 0, {scrollTo:0}, 0.2)
 
   videoSrcset()
   // objectFitPolyfill()
@@ -359,9 +359,9 @@ domLoaded.then(() => {
     const resizeHandler = () => {
 
       isPortrait = window.matchMedia(isPortraitQuery).matches
-      H = window.innerHeight
+      H = innerHeight()
 
-      console.log(isPortrait, H, 'salut')
+      console.log(isPortrait, H)
 
       if (isPortrait)
         TweenLite.set(root, { height : H + 'px' })
