@@ -11116,9 +11116,7 @@ _domLoaded.default.then(() => {
 
   const resizeHandler = () => {
     isPortrait = window.matchMedia(isPortraitQuery).matches;
-    H = (0, _iosInnerHeight.default)(); // H = window.innerHeight
-
-    console.log((0, _iosInnerHeight.default)(), window.innerHeight);
+    H = math.max((0, _iosInnerHeight.default)(), window.innerHeight);
     if (isPortrait) TweenLite.set(root, {
       height: H + 'px'
     });else TweenLite.set(root, {
