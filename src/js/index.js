@@ -360,6 +360,8 @@ domLoaded.then(() => {
       isPortrait = window.matchMedia(isPortraitQuery).matches
       H = innerHeight()
 
+      console.log(H, window.innerHeight);
+
       if (isPortrait)
         TweenLite.set(root, { height : H + 'px' })
       else
