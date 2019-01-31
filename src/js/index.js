@@ -149,7 +149,7 @@ domLoaded.then(() => {
     repeat: -1,
     repeatDelay: 0.8
   })
-  // total 26s
+
   guruSubsTl.staggerTo('.guru .claim p', 1.6, {
     opacity : 1,
     repeat: 1,
@@ -222,7 +222,7 @@ domLoaded.then(() => {
     repeat: -1,
     repeatDelay: 0.8
   })
-  // total : 24s
+
   mamaSubsTl.staggerTo('.mama .claim p', 1.6, {
     opacity : 1,
     repeat: 1,
