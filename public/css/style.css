@@ -50,6 +50,9 @@ dark-grey: #343434
               box-sizing: content-box;
   }
 
+  ::selection { background: transparent; } 
+  ::-moz-selection { background: transparent; }
+
   /* Reset `button` default styles */
   button {
       background: none;
