@@ -10844,6 +10844,7 @@ _domLoaded.default.then(() => {
     link.href = _emailScramble.default.decode(link.href);
   }); // Animation Guru
 
+  const guruDuration = 26.262;
   const guruTl = new _TweenMax.TimelineMax({
     id: "guru",
     paused: true
@@ -10900,16 +10901,19 @@ _domLoaded.default.then(() => {
 
   const guruSubsTl = new _TweenMax.TimelineMax({
     id: "guruSubs",
-    repeat: -1
+    repeat: -1,
+    repeatDelay: 0.8
   }); // total 26s
 
   guruSubsTl.staggerTo('.guru .claim p', 1.6, {
     opacity: 1,
     repeat: 1,
     yoyo: true
-  }, 5.2);
-  guruTl.add(guruSubsTl, 'hideBackgrounds+=1'); // Animation Mama
+  }, 5.6);
+  guruSubsTl.duration(guruDuration - 0.8);
+  guruTl.add(guruSubsTl, 'hideBackgrounds+=0.8'); // Animation Mama
 
+  const mamaDuration = 24.0;
   const mamaTl = new _TweenMax.TimelineMax({
     id: "mama",
     paused: true
@@ -10967,15 +10971,17 @@ _domLoaded.default.then(() => {
 
   const mamaSubsTl = new _TweenMax.TimelineMax({
     id: "mamaSubs",
-    repeat: -1
+    repeat: -1,
+    repeatDelay: 0.8
   }); // total : 24s
 
-  mamaSubsTl.staggerTo('.mama .claim p', 1.4, {
+  mamaSubsTl.staggerTo('.mama .claim p', 1.6, {
     opacity: 1,
     repeat: 1,
     yoyo: true
-  }, 4.8);
-  mamaTl.add(mamaSubsTl, 'hideBackgrounds+=1'); // Handlers
+  }, 5);
+  mamaSubsTl.duration(mamaDuration - 0.8);
+  mamaTl.add(mamaSubsTl, 'hideBackgrounds+=0.8'); // Handlers
   // Mute
 
   const unmuteHandler = () => {
@@ -11030,9 +11036,6 @@ _domLoaded.default.then(() => {
 
 
   const closeHandler = () => {
-    currentVideo.muted = true;
-    isPlaying = false; // @TODO: pause video & animation ?
-
     document.removeEventListener(visibilityChange, visibilityChangeHandler);
 
     for (var i = 0; i < ctrlUnmute.length; i++) {
@@ -11050,6 +11053,12 @@ _domLoaded.default.then(() => {
     }
 
     currentTl.reverse('hideBackgrounds');
+    currentTl.eventCallback('onReverseComplete', () => {
+      currentVideo.pause();
+      currentVideo.currentTime = 0;
+      currentVideo.muted = true;
+      isPlaying = false;
+    });
   };
 
   for (var i = 0; i < ctrlClose.length; i++) {
@@ -11079,9 +11088,10 @@ _domLoaded.default.then(() => {
 
     if (contactActive) {
       contactToggle.click();
-    } // console.log('mama', mamaTl._totalDuration)
-    // console.log('guru', guruTl._totalDuration)
+    }
 
+    console.log('mama', mamaSubsTl._totalDuration);
+    console.log('guru', guruSubsTl._totalDuration);
   };
 
   const guruClickHandler = event => {
