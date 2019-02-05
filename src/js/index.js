@@ -55,8 +55,12 @@ domLoaded.then(() => {
 
   videoSrcset()
 
-  font.load().then(function () {
+  font.load().then( () => {
     TweenLite.to('.baseline', 1, { autoAlpha: 1, y: 0, delay: 1 })
+  })
+
+  scrambled.forEach( (link) => {
+    link.href = emailScramble.decode(link.href)
   })
 
   // controls
@@ -82,10 +86,6 @@ domLoaded.then(() => {
       left: 0,
       xPercent: -100
     })
-
-  scrambled.forEach( (link) => {
-    link.href = emailScramble.decode(link.href)
-  })
 
 // Animation Guru
   const guruDuration = 26.262
