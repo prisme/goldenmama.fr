@@ -7052,7 +7052,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.EventDispatcher = exports.TweenPlugin = exports.Power4 = exports.Power3 = exports.Power2 = exports.Power1 = exports.Power0 = exports.Linear = exports.Ease = exports.Animation = exports.SimpleTimeline = exports.globals = exports.default = exports.TweenLite = exports._gsScope = void 0;
-
 /*!
  * VERSION: 2.0.2
  * DATE: 2018-08-27
@@ -7073,6 +7072,7 @@ exports.EventDispatcher = exports.TweenPlugin = exports.Power4 = exports.Power3 
 	- pass in _gsScope as the first parameter of the main function (which is actually at the bottom)
 	- remove the "export to multiple environments" in Definition().
  */
+
 var _gsScope = typeof window !== "undefined" ? window : typeof module !== "undefined" && module.exports && typeof global !== "undefined" ? global : void 0 || {};
 
 exports._gsScope = _gsScope;
@@ -11086,10 +11086,9 @@ _domLoaded.default.then(() => {
 
     if (contactActive) {
       contactToggle.click();
-    }
+    } //console.log('mama', mamaSubsTl._totalDuration)
+    //console.log('guru', guruSubsTl._totalDuration)
 
-    console.log('mama', mamaSubsTl._totalDuration);
-    console.log('guru', guruSubsTl._totalDuration);
   };
 
   const guruClickHandler = event => {

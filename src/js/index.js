@@ -322,8 +322,8 @@ domLoaded.then(() => {
         contactToggle.click()
       }
 
-      console.log('mama', mamaSubsTl._totalDuration)
-      console.log('guru', guruSubsTl._totalDuration)
+      //console.log('mama', mamaSubsTl._totalDuration)
+      //console.log('guru', guruSubsTl._totalDuration)
     }
 
     const guruClickHandler = (event) => {
