@@ -10802,12 +10802,15 @@ _domLoaded.default.then(() => {
   const guruVideo = document.querySelector('video.guru'); // Defaults
 
   (0, _videoSrcset.default)();
-  font.load().then(function () {
+  font.load().then(() => {
     TweenLite.to('.baseline', 1, {
       autoAlpha: 1,
       y: 0,
       delay: 1
     });
+  });
+  scrambled.forEach(link => {
+    link.href = _emailScramble.default.decode(link.href);
   }); // controls
 
   TweenLite.set(isMute ? ctrlMute : ctrlUnmute, {
@@ -10839,9 +10842,6 @@ _domLoaded.default.then(() => {
     top: '1vh',
     left: 0,
     xPercent: -100
-  });
-  scrambled.forEach(link => {
-    link.href = _emailScramble.default.decode(link.href);
   }); // Animation Guru
 
   const guruDuration = 26.262;
