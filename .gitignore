@@ -1,3 +1,4 @@
 node_modules
 public/video
 .acces
+.DS_Store
